@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WS Video Breather — Visual Design Guides</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+:root {
+  --brown:#32302f; --cream:#fcfcfc; --soft:#686664; --bg:#f5f4f4;
+  --gold:#c9a96e; --green:#1a7f4b; --red:#c0392b; --blue:#2980b9;
+  --card-shadow:0 4px 16px rgba(0,0,0,0.08),0 0 0 0.75px rgba(0,0,0,0.06);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:var(--brown);display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-btn{padding:14px 18px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);white-space:nowrap;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;transition:all .2s;}
+.nav-btn:hover,.nav-btn.active{color:white;border-bottom-color:var(--gold);}
+
+/* SECTIONS */
+.section{display:none;padding:36px 24px;max-width:960px;margin:0 auto;}
+.section.active{display:block;}
+.sec-hd{margin-bottom:28px;}
+.sec-hd h2{font-size:20px;font-weight:800;letter-spacing:-.3px;}
+.sec-hd p{font-size:13px;color:var(--soft);margin-top:6px;line-height:1.6;}
+
+/* PHONE DARK */
+.phone{width:190px;height:410px;background:#0a0a0a;border-radius:32px;border:5px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.28);flex-shrink:0;}
+.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:66px;height:17px;background:#1c1c1c;border-radius:0 0 11px 11px;z-index:20;}
+.phone-sm{width:155px;height:336px;border-radius:28px;border-width:4px;}
+.phone-sm::before{width:54px;height:14px;}
+
+/* PHONE LIGHT */
+.phonel{width:165px;height:356px;background:#fcfcfc;border-radius:30px;border:5px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.18);flex-shrink:0;display:flex;flex-direction:column;}
+.phonel::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:15px;background:#1c1c1c;border-radius:0 0 10px 10px;z-index:20;}
+
+/* SHARED VIDEO BG */
+.vbg{position:absolute;inset:0;background:linear-gradient(180deg,#1a1008 0%,#2a1f10 30%,#1a1618 60%,#0a0a0a 100%);}
+.vtop{position:absolute;top:0;left:0;right:0;padding:21px 11px 7px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:10;}
+.ctrl{width:22px;height:22px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:white;}
+.vbot{position:absolute;bottom:0;left:0;right:0;padding:8px 11px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:10;}
+.v-prog{height:2px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:5px;}
+.v-fill{height:100%;background:white;border-radius:2px;}
+.v-head{font-size:11px;font-weight:700;color:white;line-height:1.2;}
+.v-sub{font-size:8px;color:rgba(255,255,255,.7);margin-top:2px;}
+.v-cta{background:var(--cream);color:var(--brown);font-size:9px;font-weight:700;text-align:center;padding:8px;border-radius:100px;margin-top:7px;}
+.v-hi{height:16px;display:flex;align-items:center;justify-content:center;}
+.v-hi-bar{width:50px;height:3px;background:rgba(255,255,255,.25);border-radius:100px;}
+.sdots{position:absolute;right:5px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;z-index:10;}
+.sdot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.25);}
+.sdot.on{background:white;height:9px;border-radius:2px;}
+
+/* PERSON */
+.person{position:absolute;left:50%;top:14%;transform:translateX(-50%);width:80px;height:115px;}
+.p-head{width:34px;height:34px;background:radial-gradient(circle at 40% 35%,#c8a880,#8a6840);border-radius:50%;margin:0 auto 3px;position:relative;}
+.p-head::after{content:'';position:absolute;top:-5px;left:-4px;width:42px;height:22px;background:#2a1a0a;border-radius:50% 50% 0 0;}
+.p-body{width:58px;height:74px;background:linear-gradient(180deg,#1a1a2e,#0f1520);border-radius:11px 11px 5px 5px;margin:0 auto;}
+.mic{position:absolute;width:5px;height:5px;background:#e0c070;border-radius:50%;top:26px;right:18px;}
+
+/* LABEL */
+.lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--soft);text-align:center;margin-top:10px;}
+.badge-pill{display:inline-block;font-size:9px;font-weight:700;padding:3px 9px;border-radius:100px;color:white;}
+
+/* ── SECTION 1 — TAP ZONES ── */
+.v1-row{display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;}
+.zones{position:absolute;inset:0;display:flex;top:18%;height:55%;}
+.zone{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+.zone-l{border-right:1.5px dashed rgba(255,140,0,.45);background:rgba(255,140,0,.07);}
+.zone-c{background:rgba(255,255,255,.03);}
+.zone-r{border-left:1.5px dashed rgba(100,180,255,.45);background:rgba(100,180,255,.07);}
+.zone-ico{font-size:16px;}
+.zone-txt{font-size:7px;font-weight:700;color:rgba(255,255,255,.7);text-align:center;line-height:1.4;}
+.legend-stack{display:flex;flex-direction:column;gap:12px;max-width:260px;}
+.leg{background:white;border-radius:11px;padding:13px 15px;box-shadow:var(--card-shadow);}
+.leg h4{font-size:12px;font-weight:700;margin-bottom:3px;}
+.leg p{font-size:11px;color:var(--soft);line-height:1.5;}
+.leg .tag{font-size:9px;font-family:monospace;background:var(--bg);padding:2px 5px;border-radius:3px;display:inline-block;margin-top:4px;color:var(--brown);}
+
+/* ── SECTION 2 — SCREEN ZONES ── */
+.v2-row{display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap;}
+.zband{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;}
+.zb-t{top:0;height:25%;background:rgba(192,57,43,.18);border-bottom:1.5px dashed rgba(192,57,43,.5);z-index:5;}
+.zb-m{top:25%;height:50%;background:rgba(26,127,75,.1);border-bottom:1.5px dashed rgba(26,127,75,.4);z-index:5;}
+.zb-b{bottom:0;height:25%;background:rgba(41,128,185,.18);z-index:5;}
+.zb-lbl{font-size:7px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:2px 5px;border-radius:3px;}
+.zb-t .zb-lbl{color:rgba(192,57,43,.95);background:rgba(192,57,43,.15);}
+.zb-m .zb-lbl{color:rgba(26,127,75,.95);background:rgba(26,127,75,.15);}
+.zb-b .zb-lbl{color:rgba(41,128,185,.95);background:rgba(41,128,185,.15);}
+.specgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:7px;}
+.specitem{background:var(--bg);border-radius:5px;padding:5px 7px;}
+.specitem .k{font-size:8px;color:var(--soft);font-weight:600;}
+.specitem .v{font-size:10px;font-weight:700;margin-top:1px;}
+
+/* ── SECTION 3 — COPY ── */
+.v3-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+.v3-col{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.copy-rules{background:white;border-radius:11px;padding:13px;box-shadow:var(--card-shadow);max-width:190px;}
+.copy-rules h4{font-size:10px;font-weight:700;margin-bottom:7px;}
+.cr{font-size:9px;color:var(--soft);padding:3px 0;border-bottom:1px solid var(--bg);line-height:1.4;}
+.cr:last-child{border:none;}
+.cr strong{color:var(--brown);}
+
+/* ── SECTION 4 — FEED ORDER ── */
+.v4-row{display:flex;align-items:flex-start;gap:0;justify-content:center;flex-wrap:wrap;}
+.v4-card{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;}
+.v4-con{display:flex;align-items:center;margin-top:52px;color:var(--gold);font-size:22px;width:48px;justify-content:center;flex-shrink:0;}
+.cnt-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:white;}
+.v4-name{font-size:11px;font-weight:700;text-align:center;}
+.v4-sub{font-size:10px;color:var(--soft);text-align:center;max-width:130px;line-height:1.4;}
+.count-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px;}
+.count-card{background:white;border-radius:10px;padding:11px 15px;box-shadow:var(--card-shadow);text-align:center;min-width:90px;}
+.count-num{font-size:18px;font-weight:800;}
+.count-lbl{font-size:9px;color:var(--soft);margin-top:2px;}
+
+/* ── SECTION 5 — CONTENT BLOCK MAP ── */
+.v5-arch{background:#edeae5;border-radius:18px;padding:28px 20px;margin-bottom:32px;text-align:center;}
+.v5-arch-title{font-size:18px;font-weight:800;letter-spacing:-.3px;margin-bottom:3px;}
+.v5-arch-sub{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--soft);margin-bottom:24px;}
+.v5-arch-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.v5-card{background:white;border-radius:14px;padding:18px;min-width:200px;text-align:left;box-shadow:0 4px 20px rgba(0,0,0,.07);}
+.v5-card-title{font-size:13px;font-weight:700;margin-bottom:12px;}
+.fld{margin-bottom:6px;}
+.fld-key{font-size:8px;font-weight:700;letter-spacing:.5px;color:var(--soft);font-family:monospace;margin-bottom:2px;text-transform:uppercase;}
+.fld-val{background:var(--bg);border-radius:4px;padding:4px 7px;font-size:9px;font-family:monospace;color:var(--brown);}
+.iam-row{padding:6px 0;border-bottom:1px solid var(--bg);font-size:11px;color:var(--soft);}
+.iam-row:last-child{border:none;}
+.iam-note{background:var(--bg);border-radius:7px;padding:9px 11px;font-size:9px;font-family:monospace;color:var(--soft);line-height:1.7;margin-top:10px;}
+.v5-map-row{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;}
+.v5-fields{display:flex;flex-direction:column;gap:5px;}
+.v5-field{background:white;border-radius:7px;padding:7px 11px;box-shadow:var(--card-shadow);display:flex;align-items:center;gap:8px;}
+.v5-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.v5-key{font-size:10px;font-family:monospace;font-weight:700;min-width:90px;}
+.v5-val{font-size:9px;color:var(--soft);font-family:monospace;}
+.v5-legend{display:flex;flex-direction:column;gap:7px;max-width:190px;}
+.v5-leg-item{display:flex;align-items:flex-start;gap:7px;background:white;border-radius:7px;padding:7px 10px;box-shadow:var(--card-shadow);}
+.v5-leg-dot{width:9px;height:9px;border-radius:3px;flex-shrink:0;margin-top:2px;}
+
+/* ── SECTION 6 — USER JOURNEY ── */
+.j-section{margin-bottom:44px;}
+.j-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--soft);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.j-title::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.08);}
+.j-row{display:flex;align-items:flex-start;overflow-x:auto;padding-bottom:8px;gap:0;}
+.j-step{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;}
+.j-con{width:52px;margin-top:50px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.j-line{height:1.5px;width:100%;background:linear-gradient(to right,var(--gold),#b8956a);}
+.j-arrow{color:var(--gold);font-size:15px;margin-top:-6px;}
+.j-clabel{font-size:8px;font-weight:700;color:var(--soft);text-align:center;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
+.j-step-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;flex-shrink:0;}
+.j-step-header{display:flex;align-items:center;gap:5px;}
+.j-step-name{font-size:10px;font-weight:700;}
+.j-step-lbl{font-size:10px;color:var(--soft);text-align:center;max-width:130px;line-height:1.4;}
+.event-badge{font-size:9px;font-weight:700;padding:3px 8px;border-radius:5px;text-align:center;}
+/* braze screen */
+.braze-screen{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;padding:18px;background:var(--brown);}
+.braze-icon{width:38px;height:38px;background:rgba(255,255,255,.1);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.15);}
+.braze-tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);font-size:8px;font-weight:700;padding:3px 9px;border-radius:100px;border:1px solid rgba(255,255,255,.15);}
+.braze-title{font-size:11px;font-weight:700;color:white;text-align:center;line-height:1.4;}
+.braze-sub{font-size:8px;color:rgba(255,255,255,.45);text-align:center;line-height:1.6;}
+.braze-dots{display:flex;gap:4px;}
+.braze-dot{width:5px;height:5px;background:rgba(255,255,255,.2);border-radius:50%;animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,80%,100%{opacity:.3;transform:scale(.8);}40%{opacity:1;transform:scale(1);}}
+/* light phone internals */
+.sb{height:22px;display:flex;align-items:center;justify-content:space-between;padding:0 11px;margin-top:15px;font-size:9px;font-weight:700;color:var(--brown);}
+.tnl{display:flex;align-items:center;justify-content:space-between;padding:3px 10px 5px;}
+.tn-ico{width:22px;height:22px;background:rgba(0,0,0,.06);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;}
+.tn-ttl{font-size:11px;font-weight:700;color:var(--brown);}
+.bnav{border-top:.75px solid rgba(0,0,0,.08);display:flex;padding:5px 0 9px;margin-top:auto;}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;font-size:7px;color:var(--soft);font-weight:600;}
+.bnav-item.on{color:var(--brown);}
+/* entry summary */
+.entry-sum{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);margin-top:4px;}
+.entry-sum h4{font-size:12px;font-weight:700;margin-bottom:12px;}
+.entry-cards{display:flex;gap:10px;flex-wrap:wrap;}
+.entry-card{flex:1;min-width:150px;background:var(--bg);border-radius:9px;padding:11px;}
+.entry-card h5{font-size:10px;font-weight:700;margin-bottom:3px;}
+.entry-card p{font-size:9px;color:var(--soft);line-height:1.5;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="show(0)">① Tap Zones</button>
+  <button class="nav-btn" onclick="show(1)">② Screen Zones</button>
+  <button class="nav-btn" onclick="show(2)">③ Copy Guidelines</button>
+  <button class="nav-btn" onclick="show(3)">④ Feed Order</button>
+  <button class="nav-btn" onclick="show(4)">⑤ Content Block Map</button>
+  <button class="nav-btn" onclick="show(5)">⑥ User Journey</button>
+</nav>
+
+<!-- ① TAP ZONES -->
+<section class="section active" id="s0">
+  <div class="sec-hd"><h2>① Tap Zone Interaction Guide</h2><p>The Breather screen is divided into 3 horizontal tap zones. Each triggers a distinct interaction with visual feedback.</p></div>
+  <div class="v1-row">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+      <div class="phone">
+        <div class="vbg"></div>
+        <div class="person"><div class="p-head"></div><div class="p-body"><div class="mic"></div></div></div>
+        <div class="vtop"><div class="ctrl">‹</div><div class="ctrl">🔇</div></div>
+        <div class="zones">
+          <div class="zone zone-l"><div class="zone-ico">↺</div><div class="zone-txt">Rewind<br/>2 sec</div></div>
+          <div class="zone zone-c"><div class="zone-ico">⏸</div><div class="zone-txt">Play /<br/>Pause</div></div>
+          <div class="zone zone-r"><div class="zone-ico">⚡</div><div class="zone-txt">Hold<br/>2×</div></div>
+        </div>
+        <div class="sdots"><div class="sdot on"></div><div class="sdot"></div><div class="sdot"></div></div>
+        <div class="vbot">
+          <div class="v-prog"><div class="v-fill" style="width:55%"></div></div>
+          <div class="v-head">All the nerdy things</div>
+          <div class="v-sub">AI trading tools, RRSP accelerators</div>
+          <div class="v-cta">Discover tools for you</div>
+          <div class="v-hi"><div class="v-hi-bar"></div></div>
+        </div>
+      </div>
+      <div class="lbl">Tap Zones Active</div>
+    </div>
+    <div class="legend-stack">
+      <div class="leg" style="border-left:3px solid #e67e22"><h4>↺ Left — Rewind 2s</h4><p>Tap left ⅓ to rewind. Ripple animation confirms.</p><span class="tag">Visual: ripple animation</span></div>
+      <div class="leg" style="border-left:3px solid #888"><h4>⏸ Centre — Play / Pause</h4><p>Tap middle ⅓ to toggle playback. Icon flashes briefly.</p><span class="tag">Visual: play/pause icon flash</span></div>
+      <div class="leg" style="border-left:3px solid var(--blue)"><h4>⚡ Right — 2× Speed</h4><p>Long-press right ⅓ for 2× speed. "2×" badge appears.</p><span class="tag">Visual: "2×" on-screen indicator</span></div>
+      <div class="leg" style="border-left:3px solid var(--gold)"><h4>🔇 Sound Toggle</h4><p>Speaker icon top-right. First tap anywhere also unmutes. Persists all session.</p><span class="tag">Visual: sound wave animation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ② SCREEN ZONES -->
+<section class="section" id="s1">
+  <div class="sec-hd"><h2>② Screen Zone Anatomy</h2><p>The screen has 3 fixed vertical zones. Video producers and copywriters must respect these boundaries.</p></div>
+  <div class="v2-row">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+      <div class="phone">
+        <div class="vbg"></div>
+        <div class="person"><div class="p-head"></div><div class="p-body"><div class="mic"></div></div></div>
+        <div class="zband zb-t"><span class="zb-lbl">Top Safe Zone · 25%</span></div>
+        <div class="zband zb-m"><span class="zb-lbl">Focal Area · 50%</span></div>
+        <div class="zband zb-b"><span class="zb-lbl">Bottom Safe · 25%</span></div>
+        <div style="position:absolute;top:22px;left:10px;width:22px;height:22px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:white;z-index:10">‹</div>
+        <div style="position:absolute;top:24px;right:10px;font-size:10px;color:rgba(255,255,255,.7);z-index:10">🔇</div>
+        <div style="position:absolute;top:30%;left:12%;right:12%;bottom:30%;border:1.5px dashed rgba(255,255,255,.2);border-radius:6px;z-index:6;display:flex;align-items:center;justify-content:center">
+          <div style="font-size:7px;color:rgba(255,255,255,.4);text-align:center;line-height:1.5">Main subject<br/>face · product<br/>key visual</div>
+        </div>
+        <div class="vbot" style="z-index:10">
+          <div class="v-prog"><div class="v-fill" style="width:55%"></div></div>
+          <div class="v-head" style="font-size:10px">All the nerdy things</div>
+          <div class="v-sub">AI trading tools</div>
+          <div class="v-cta" style="font-size:8px;padding:7px">Discover tools for you</div>
+          <div class="v-hi"><div class="v-hi-bar"></div></div>
+        </div>
+      </div>
+      <div class="lbl">375×812pt · 9:16</div>
+    </div>
+    <div class="legend-stack" style="max-width:300px">
+      <div class="leg"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:3px;background:rgba(192,57,43,.5)"></div><h4 style="margin:0">🔴 Top Safe Zone — 25%</h4></div><p>Back arrow (DS: ScreenTop), sound toggle, device status bar. No video subject or copy.</p></div>
+      <div class="leg"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:3px;background:rgba(26,127,75,.5)"></div><h4 style="margin:0">🟢 Focal Area — 50%</h4></div><p>Main subject centred, equal horizontal margins. Key moment within first 2 seconds. No UI elements.</p></div>
+      <div class="leg"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:3px;background:rgba(41,128,185,.5)"></div><h4 style="margin:0">🔵 Bottom Safe — 25%</h4></div><p>Progress bar, headline, body copy, DSButton pill (#32302F), DSScreenBottom + home indicator.</p></div>
+      <div class="leg" style="border-left:3px solid var(--gold)"><h4>📐 Video Specs</h4><div class="specgrid"><div class="specitem"><div class="k">Ratio</div><div class="v">9:16</div></div><div class="specitem"><div class="k">Res</div><div class="v">1080×1920</div></div><div class="specitem"><div class="k">Format</div><div class="v">MP4 H.264</div></div><div class="specitem"><div class="k">FPS</div><div class="v">≤ 30fps</div></div><div class="specitem"><div class="k">Size</div><div class="v">3–5 MB</div></div><div class="specitem"><div class="k">Duration</div><div class="v">10–15s</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ COPY GUIDELINES -->
+<section class="section" id="s2">
+  <div class="sec-hd"><h2>③ Copy Guidelines</h2><p>Side-by-side good vs bad copy in the Breather UI.</p></div>
+  <div class="v3-row">
+    <div class="v3-col">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:16px">✅</span><span style="font-size:12px;font-weight:700;color:var(--green)">Do this</span></div>
+      <div class="phone" style="height:380px"><div class="vbg" style="background:linear-gradient(180deg,#0a180a,#152515,#0a1a0a,#0a0a0a)"></div><div class="person"><div class="p-head"></div><div class="p-body"><div class="mic"></div></div></div><div class="vtop"><div class="ctrl">‹</div><div class="ctrl">🔇</div></div><div class="vbot"><div class="v-prog"><div class="v-fill" style="width:55%"></div></div><div class="v-head">Trade $0 options</div><div class="v-sub">Advanced strategies for active traders</div><div class="v-cta">Get started</div><div class="v-hi"><div class="v-hi-bar"></div></div></div></div>
+      <div class="copy-rules"><h4>✅ Headline</h4><div class="cr"><strong>3–6 words</strong> max</div><div class="cr"><strong>Benefit-led</strong>, not feature-led</div><div class="cr" style="color:var(--green);font-weight:600">"Trade $0 options" ✓</div></div>
+      <div class="copy-rules"><h4>✅ Body copy</h4><div class="cr"><strong>1 sentence</strong>, 5–10 words</div><div class="cr">Start with capital letter</div><div class="cr" style="color:var(--green);font-weight:600">"Advanced strategies…" ✓</div></div>
+      <div class="copy-rules"><h4>✅ CTA</h4><div class="cr"><strong>2–3 words</strong>, verb-first</div><div class="cr">Sentence case</div><div class="cr" style="color:var(--green);font-weight:600">"Get started" ✓</div></div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;color:#ccc;font-size:24px;margin-top:50px">VS</div>
+    <div class="v3-col">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:16px">❌</span><span style="font-size:12px;font-weight:700;color:var(--red)">Avoid this</span></div>
+      <div class="phone" style="height:380px"><div class="vbg" style="background:linear-gradient(180deg,#1a0808,#351515,#1a0c0c,#0a0a0a)"></div><div class="person"><div class="p-head"></div><div class="p-body"><div class="mic"></div></div></div><div class="vtop"><div class="ctrl">‹</div><div class="ctrl">🔇</div></div><div class="vbot"><div class="v-prog"><div class="v-fill" style="width:30%"></div></div><div class="v-head" style="font-size:8px;opacity:.7">Options trading feature now available for our clients today</div><div class="v-sub" style="font-size:7px">advanced strategies for active traders who want more</div><div class="v-cta" style="font-size:8px">discover all the tools available to you now</div><div class="v-hi"><div class="v-hi-bar"></div></div></div></div>
+      <div class="copy-rules"><h4>❌ Headline</h4><div class="cr">Too long — truncates</div><div class="cr">Feature-led, not benefit-led</div><div class="cr" style="color:var(--red);font-weight:600">"Options trading feature now…" ✗</div></div>
+      <div class="copy-rules"><h4>❌ Body copy</h4><div class="cr">Lowercase start</div><div class="cr">Too long, wraps badly</div><div class="cr" style="color:var(--red);font-weight:600">"advanced strategies for…" ✗</div></div>
+      <div class="copy-rules"><h4>❌ CTA</h4><div class="cr">Too long for pill</div><div class="cr">Vague, no clear action</div><div class="cr" style="color:var(--red);font-weight:600">"discover all the tools…" ✗</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ FEED ORDER -->
+<section class="section" id="s3">
+  <div class="sec-hd"><h2>④ Video Feed Ordering Strategy</h2><p>Order videos using this 3-act structure for maximum completion and CTA rates.</p></div>
+  <div class="v4-row">
+    <div class="v4-card">
+      <div style="display:flex;align-items:center;gap:5px"><div class="cnt-badge" style="background:var(--red)">1</div><span class="j-step-name">Hook</span></div>
+      <div class="phone phone-sm"><div class="vbg" style="background:linear-gradient(180deg,#1a0808,#3a1515,#1a0c0c,#0a0a0a)"></div><div class="vtop" style="padding:18px 9px 5px"><div class="ctrl" style="width:19px;height:19px;font-size:8px">‹</div><div class="ctrl" style="width:19px;height:19px;font-size:8px">🔇</div></div><div style="position:absolute;top:21px;left:50%;transform:translateX(-50%);background:var(--red);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:white;z-index:10">1</div><div class="vbot"><div class="v-prog"><div class="v-fill" style="width:75%"></div></div><div class="v-head" style="font-size:9px">Most compelling hook</div><div class="v-sub" style="font-size:7px">Grab attention in 2s</div><div class="v-cta" style="font-size:8px;padding:6px">Learn more</div><div class="v-hi"><div class="v-hi-bar"></div></div></div></div>
+      <div class="v4-sub">Most compelling video first. Hook in 2 seconds.</div>
+    </div>
+    <div class="v4-con">›</div>
+    <div class="v4-card">
+      <div style="display:flex;align-items:center;gap:5px"><div class="cnt-badge" style="background:var(--blue)">2–N</div><span class="j-step-name">Mix</span></div>
+      <div class="phone phone-sm"><div class="vbg" style="background:linear-gradient(180deg,#080f1a,#0f2035,#0a1520,#0a0a0a)"></div><div class="vtop" style="padding:18px 9px 5px"><div class="ctrl" style="width:19px;height:19px;font-size:8px">‹</div><div class="ctrl" style="width:19px;height:19px;font-size:8px">🔊</div></div><div style="position:absolute;top:21px;left:50%;transform:translateX(-50%);background:var(--blue);width:22px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:800;color:white;z-index:10">2–N</div><div class="vbot"><div class="v-prog"><div class="v-fill" style="width:40%"></div></div><div class="v-head" style="font-size:9px">Alternate types</div><div class="v-sub" style="font-size:7px">Mix product + education</div><div class="v-cta" style="font-size:8px;padding:6px">Explore</div><div class="v-hi"><div class="v-hi-bar"></div></div></div></div>
+      <div class="v4-sub">Alternate content types. 3–7 videos ideal.</div>
+    </div>
+    <div class="v4-con">›</div>
+    <div class="v4-card">
+      <div style="display:flex;align-items:center;gap:5px"><div class="cnt-badge" style="background:var(--green)">✓</div><span class="j-step-name">End Strong</span></div>
+      <div class="phone phone-sm"><div class="vbg" style="background:linear-gradient(180deg,#0a1a0a,#1a3520,#0c1a10,#0a0a0a)"></div><div class="vtop" style="padding:18px 9px 5px"><div class="ctrl" style="width:19px;height:19px;font-size:8px">‹</div><div class="ctrl" style="width:19px;height:19px;font-size:8px">🔊</div></div><div style="position:absolute;top:21px;left:50%;transform:translateX(-50%);background:var(--green);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:white;z-index:10">✓</div><div class="vbot"><div class="v-prog"><div class="v-fill" style="width:90%;background:var(--gold)"></div></div><div class="v-head" style="font-size:9px">Highest-value CTA</div><div class="v-sub" style="font-size:7px">Committed viewer = ready</div><div class="v-cta" style="font-size:8px;padding:6px;background:var(--brown);color:white">Get started</div><div class="v-hi"><div class="v-hi-bar"></div></div></div></div>
+      <div class="v4-sub">Highest-value CTA last. Committed viewers act.</div>
+    </div>
+  </div>
+  <div class="count-row">
+    <div class="count-card"><div class="count-num" style="color:var(--green)">3–5</div><div class="count-lbl">Focused</div></div>
+    <div class="count-card"><div class="count-num" style="color:var(--blue)">5–7</div><div class="count-lbl">Balanced</div></div>
+    <div class="count-card"><div class="count-num" style="color:var(--gold)">8–10</div><div class="count-lbl">Comprehensive</div></div>
+    <div class="count-card"><div class="count-num" style="color:var(--red)">10+</div><div class="count-lbl">Risk of overwhelm</div></div>
+  </div>
+</section>
+
+<!-- ⑤ CONTENT BLOCK MAP -->
+<section class="section" id="s4">
+  <div class="sec-hd"><h2>⑤ Content Block → Screen Mapping</h2><p>Each field in <code style="background:var(--bg);padding:2px 5px;border-radius:3px;font-size:12px">reels_feed_v1</code> maps directly to a UI element on screen.</p></div>
+  <div class="v5-arch">
+    <div class="v5-arch-title">Content Block Architecture</div>
+    <div class="v5-arch-sub">How Braze Content Blocks feed into each video card</div>
+    <div class="v5-arch-row">
+      <div class="v5-card">
+        <div class="v5-card-title">📦 Content Block (per card)</div>
+        <div class="fld"><div class="fld-key">VIDEO_URL</div><div class="fld-val">https://cdn.ws.com/v1.mp4</div></div>
+        <div class="fld"><div class="fld-key">POSTER_URL</div><div class="fld-val">https://cdn.ws.com/p1.jpg</div></div>
+        <div class="fld"><div class="fld-key">HEADLINE</div><div class="fld-val">All the nerdy things</div></div>
+        <div class="fld"><div class="fld-key">BODY_COPY</div><div class="fld-val">AI tools, RRSP accel...</div></div>
+        <div class="fld"><div class="fld-key">CTA_TEXT</div><div class="fld-val">Discover tools for you</div></div>
+        <div class="fld"><div class="fld-key">CTA_DESTINATION</div><div class="fld-val">ws://invest/tools</div></div>
+        <div class="fld"><div class="fld-key">VIDEO_ID</div><div class="fld-val">video_1</div></div>
+      </div>
+      <div style="font-size:24px;color:var(--gold);flex-shrink:0">→</div>
+      <div class="v5-card">
+        <div class="v5-card-title">⚙️ Breather IAM (HTML/JS)</div>
+        <div class="iam-row">📽 Renders video card UI</div>
+        <div class="iam-row">▶ Handles playback logic</div>
+        <div class="iam-row">↕ Manages scroll snapping</div>
+        <div class="iam-row">🖼 Shows poster on load</div>
+        <div class="iam-row">📊 Fires Braze events</div>
+        <div class="iam-note">Liquid variables resolve<br/>at IAM send time.<br/>Marketers swap content<br/>without touching code.</div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:13px;font-weight:700;margin-bottom:14px;text-align:center">Field → UI Element Mapping</div>
+  <div class="v5-map-row">
+    <div class="v5-fields">
+      <div style="font-size:10px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Content Block Fields</div>
+      <div class="v5-field"><div class="v5-dot" style="background:#e74c3c"></div><div class="v5-key">video_url</div><div class="v5-val">MP4 on S3/CDN</div></div>
+      <div class="v5-field"><div class="v5-dot" style="background:#e67e22"></div><div class="v5-key">poster_url</div><div class="v5-val">1080×1920 PNG/JPG</div></div>
+      <div class="v5-field"><div class="v5-dot" style="background:#f1c40f"></div><div class="v5-key">headline</div><div class="v5-val">3–6 words</div></div>
+      <div class="v5-field"><div class="v5-dot" style="background:#2ecc71"></div><div class="v5-key">body</div><div class="v5-val">1 sentence, 5–10 words</div></div>
+      <div class="v5-field"><div class="v5-dot" style="background:#3498db"></div><div class="v5-key">cta_text</div><div class="v5-val">2–3 words, verb-first</div></div>
+      <div class="v5-field"><div class="v5-dot" style="background:#9b59b6"></div><div class="v5-key">cta_url</div><div class="v5-val">wealthsimple:// link</div></div>
+      <div class="v5-field"><div class="v5-dot" style="background:#95a5a6"></div><div class="v5-key">id</div><div class="v5-val">fires CTA_video_id</div></div>
+    </div>
+    <div style="font-size:24px;color:var(--gold)">→</div>
+    <div style="position:relative">
+      <div class="phone" style="height:360px">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,#100c08,#201810,#180e0c,#0a0a0a)"></div>
+        <div class="person" style="z-index:2"><div class="p-head"></div><div class="p-body"><div class="mic"></div></div></div>
+        <div class="vtop" style="z-index:10"><div class="ctrl">‹</div><div class="ctrl">🔇</div></div>
+        <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);background:rgba(231,76,60,.8);border-radius:3px;padding:2px 5px;font-size:7px;font-weight:700;color:white;z-index:15">video_url</div>
+        <div style="position:absolute;top:24px;left:50%;transform:translateX(-50%);background:rgba(230,126,34,.8);border-radius:3px;padding:2px 5px;font-size:7px;font-weight:700;color:white;z-index:15">poster_url</div>
+        <div class="vbot" style="z-index:10">
+          <div class="v-prog"><div class="v-fill" style="width:55%"></div></div>
+          <div style="background:rgba(241,196,15,.2);border-radius:3px;padding:1px 3px"><div class="v-head" style="font-size:10px">All the nerdy things</div></div>
+          <div style="background:rgba(46,204,113,.2);border-radius:3px;padding:1px 3px;margin-top:2px"><div class="v-sub">AI trading tools, RRSP accel…</div></div>
+          <div style="background:rgba(52,152,219,.3);border-radius:100px;padding:8px;text-align:center;font-size:9px;font-weight:700;color:white;margin-top:7px">Discover tools for you</div>
+          <div class="v-hi"><div class="v-hi-bar"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="v5-legend">
+      <div style="font-size:10px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Maps to</div>
+      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#e74c3c"></div><div><div style="font-size:10px;font-weight:700">video_url</div><div style="font-size:9px;color:var(--soft)">Full-screen video player</div></div></div>
+      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#e67e22"></div><div><div style="font-size:10px;font-weight:700">poster_url</div><div style="font-size:9px;color:var(--soft)">First-paint (no black flash)</div></div></div>
+      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#f1c40f"></div><div><div style="font-size:10px;font-weight:700">headline</div><div style="font-size:9px;color:var(--soft)">Bold text, bottom overlay</div></div></div>
+      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#2ecc71"></div><div><div style="font-size:10px;font-weight:700">body</div><div style="font-size:9px;color:var(--soft)">Subtitle below headline</div></div></div>
+      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#3498db"></div><div><div style="font-size:10px;font-weight:700">cta_text</div><div style="font-size:9px;color:var(--soft)">DSButton pill label</div></div></div>
+      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#9b59b6"></div><div><div style="font-size:10px;font-weight:700">cta_url</div><div style="font-size:9px;color:var(--soft)">Button destination</div></div></div>
+      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#95a5a6"></div><div><div style="font-size:10px;font-weight:700">id</div><div style="font-size:9px;color:var(--soft)">Fires CTA_video_<em>id</em></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ USER JOURNEY -->
+<section class="section" id="s5">
+  <div class="sec-hd"><h2>⑥ User Journey</h2><p>Three entry points that trigger the Video Breather — Home Tab, Account/Security page, and Notification Centre.</p></div>
+
+  <!-- JOURNEY A -->
+  <div class="j-section">
+    <div class="j-title"><span class="badge-pill" style="background:#826f8b">Journey A</span>Home Tab — "For You" Marketing Card</div>
+    <div class="j-row">
+      <!-- Step 1 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:#826f8b">1</div><div class="j-step-name">Home Tab</div></div>
+        <div class="phonel">
+          <div style="background:linear-gradient(160deg,#ecddc5,#e8d5e4,#d4c4d8,#ecd9c6);flex:1;display:flex;flex-direction:column">
+            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
+            <div class="tnl"><div class="tn-ico">🎁</div><div class="tn-ttl">Home</div><div style="display:flex;gap:3px"><div class="tn-ico">🔔</div><div class="tn-ico">👤</div></div></div>
+            <div style="padding:5px 9px"><div style="font-size:7px;color:var(--soft)">Total portfolio</div><div style="font-size:19px;font-weight:800;color:var(--brown);letter-spacing:-.5px">$312,155.55</div></div>
+            <div style="display:flex;gap:4px;padding:4px 9px;background:#fcfcfc">
+              <div style="flex:1;background:white;border-radius:8px;padding:6px;box-shadow:0 1px 5px rgba(0,0,0,.06)"><div style="font-size:7px;color:var(--soft)">Spend & save</div><div style="font-size:9px;font-weight:700;color:var(--brown)">$12,105</div><div style="font-size:7px;color:var(--green)">+$140 this mo</div></div>
+              <div style="flex:1;background:white;border-radius:8px;padding:6px;box-shadow:0 1px 5px rgba(0,0,0,.06)"><div style="font-size:7px;color:var(--soft)">Invest</div><div style="font-size:9px;font-weight:700;color:var(--brown)">$300,050</div><div style="font-size:7px;color:var(--green)">+14.02% all time</div></div>
+            </div>
+            <div style="background:#fcfcfc;flex:1;display:flex;flex-direction:column">
+              <div style="padding:5px 9px 3px;font-size:10px;font-weight:700;color:var(--brown)">For you</div>
+              <div style="margin:0 9px;border-radius:9px;padding:9px;background:linear-gradient(135deg,#826f8b,#bf8f85);position:relative">
+                <div style="position:absolute;top:9px;right:9px;width:18px;height:18px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px">▶</div>
+                <div style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.7)">📹 VIDEO · 45S</div>
+                <div style="font-size:10px;font-weight:800;color:white;margin-top:2px">All the nerdy things</div>
+                <div style="font-size:8px;color:rgba(255,255,255,.8);margin-top:2px;max-width:80px;line-height:1.3">AI trading tools, RRSP accel…</div>
+                <div style="margin-top:7px;display:inline-block;background:white;color:var(--brown);font-size:7px;font-weight:700;padding:3px 7px;border-radius:100px">Discover tools</div>
+              </div>
+              <div class="bnav"><div class="bnav-item on">🏠</div><div class="bnav-item">🔍</div><div class="bnav-item">⇄</div><div class="bnav-item">🕐</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Sees video card<br/>in For You rail</div>
+      </div>
+      <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap card</div></div>
+      <!-- Step 2 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:#444">2</div><div class="j-step-name">Braze IAM</div></div>
+        <div class="phonel" style="background:var(--brown)">
+          <div class="braze-screen">
+            <div class="braze-icon">⚡</div>
+            <div class="braze-tag">Braze IAM Fired</div>
+            <div class="braze-title">Fetching Content<br/>Blocks</div>
+            <div class="braze-sub">Liquid variables resolve<br/>video_url, poster_url<br/>headline, CTA…</div>
+            <div class="braze-dots"><div class="braze-dot"></div><div class="braze-dot" style="animation-delay:.2s"></div><div class="braze-dot" style="animation-delay:.4s"></div></div>
+          </div>
+        </div>
+        <div class="j-step-lbl">IAM loads,<br/>poster shown first</div>
+      </div>
+      <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
+      <!-- Step 3 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Breather</div></div>
+        <div class="phonel" style="background:#0a0a0a">
+          <div style="height:100%;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1008,#2a1f10,#1a1618,#0a0a0a)"></div>
+            <div style="position:absolute;left:50%;top:13%;transform:translateX(-50%);width:70px;height:100px"><div style="width:28px;height:28px;background:radial-gradient(circle at 40% 35%,#c8a880,#8a6840);border-radius:50%;margin:0 auto 2px;position:relative"><div style="position:absolute;top:-4px;left:-3px;width:34px;height:18px;background:#2a1a0a;border-radius:50% 50% 0 0"></div></div><div style="width:50px;height:64px;background:linear-gradient(180deg,#1a1a2e,#0f1520);border-radius:9px 9px 4px 4px;margin:0 auto"></div></div>
+            <div style="position:absolute;top:0;left:0;right:0;padding:19px 9px 5px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5"><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">‹</div><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">🔇</div></div>
+            <div style="position:absolute;right:4px;top:45%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:5"><div style="width:3px;height:8px;background:white;border-radius:2px"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div></div>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:7px 9px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5">
+              <div style="height:1.5px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px"><div style="height:100%;width:55%;background:white;border-radius:2px"></div></div>
+              <div style="font-size:10px;font-weight:700;color:white">All the nerdy things</div>
+              <div style="font-size:7px;color:rgba(255,255,255,.7);margin-top:1px">AI trading tools, RRSP accel…</div>
+              <div style="background:white;color:var(--brown);font-size:8px;font-weight:700;text-align:center;padding:7px;border-radius:100px;margin-top:6px">Discover tools for you</div>
+              <div style="height:14px;display:flex;align-items:center;justify-content:center"><div style="width:44px;height:3px;background:rgba(255,255,255,.25);border-radius:100px"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Watches video,<br/>taps CTA</div>
+      </div>
+      <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
+      <!-- Step 4 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:var(--green)">4</div><div class="j-step-name">Destination</div></div>
+        <div class="phonel">
+          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc">
+            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
+            <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Invest</div><div class="tn-ico">⋯</div></div>
+            <div style="flex:1;padding:9px;display:flex;flex-direction:column;gap:7px">
+              <div style="background:white;border-radius:10px;padding:10px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="font-size:8px;color:var(--soft);font-weight:600">Active Trader</div><div style="font-size:12px;font-weight:800;color:var(--brown);margin-top:1px">Tools for you</div><div style="font-size:7px;color:var(--soft);margin-top:2px;line-height:1.5">$0 options, advanced charts, real-time data</div><div style="background:var(--brown);color:white;font-size:7px;font-weight:700;padding:4px 8px;border-radius:100px;display:inline-block;margin-top:7px">Get started</div></div>
+              <div style="background:white;border-radius:10px;padding:9px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="font-size:8px;color:var(--soft);font-weight:600;margin-bottom:4px">RELATED</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0;border-bottom:.5px solid var(--bg)">Options trading →</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0;border-bottom:.5px solid var(--bg)">RRSP accelerator →</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0">AI insights →</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Deep linked to<br/>feature destination</div>
+        <div class="event-badge" style="background:rgba(26,127,75,.1);color:var(--green)">🎯 CTA_video_1 fired</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOURNEY B -->
+  <div class="j-section">
+    <div class="j-title"><span class="badge-pill" style="background:#1a6b4a">Journey B</span>Account / Security Page — Learn Card (Gold, Options)</div>
+    <div class="j-row">
+      <!-- Step 1 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:#1a6b4a">1</div><div class="j-step-name">Security Page</div></div>
+        <div class="phonel">
+          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc">
+            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
+            <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Gold (XAU)</div><div style="display:flex;gap:3px"><div class="tn-ico">☆</div><div class="tn-ico">🔔</div></div></div>
+            <div style="padding:7px 9px">
+              <div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#f0c060,#c88000);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:white">Au</div><div style="font-size:8px;color:var(--soft);font-weight:600">Gold (XAU/CAD)</div></div>
+              <div style="font-size:19px;font-weight:800;color:var(--brown);letter-spacing:-.5px">$3,842.50</div>
+              <div style="font-size:8px;color:var(--green);font-weight:700;margin-top:1px">+$62.34 (+1.65%) past day</div>
+            </div>
+            <div style="height:40px;margin:0 9px;border-radius:4px;background:rgba(26,127,75,.06);position:relative;overflow:hidden"><svg viewBox="0 0 140 36" style="width:100%;height:100%;position:absolute;bottom:0"><polyline points="0,28 20,23 40,26 60,16 80,13 100,18 120,10 140,6" fill="none" stroke="#1a7f4b" stroke-width="1.5"/><polygon points="0,28 20,23 40,26 60,16 80,13 100,18 120,10 140,6 140,36 0,36" fill="rgba(26,127,75,.08)"/></svg></div>
+            <div style="padding:5px 9px 2px;font-size:9px;font-weight:700;color:var(--brown);border-top:.5px solid rgba(0,0,0,.06);margin-top:4px">Holdings</div>
+            <div style="display:flex;justify-content:space-between;padding:3px 9px;font-size:8px"><span style="color:var(--soft)">0.24 oz</span><span style="font-weight:700">$922.20 CAD</span></div>
+            <div style="display:flex;justify-content:space-between;padding:3px 9px;font-size:8px"><span style="color:var(--soft)">Total return</span><span style="font-weight:700;color:var(--green)">+$122.10</span></div>
+            <!-- Learn card -->
+            <div style="margin:5px 9px;border-radius:9px;padding:9px;background:linear-gradient(135deg,#1a3520,#2a5030);position:relative">
+              <div style="position:absolute;top:9px;right:9px;width:18px;height:18px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">▶</div>
+              <div style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.6)">📹 LEARN · 30S</div>
+              <div style="font-size:10px;font-weight:800;color:white;margin-top:2px">Why gold now?</div>
+              <div style="font-size:7px;color:rgba(255,255,255,.7);margin-top:2px;max-width:80px;line-height:1.3">How gold hedges inflation</div>
+              <div style="margin-top:7px;display:inline-block;background:white;color:var(--brown);font-size:7px;font-weight:700;padding:3px 7px;border-radius:100px">Watch now</div>
+            </div>
+            <div style="border-top:.75px solid rgba(0,0,0,.08);display:flex;gap:5px;padding:6px 9px 10px;margin-top:auto">
+              <div style="flex:1;background:var(--brown);color:white;font-size:9px;font-weight:700;text-align:center;padding:8px;border-radius:100px">Trade</div>
+              <div style="flex:1;border:1.5px solid rgba(0,0,0,.12);color:var(--brown);font-size:9px;font-weight:700;text-align:center;padding:8px;border-radius:100px">Transfer</div>
+            </div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Browsing Gold<br/>security page</div>
+      </div>
+      <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap learn card</div></div>
+      <!-- Step 2 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:#444">2</div><div class="j-step-name">Braze IAM</div></div>
+        <div class="phonel" style="background:var(--brown)">
+          <div class="braze-screen">
+            <div class="braze-icon">⚡</div>
+            <div class="braze-tag">Braze IAM Fired</div>
+            <div class="braze-title">Gold Education<br/>Feed Loading</div>
+            <div class="braze-sub">Personalized to:<br/>Gold holder · SDI<br/>Active investor</div>
+            <div class="braze-dots"><div class="braze-dot"></div><div class="braze-dot" style="animation-delay:.2s"></div><div class="braze-dot" style="animation-delay:.4s"></div></div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Context-aware IAM<br/>loads gold content</div>
+      </div>
+      <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
+      <!-- Step 3 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Breather</div></div>
+        <div class="phonel" style="background:#0a0a0a">
+          <div style="height:100%;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1200,#2a1e00,#1a1400,#0a0a0a)"></div>
+            <div style="position:absolute;left:50%;top:12%;transform:translateX(-50%);width:80px;height:100px;display:flex;align-items:center;justify-content:center"><div style="width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe066,#c88000,#8a5500);box-shadow:0 4px 16px rgba(200,128,0,.4);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:rgba(255,255,255,.5)">Au</div></div>
+            <div style="position:absolute;top:0;left:0;right:0;padding:19px 9px 5px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5"><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">‹</div><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">🔇</div></div>
+            <div style="position:absolute;right:4px;top:45%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:5"><div style="width:3px;height:8px;background:white;border-radius:2px"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div></div>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:7px 9px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5">
+              <div style="height:1.5px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px"><div style="height:100%;width:35%;background:var(--gold);border-radius:2px"></div></div>
+              <div style="font-size:10px;font-weight:700;color:white">Why gold now?</div>
+              <div style="font-size:7px;color:rgba(255,255,255,.7);margin-top:1px">Inflation hedge explained in 30s</div>
+              <div style="background:white;color:var(--brown);font-size:8px;font-weight:700;text-align:center;padding:7px;border-radius:100px;margin-top:6px">Buy gold</div>
+              <div style="height:14px;display:flex;align-items:center;justify-content:center"><div style="width:44px;height:3px;background:rgba(255,255,255,.25);border-radius:100px"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Gold education<br/>video plays</div>
+      </div>
+      <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
+      <!-- Step 4 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:var(--green)">4</div><div class="j-step-name">Trade Gold</div></div>
+        <div class="phonel">
+          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc">
+            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
+            <div class="tnl"><div class="tn-ico">✕</div><div class="tn-ttl">Buy Gold</div><div style="width:22px"></div></div>
+            <div style="flex:1;padding:9px;display:flex;flex-direction:column;gap:7px">
+              <div style="background:white;border-radius:10px;padding:10px;box-shadow:0 2px 7px rgba(0,0,0,.06);text-align:center"><div style="font-size:8px;color:var(--soft);font-weight:600">Amount</div><div style="font-size:24px;font-weight:800;color:var(--brown);letter-spacing:-.5px">$500</div><div style="font-size:7px;color:var(--soft);margin-top:1px">≈ 0.13 oz at $3,842.50</div></div>
+              <div style="background:white;border-radius:10px;padding:9px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="display:flex;justify-content:space-between;font-size:8px;padding:3px 0;border-bottom:.5px solid var(--bg)"><span style="color:var(--soft)">From</span><span style="font-weight:700">Chequing</span></div><div style="display:flex;justify-content:space-between;font-size:8px;padding:3px 0"><span style="color:var(--soft)">Fee</span><span style="font-weight:700">$0.00</span></div></div>
+              <div style="background:var(--brown);color:white;font-size:10px;font-weight:700;text-align:center;padding:10px;border-radius:100px;margin-top:auto">Confirm purchase</div>
+            </div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Taken to<br/>Gold trade flow</div>
+        <div class="event-badge" style="background:rgba(26,127,75,.1);color:var(--green)">🎯 CTA_video_gold fired</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOURNEY C -->
+  <div class="j-section">
+    <div class="j-title"><span class="badge-pill" style="background:#2980b9">Journey C</span>Notification Centre — Push Notification</div>
+    <div class="j-row">
+      <!-- Step 1 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:#2980b9">1</div><div class="j-step-name">Notifications</div></div>
+        <div class="phonel">
+          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc">
+            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
+            <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Notifications</div><div class="tn-ico">⚙</div></div>
+            <div style="flex:1;overflow:hidden">
+              <div style="padding:4px 9px 2px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--soft)">TODAY</div>
+              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06)">
+                <div style="width:24px;height:24px;border-radius:50%;background:#fee;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">🚀</div>
+                <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">TSLA reached <strong>$170.30 USD</strong></div><div style="font-size:7px;color:var(--soft);margin-top:1px">40 min ago</div></div>
+                <div style="width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:4px"></div>
+              </div>
+              <!-- HIGHLIGHTED -->
+              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06);background:rgba(201,169,110,.1);border-left:2px solid var(--gold)">
+                <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#826f8b,#bf8f85);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">📹</div>
+                <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4"><strong>New for you:</strong> Learn about options trading in 45s</div><div style="font-size:7px;color:var(--soft);margin-top:1px">2 hours ago</div></div>
+                <div style="width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:4px"></div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06)">
+                <div style="width:24px;height:24px;border-radius:50%;background:#fff3e0;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">⚠️</div>
+                <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">Sign your TFSA transfer form</div><div style="font-size:7px;color:var(--soft);margin-top:1px">23 hours ago</div></div>
+              </div>
+              <div style="padding:4px 9px 2px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--soft);margin-top:2px">LAST WEEK</div>
+              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06)">
+                <div style="width:24px;height:24px;border-radius:50%;background:#fff8e1;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">₿</div>
+                <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">BTC price is <strong>$356.70 USD</strong></div><div style="font-size:7px;color:var(--soft);margin-top:1px">7 days ago</div></div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px">
+                <div style="width:24px;height:24px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">📈</div>
+                <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">Add funds to your RRSP</div><div style="font-size:7px;color:var(--soft);margin-top:1px">11 days ago</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Sees video notif<br/>(highlighted in gold)</div>
+      </div>
+      <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap notif</div></div>
+      <!-- Step 2 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:#444">2</div><div class="j-step-name">Braze IAM</div></div>
+        <div class="phonel" style="background:var(--brown)">
+          <div class="braze-screen">
+            <div class="braze-icon">⚡</div>
+            <div class="braze-tag">Braze IAM Fired</div>
+            <div class="braze-title">Options Education<br/>Feed Loading</div>
+            <div class="braze-sub">Triggered via<br/>notification tap<br/>Push → IAM</div>
+            <div class="braze-dots"><div class="braze-dot"></div><div class="braze-dot" style="animation-delay:.2s"></div><div class="braze-dot" style="animation-delay:.4s"></div></div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Push → IAM<br/>handoff</div>
+      </div>
+      <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
+      <!-- Step 3 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Breather</div></div>
+        <div class="phonel" style="background:#0a0a0a">
+          <div style="height:100%;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#080f1a,#102030,#0a1520,#0a0a0a)"></div>
+            <div style="position:absolute;left:50%;top:10%;transform:translateX(-50%);width:90px;height:110px;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:24px">📊</div><div style="background:rgba(41,128,185,.15);border:1px solid rgba(41,128,185,.3);border-radius:5px;padding:3px 7px;font-size:7px;font-weight:700;color:rgba(100,180,255,.8)">$0 OPTIONS</div><div style="display:flex;gap:2px;margin-top:3px"><div style="background:rgba(255,255,255,.06);border-radius:3px;padding:2px 4px;font-size:6px;color:rgba(255,255,255,.35)">CALL</div><div style="background:rgba(255,255,255,.06);border-radius:3px;padding:2px 4px;font-size:6px;color:rgba(255,255,255,.35)">PUT</div><div style="background:rgba(41,128,185,.3);border-radius:3px;padding:2px 4px;font-size:6px;color:rgba(100,180,255,.8)">SPREAD</div></div></div>
+            <div style="position:absolute;top:0;left:0;right:0;padding:19px 9px 5px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5"><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">‹</div><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">🔇</div></div>
+            <div style="position:absolute;right:4px;top:45%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:5"><div style="width:3px;height:8px;background:white;border-radius:2px"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div></div>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:7px 9px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5">
+              <div style="height:1.5px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px"><div style="height:100%;width:70%;background:#2980b9;border-radius:2px"></div></div>
+              <div style="font-size:10px;font-weight:700;color:white">Trade $0 options</div>
+              <div style="font-size:7px;color:rgba(255,255,255,.7);margin-top:1px">Advanced strategies, explained</div>
+              <div style="background:white;color:var(--brown);font-size:8px;font-weight:700;text-align:center;padding:7px;border-radius:100px;margin-top:6px">Start trading options</div>
+              <div style="height:14px;display:flex;align-items:center;justify-content:center"><div style="width:44px;height:3px;background:rgba(255,255,255,.25);border-radius:100px"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Options education<br/>video plays</div>
+      </div>
+      <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
+      <!-- Step 4 -->
+      <div class="j-step">
+        <div class="j-step-header"><div class="j-step-num" style="background:var(--green)">4</div><div class="j-step-name">Options Trading</div></div>
+        <div class="phonel">
+          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc">
+            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
+            <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Options</div><div class="tn-ico">?</div></div>
+            <div style="flex:1;padding:9px;display:flex;flex-direction:column;gap:7px">
+              <div style="background:white;border-radius:10px;padding:10px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="font-size:8px;color:var(--soft);font-weight:600;margin-bottom:3px">Active Trader</div><div style="font-size:12px;font-weight:800;color:var(--brown)">$0 options trading</div><div style="font-size:7px;color:var(--soft);margin-top:2px;line-height:1.5">No commissions. Advanced chains.</div><div style="background:var(--brown);color:white;font-size:7px;font-weight:700;padding:4px 8px;border-radius:100px;display:inline-block;margin-top:7px">Enable options</div></div>
+              <div style="background:white;border-radius:10px;padding:9px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="font-size:8px;color:var(--soft);font-weight:600;margin-bottom:4px">QUICK START</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0;border-bottom:.5px solid var(--bg)">Covered calls →</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0;border-bottom:.5px solid var(--bg)">Cash-secured puts →</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0">Options chains →</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="j-step-lbl">Deep linked to<br/>Options feature</div>
+        <div class="event-badge" style="background:rgba(41,128,185,.1);color:var(--blue)">🎯 CTA_video_options fired</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTRY SUMMARY -->
+  <div class="entry-sum">
+    <h4>Entry Point Summary</h4>
+    <div class="entry-cards">
+      <div class="entry-card" style="border-left:3px solid #826f8b"><h5>🏠 Home Tab</h5><p>Marketing card in "For You" rail. Broad reach — any user who opens the home screen.</p></div>
+      <div class="entry-card" style="border-left:3px solid #1a6b4a"><h5>📈 Account Page</h5><p>Learn card on security/asset page. High intent — user is already engaged with the product.</p></div>
+      <div class="entry-card" style="border-left:3px solid #2980b9"><h5>🔔 Notification Centre</h5><p>Push notification tap → IAM. Re-engagement channel for users not actively browsing.</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function show(i) {
+    document.querySelectorAll('.section').forEach((s,j) => s.classList.toggle('active', i===j));
+    document.querySelectorAll('.nav-btn').forEach((b,j) => b.classList.toggle('active', i===j));
+  }
+</script>
+</body>
+</html>
