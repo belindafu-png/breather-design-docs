@@ -14,30 +14,25 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 
-/* NAV */
 .nav{position:sticky;top:0;z-index:100;background:var(--brown);display:flex;overflow-x:auto;scrollbar-width:none;}
 .nav::-webkit-scrollbar{display:none;}
 .nav-btn{padding:14px 18px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);white-space:nowrap;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;transition:all .2s;}
 .nav-btn:hover,.nav-btn.active{color:white;border-bottom-color:var(--gold);}
 
-/* SECTIONS */
 .section{display:none;padding:36px 24px;max-width:960px;margin:0 auto;}
 .section.active{display:block;}
 .sec-hd{margin-bottom:28px;}
 .sec-hd h2{font-size:20px;font-weight:800;letter-spacing:-.3px;}
 .sec-hd p{font-size:13px;color:var(--soft);margin-top:6px;line-height:1.6;}
 
-/* PHONE DARK */
 .phone{width:190px;height:410px;background:#0a0a0a;border-radius:32px;border:5px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.28);flex-shrink:0;}
 .phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:66px;height:17px;background:#1c1c1c;border-radius:0 0 11px 11px;z-index:20;}
 .phone-sm{width:155px;height:336px;border-radius:28px;border-width:4px;}
 .phone-sm::before{width:54px;height:14px;}
 
-/* PHONE LIGHT */
 .phonel{width:165px;height:356px;background:#fcfcfc;border-radius:30px;border:5px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.18);flex-shrink:0;display:flex;flex-direction:column;}
 .phonel::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:15px;background:#1c1c1c;border-radius:0 0 10px 10px;z-index:20;}
 
-/* SHARED VIDEO BG */
 .vbg{position:absolute;inset:0;background:linear-gradient(180deg,#1a1008 0%,#2a1f10 30%,#1a1618 60%,#0a0a0a 100%);}
 .vtop{position:absolute;top:0;left:0;right:0;padding:21px 11px 7px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:10;}
 .ctrl{width:22px;height:22px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:white;}
@@ -53,14 +48,12 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 .sdot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.25);}
 .sdot.on{background:white;height:9px;border-radius:2px;}
 
-/* PERSON */
 .person{position:absolute;left:50%;top:14%;transform:translateX(-50%);width:80px;height:115px;}
 .p-head{width:34px;height:34px;background:radial-gradient(circle at 40% 35%,#c8a880,#8a6840);border-radius:50%;margin:0 auto 3px;position:relative;}
 .p-head::after{content:'';position:absolute;top:-5px;left:-4px;width:42px;height:22px;background:#2a1a0a;border-radius:50% 50% 0 0;}
 .p-body{width:58px;height:74px;background:linear-gradient(180deg,#1a1a2e,#0f1520);border-radius:11px 11px 5px 5px;margin:0 auto;}
 .mic{position:absolute;width:5px;height:5px;background:#e0c070;border-radius:50%;top:26px;right:18px;}
 
-/* LABEL */
 .lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--soft);text-align:center;margin-top:10px;}
 .badge-pill{display:inline-block;font-size:9px;font-weight:700;padding:3px 9px;border-radius:100px;color:white;}
 
@@ -103,17 +96,51 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 .cr:last-child{border:none;}
 .cr strong{color:var(--brown);}
 
-/* ── SECTION 4 — FEED ORDER ── */
-.v4-row{display:flex;align-items:flex-start;gap:0;justify-content:center;flex-wrap:wrap;}
-.v4-card{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;}
-.v4-con{display:flex;align-items:center;margin-top:52px;color:var(--gold);font-size:22px;width:48px;justify-content:center;flex-shrink:0;}
-.cnt-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:white;}
-.v4-name{font-size:11px;font-weight:700;text-align:center;}
-.v4-sub{font-size:10px;color:var(--soft);text-align:center;max-width:130px;line-height:1.4;}
-.count-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px;}
-.count-card{background:white;border-radius:10px;padding:11px 15px;box-shadow:var(--card-shadow);text-align:center;min-width:90px;}
-.count-num{font-size:18px;font-weight:800;}
-.count-lbl{font-size:9px;color:var(--soft);margin-top:2px;}
+/* ── SECTION 4 — CONTENT TIMING ── */
+.timing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px;}
+.timing-card{background:white;border-radius:16px;padding:20px;box-shadow:var(--card-shadow);position:relative;overflow:hidden;}
+.timing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.timing-card.quick::before{background:linear-gradient(to right,#e67e22,#f39c12);}
+.timing-card.gtm::before{background:linear-gradient(to right,var(--blue),#5dade2);}
+.timing-card.edu::before{background:linear-gradient(to right,var(--green),#58d68d);}
+.timing-card.personal::before{background:linear-gradient(to right,#826f8b,#bf8f85);}
+.timing-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;padding:4px 10px;border-radius:100px;margin-bottom:12px;}
+.timing-card.quick .timing-badge{background:rgba(230,126,34,.12);color:#c87522;}
+.timing-card.gtm .timing-badge{background:rgba(41,128,185,.12);color:#2471a3;}
+.timing-card.edu .timing-badge{background:rgba(26,127,75,.12);color:#1a7f4b;}
+.timing-card.personal .timing-badge{background:rgba(130,111,139,.12);color:#826f8b;}
+.timing-dur{font-size:32px;font-weight:800;letter-spacing:-1px;line-height:1;}
+.timing-card.quick .timing-dur{color:#e67e22;}
+.timing-card.gtm .timing-dur{color:var(--blue);}
+.timing-card.edu .timing-dur{color:var(--green);}
+.timing-card.personal .timing-dur{color:#826f8b;}
+.timing-unit{font-size:13px;font-weight:600;color:var(--soft);margin-left:2px;}
+.timing-name{font-size:13px;font-weight:700;color:var(--brown);margin-top:8px;margin-bottom:4px;}
+.timing-desc{font-size:11px;color:var(--soft);line-height:1.6;}
+.timing-eg{margin-top:10px;background:var(--bg);border-radius:8px;padding:8px 10px;}
+.timing-eg-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--soft);margin-bottom:5px;}
+.timing-eg-item{font-size:10px;color:var(--brown);padding:2px 0;display:flex;align-items:center;gap:5px;}
+.timing-eg-item::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.timing-card.quick .timing-eg-item::before{background:#e67e22;}
+.timing-card.gtm .timing-eg-item::before{background:var(--blue);}
+.timing-card.edu .timing-eg-item::before{background:var(--green);}
+.timing-card.personal .timing-eg-item::before{background:#826f8b;}
+
+/* timeline bar */
+.timeline-wrap{background:white;border-radius:16px;padding:24px;box-shadow:var(--card-shadow);margin-bottom:8px;}
+.timeline-wrap h4{font-size:12px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.7px;margin-bottom:18px;}
+.timeline-bar{position:relative;height:48px;background:var(--bg);border-radius:10px;overflow:hidden;display:flex;}
+.tl-seg{display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white;white-space:nowrap;padding:0 6px;}
+.tl-seg.quick{background:linear-gradient(to right,#e67e22,#f39c12);flex:3;}
+.tl-seg.gtm{background:linear-gradient(to right,var(--blue),#5dade2);flex:2;}
+.tl-seg.edu{background:linear-gradient(to right,var(--green),#58d68d);flex:0.5;}
+.tl-seg.personal{background:linear-gradient(to right,#826f8b,#bf8f85);flex:1;}
+.tl-labels{display:flex;margin-top:7px;}
+.tl-lbl{font-size:9px;color:var(--soft);text-align:center;}
+.tl-lbl.quick{flex:3;}
+.tl-lbl.gtm{flex:2;}
+.tl-lbl.edu{flex:0.5;}
+.tl-lbl.personal{flex:1;}
 
 /* ── SECTION 5 — CONTENT BLOCK MAP ── */
 .v5-arch{background:#edeae5;border-radius:18px;padding:28px 20px;margin-bottom:32px;text-align:center;}
@@ -153,7 +180,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 .j-step-name{font-size:10px;font-weight:700;}
 .j-step-lbl{font-size:10px;color:var(--soft);text-align:center;max-width:130px;line-height:1.4;}
 .event-badge{font-size:9px;font-weight:700;padding:3px 8px;border-radius:5px;text-align:center;}
-/* braze screen */
 .braze-screen{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;padding:18px;background:var(--brown);}
 .braze-icon{width:38px;height:38px;background:rgba(255,255,255,.1);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.15);}
 .braze-tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);font-size:8px;font-weight:700;padding:3px 9px;border-radius:100px;border:1px solid rgba(255,255,255,.15);}
@@ -162,7 +188,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 .braze-dots{display:flex;gap:4px;}
 .braze-dot{width:5px;height:5px;background:rgba(255,255,255,.2);border-radius:50%;animation:pulse 1.4s ease-in-out infinite;}
 @keyframes pulse{0%,80%,100%{opacity:.3;transform:scale(.8);}40%{opacity:1;transform:scale(1);}}
-/* light phone internals */
 .sb{height:22px;display:flex;align-items:center;justify-content:space-between;padding:0 11px;margin-top:15px;font-size:9px;font-weight:700;color:var(--brown);}
 .tnl{display:flex;align-items:center;justify-content:space-between;padding:3px 10px 5px;}
 .tn-ico{width:22px;height:22px;background:rgba(0,0,0,.06);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;}
@@ -170,7 +195,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 .bnav{border-top:.75px solid rgba(0,0,0,.08);display:flex;padding:5px 0 9px;margin-top:auto;}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;font-size:7px;color:var(--soft);font-weight:600;}
 .bnav-item.on{color:var(--brown);}
-/* entry summary */
 .entry-sum{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);margin-top:4px;}
 .entry-sum h4{font-size:12px;font-weight:700;margin-bottom:12px;}
 .entry-cards{display:flex;gap:10px;flex-wrap:wrap;}
@@ -185,7 +209,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
   <button class="nav-btn active" onclick="show(0)">① Tap Zones</button>
   <button class="nav-btn" onclick="show(1)">② Screen Zones</button>
   <button class="nav-btn" onclick="show(2)">③ Copy Guidelines</button>
-  <button class="nav-btn" onclick="show(3)">④ Feed Order</button>
+  <button class="nav-btn" onclick="show(3)">④ Content Timing</button>
   <button class="nav-btn" onclick="show(4)">⑤ Content Block Map</button>
   <button class="nav-btn" onclick="show(5)">⑥ User Journey</button>
 </nav>
@@ -281,33 +305,86 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
   </div>
 </section>
 
-<!-- ④ FEED ORDER -->
+<!-- ④ CONTENT TIMING -->
 <section class="section" id="s3">
-  <div class="sec-hd"><h2>④ Video Feed Ordering Strategy</h2><p>Order videos using this 3-act structure for maximum completion and CTA rates.</p></div>
-  <div class="v4-row">
-    <div class="v4-card">
-      <div style="display:flex;align-items:center;gap:5px"><div class="cnt-badge" style="background:var(--red)">1</div><span class="j-step-name">Hook</span></div>
-      <div class="phone phone-sm"><div class="vbg" style="background:linear-gradient(180deg,#1a0808,#3a1515,#1a0c0c,#0a0a0a)"></div><div class="vtop" style="padding:18px 9px 5px"><div class="ctrl" style="width:19px;height:19px;font-size:8px">‹</div><div class="ctrl" style="width:19px;height:19px;font-size:8px">🔇</div></div><div style="position:absolute;top:21px;left:50%;transform:translateX(-50%);background:var(--red);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:white;z-index:10">1</div><div class="vbot"><div class="v-prog"><div class="v-fill" style="width:75%"></div></div><div class="v-head" style="font-size:9px">Most compelling hook</div><div class="v-sub" style="font-size:7px">Grab attention in 2s</div><div class="v-cta" style="font-size:8px;padding:6px">Learn more</div><div class="v-hi"><div class="v-hi-bar"></div></div></div></div>
-      <div class="v4-sub">Most compelling video first. Hook in 2 seconds.</div>
+  <div class="sec-hd">
+    <h2>④ Content Timing Guidelines</h2>
+    <p>Rule of thumb: match video length to content type. Shorter isn't always better — some messages earn more time.</p>
+  </div>
+
+  <div class="timing-grid">
+    <!-- QUICK / SNIPPY -->
+    <div class="timing-card quick">
+      <div class="timing-badge">⚡ Quick &amp; Snippy</div>
+      <div><span class="timing-dur">3–5</span><span class="timing-unit">sec</span></div>
+      <div class="timing-name">Fast-hit awareness</div>
+      <div class="timing-desc">High-energy, single idea. Works when the message is instantly recognizable — no context needed. Hooks fast or loses the viewer.</div>
+      <div class="timing-eg">
+        <div class="timing-eg-lbl">Examples</div>
+        <div class="timing-eg-item">New feature badge drop</div>
+        <div class="timing-eg-item">Promotional offer reveal</div>
+        <div class="timing-eg-item">Price milestone alert</div>
+      </div>
     </div>
-    <div class="v4-con">›</div>
-    <div class="v4-card">
-      <div style="display:flex;align-items:center;gap:5px"><div class="cnt-badge" style="background:var(--blue)">2–N</div><span class="j-step-name">Mix</span></div>
-      <div class="phone phone-sm"><div class="vbg" style="background:linear-gradient(180deg,#080f1a,#0f2035,#0a1520,#0a0a0a)"></div><div class="vtop" style="padding:18px 9px 5px"><div class="ctrl" style="width:19px;height:19px;font-size:8px">‹</div><div class="ctrl" style="width:19px;height:19px;font-size:8px">🔊</div></div><div style="position:absolute;top:21px;left:50%;transform:translateX(-50%);background:var(--blue);width:22px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:800;color:white;z-index:10">2–N</div><div class="vbot"><div class="v-prog"><div class="v-fill" style="width:40%"></div></div><div class="v-head" style="font-size:9px">Alternate types</div><div class="v-sub" style="font-size:7px">Mix product + education</div><div class="v-cta" style="font-size:8px;padding:6px">Explore</div><div class="v-hi"><div class="v-hi-bar"></div></div></div></div>
-      <div class="v4-sub">Alternate content types. 3–7 videos ideal.</div>
+
+    <!-- GO TO MARKET -->
+    <div class="timing-card gtm">
+      <div class="timing-badge">🚀 Go-to-Market</div>
+      <div><span class="timing-dur">5–7</span><span class="timing-unit">sec</span></div>
+      <div class="timing-name">Product launch &amp; campaigns</div>
+      <div class="timing-desc">Sweet spot for most marketing content. Enough time to land a benefit and a CTA without overstaying the welcome.</div>
+      <div class="timing-eg">
+        <div class="timing-eg-lbl">Examples</div>
+        <div class="timing-eg-item">Feature launch video</div>
+        <div class="timing-eg-item">Seasonal campaign</div>
+        <div class="timing-eg-item">Cross-sell moment</div>
+      </div>
     </div>
-    <div class="v4-con">›</div>
-    <div class="v4-card">
-      <div style="display:flex;align-items:center;gap:5px"><div class="cnt-badge" style="background:var(--green)">✓</div><span class="j-step-name">End Strong</span></div>
-      <div class="phone phone-sm"><div class="vbg" style="background:linear-gradient(180deg,#0a1a0a,#1a3520,#0c1a10,#0a0a0a)"></div><div class="vtop" style="padding:18px 9px 5px"><div class="ctrl" style="width:19px;height:19px;font-size:8px">‹</div><div class="ctrl" style="width:19px;height:19px;font-size:8px">🔊</div></div><div style="position:absolute;top:21px;left:50%;transform:translateX(-50%);background:var(--green);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:white;z-index:10">✓</div><div class="vbot"><div class="v-prog"><div class="v-fill" style="width:90%;background:var(--gold)"></div></div><div class="v-head" style="font-size:9px">Highest-value CTA</div><div class="v-sub" style="font-size:7px">Committed viewer = ready</div><div class="v-cta" style="font-size:8px;padding:6px;background:var(--brown);color:white">Get started</div><div class="v-hi"><div class="v-hi-bar"></div></div></div></div>
-      <div class="v4-sub">Highest-value CTA last. Committed viewers act.</div>
+
+    <!-- EDUCATIONAL -->
+    <div class="timing-card edu">
+      <div class="timing-badge">📚 Educational</div>
+      <div><span class="timing-dur">~10</span><span class="timing-unit">sec</span></div>
+      <div class="timing-name">Concepts &amp; how-tos</div>
+      <div class="timing-desc">Teaching takes time. Use this length when the viewer needs context to act — e.g. explaining a product mechanic before a CTA.</div>
+      <div class="timing-eg">
+        <div class="timing-eg-lbl">Examples</div>
+        <div class="timing-eg-item">How options work</div>
+        <div class="timing-eg-item">TFSA vs RRSP explainer</div>
+        <div class="timing-eg-item">Why gold hedges inflation</div>
+      </div>
+    </div>
+
+    <!-- PERSONAL / CEO -->
+    <div class="timing-card personal">
+      <div class="timing-badge">🎙 Personal &amp; High-trust</div>
+      <div><span class="timing-dur">10+</span><span class="timing-unit">sec</span></div>
+      <div class="timing-name">CEO, founder &amp; leadership</div>
+      <div class="timing-desc">Personable messages earn more time. A face behind the brand builds trust — but the tone must feel genuine, not scripted.</div>
+      <div class="timing-eg">
+        <div class="timing-eg-lbl">Examples</div>
+        <div class="timing-eg-item">CEO market update</div>
+        <div class="timing-eg-item">Founder product message</div>
+        <div class="timing-eg-item">Team milestone moment</div>
+      </div>
     </div>
   </div>
-  <div class="count-row">
-    <div class="count-card"><div class="count-num" style="color:var(--green)">3–5</div><div class="count-lbl">Focused</div></div>
-    <div class="count-card"><div class="count-num" style="color:var(--blue)">5–7</div><div class="count-lbl">Balanced</div></div>
-    <div class="count-card"><div class="count-num" style="color:var(--gold)">8–10</div><div class="count-lbl">Comprehensive</div></div>
-    <div class="count-card"><div class="count-num" style="color:var(--red)">10+</div><div class="count-lbl">Risk of overwhelm</div></div>
+
+  <!-- TIMELINE VIZ -->
+  <div class="timeline-wrap">
+    <h4>Duration spectrum at a glance</h4>
+    <div class="timeline-bar">
+      <div class="tl-seg quick">3–5s</div>
+      <div class="tl-seg gtm">5–7s</div>
+      <div class="tl-seg edu">~10s</div>
+      <div class="tl-seg personal">10s+</div>
+    </div>
+    <div class="tl-labels">
+      <div class="tl-lbl quick" style="color:#c87522;font-weight:700">Quick &amp; Snippy</div>
+      <div class="tl-lbl gtm" style="color:#2471a3;font-weight:700">Go-to-Market</div>
+      <div class="tl-lbl edu" style="color:#1a7f4b;font-weight:700;font-size:8px">Edu</div>
+      <div class="tl-lbl personal" style="color:#826f8b;font-weight:700">Personal</div>
+    </div>
   </div>
 </section>
 
@@ -386,11 +463,9 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 <section class="section" id="s5">
   <div class="sec-hd"><h2>⑥ User Journey</h2><p>Three entry points that trigger the Video Breather — Home Tab, Account/Security page, and Notification Centre.</p></div>
 
-  <!-- JOURNEY A -->
   <div class="j-section">
     <div class="j-title"><span class="badge-pill" style="background:#826f8b">Journey A</span>Home Tab — "For You" Marketing Card</div>
     <div class="j-row">
-      <!-- Step 1 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:#826f8b">1</div><div class="j-step-name">Home Tab</div></div>
         <div class="phonel">
@@ -418,7 +493,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
         <div class="j-step-lbl">Sees video card<br/>in For You rail</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap card</div></div>
-      <!-- Step 2 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:#444">2</div><div class="j-step-name">Braze IAM</div></div>
         <div class="phonel" style="background:var(--brown)">
@@ -433,7 +507,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
         <div class="j-step-lbl">IAM loads,<br/>poster shown first</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
-      <!-- Step 3 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Breather</div></div>
         <div class="phonel" style="background:#0a0a0a">
@@ -454,7 +527,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
         <div class="j-step-lbl">Watches video,<br/>taps CTA</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
-      <!-- Step 4 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:var(--green)">4</div><div class="j-step-name">Destination</div></div>
         <div class="phonel">
@@ -473,11 +545,9 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
     </div>
   </div>
 
-  <!-- JOURNEY B -->
   <div class="j-section">
     <div class="j-title"><span class="badge-pill" style="background:#1a6b4a">Journey B</span>Account / Security Page — Learn Card (Gold, Options)</div>
     <div class="j-row">
-      <!-- Step 1 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:#1a6b4a">1</div><div class="j-step-name">Security Page</div></div>
         <div class="phonel">
@@ -493,7 +563,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
             <div style="padding:5px 9px 2px;font-size:9px;font-weight:700;color:var(--brown);border-top:.5px solid rgba(0,0,0,.06);margin-top:4px">Holdings</div>
             <div style="display:flex;justify-content:space-between;padding:3px 9px;font-size:8px"><span style="color:var(--soft)">0.24 oz</span><span style="font-weight:700">$922.20 CAD</span></div>
             <div style="display:flex;justify-content:space-between;padding:3px 9px;font-size:8px"><span style="color:var(--soft)">Total return</span><span style="font-weight:700;color:var(--green)">+$122.10</span></div>
-            <!-- Learn card -->
             <div style="margin:5px 9px;border-radius:9px;padding:9px;background:linear-gradient(135deg,#1a3520,#2a5030);position:relative">
               <div style="position:absolute;top:9px;right:9px;width:18px;height:18px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">▶</div>
               <div style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.6)">📹 LEARN · 30S</div>
@@ -510,7 +579,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
         <div class="j-step-lbl">Browsing Gold<br/>security page</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap learn card</div></div>
-      <!-- Step 2 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:#444">2</div><div class="j-step-name">Braze IAM</div></div>
         <div class="phonel" style="background:var(--brown)">
@@ -525,7 +593,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
         <div class="j-step-lbl">Context-aware IAM<br/>loads gold content</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
-      <!-- Step 3 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Breather</div></div>
         <div class="phonel" style="background:#0a0a0a">
@@ -546,7 +613,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
         <div class="j-step-lbl">Gold education<br/>video plays</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
-      <!-- Step 4 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:var(--green)">4</div><div class="j-step-name">Trade Gold</div></div>
         <div class="phonel">
@@ -566,11 +632,9 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
     </div>
   </div>
 
-  <!-- JOURNEY C -->
   <div class="j-section">
     <div class="j-title"><span class="badge-pill" style="background:#2980b9">Journey C</span>Notification Centre — Push Notification</div>
     <div class="j-row">
-      <!-- Step 1 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:#2980b9">1</div><div class="j-step-name">Notifications</div></div>
         <div class="phonel">
@@ -584,7 +648,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
                 <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">TSLA reached <strong>$170.30 USD</strong></div><div style="font-size:7px;color:var(--soft);margin-top:1px">40 min ago</div></div>
                 <div style="width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:4px"></div>
               </div>
-              <!-- HIGHLIGHTED -->
               <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06);background:rgba(201,169,110,.1);border-left:2px solid var(--gold)">
                 <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#826f8b,#bf8f85);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">📹</div>
                 <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4"><strong>New for you:</strong> Learn about options trading in 45s</div><div style="font-size:7px;color:var(--soft);margin-top:1px">2 hours ago</div></div>
@@ -609,7 +672,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
         <div class="j-step-lbl">Sees video notif<br/>(highlighted in gold)</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap notif</div></div>
-      <!-- Step 2 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:#444">2</div><div class="j-step-name">Braze IAM</div></div>
         <div class="phonel" style="background:var(--brown)">
@@ -624,7 +686,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
         <div class="j-step-lbl">Push → IAM<br/>handoff</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
-      <!-- Step 3 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Breather</div></div>
         <div class="phonel" style="background:#0a0a0a">
@@ -645,7 +706,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
         <div class="j-step-lbl">Options education<br/>video plays</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
-      <!-- Step 4 -->
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:var(--green)">4</div><div class="j-step-name">Options Trading</div></div>
         <div class="phonel">
@@ -664,7 +724,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
     </div>
   </div>
 
-  <!-- ENTRY SUMMARY -->
   <div class="entry-sum">
     <h4>Entry Point Summary</h4>
     <div class="entry-cards">
