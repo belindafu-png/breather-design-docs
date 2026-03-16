@@ -643,35 +643,39 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
       </div>
     </div>
   </div>
-  <!-- BUTTON ALIAS -->
+      <!-- BUTTON ALIAS -->
   <div style="background:white;border-radius:14px;padding:20px;box-shadow:var(--card-shadow);margin-bottom:28px;">
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
       <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;"></div>
       <div style="font-size:13px;font-weight:700;">Button Click Aliases — <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:3px;">data-button-id</code></div>
     </div>
-    <p style="font-size:12px;color:var(--soft);line-height:1.7;margin-bottom:14px;">Each reel card's <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">&lt;a&gt;</code> tag must include a <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">data-button-id</code> attribute. This is what Braze reads to attribute a button click alias to a specific card — without it, CTA taps won't register in campaign analytics. The value must match the alias configured in the Braze campaign.</p>
+    <p style="font-size:12px;color:var(--soft);line-height:1.7;margin-bottom:14px;">You <strong style="color:var(--brown)">do not need to touch the HTML.</strong> The IAM code automatically generates <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">data-button-id</code> from the <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">id</code> field you set in the content block. The only thing to configure is the <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">id</code> field inside each video object in <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">reels_feed_v1</code>.</p>
     <div style="background:#1e1e1e;border-radius:10px;padding:16px 18px;font-family:monospace;font-size:11px;line-height:1.9;overflow-x:auto;margin-bottom:14px;">
-      <div><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">a</span> <span style="color:#ffab70;">href</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"{{OptionURL}}"</span></div>
-      <div style="padding-left:18px;"><span style="color:#ffab70;">id</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"ContentCard1"</span></div>
-      <div style="padding-left:18px;"><span style="color:#f97583;">data-button-id</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"<span style="background:rgba(201,169,110,.2);padding:1px 3px;border-radius:3px;color:#c9a96e;">Options</span>"</span></div>
-      <div style="padding-left:18px;"><span style="color:#ffab70;">aria-label</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"{{ContentCard1Title}}"</span><span style="color:#888;">&gt;</span></div>
+      <div style="color:#6a9955;margin-bottom:4px;">// The IAM generates this automatically:</div>
+      <div><span style="color:#ffab70;">data-button-id</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"CTA_<span style="color:#c9a96e;">${item.id}</span>"</span></div>
+      <div style="margin-top:10px;color:#6a9955;">// So in reels_feed_v1, you just set the id field:</div>
+      <div style="margin-top:4px;"><span style="color:#9ecbff;">"id"</span><span style="color:#888;">: </span><span style="color:#9ecbff;">"<span style="background:rgba(201,169,110,.2);padding:1px 3px;border-radius:3px;color:#c9a96e;">video_options</span>"</span></div>
+      <div style="color:#6a9955;margin-top:2px;">// → Braze alias becomes: CTA_video_options</div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
       <div style="background:var(--bg);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Attribute</div>
-        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">data-button-id</div>
-        <div style="font-size:10px;color:var(--soft);margin-top:3px;">Required on every card <code style="font-size:9px;background:white;padding:1px 3px;border-radius:3px;">&lt;a&gt;</code></div>
+        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Set this</div>
+        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">id field</div>
+        <div style="font-size:10px;color:var(--soft);margin-top:3px;">In <code style="font-size:9px;background:white;padding:1px 3px;border-radius:3px;">reels_feed_v1</code> content block</div>
       </div>
       <div style="background:var(--bg);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Value</div>
-        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">"Options"</div>
-        <div style="font-size:10px;color:var(--soft);margin-top:3px;">Must match Braze button alias exactly</div>
+        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Naming</div>
+        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">video_options</div>
+        <div style="font-size:10px;color:var(--soft);margin-top:3px;">Topic-based, not positional (not <code style="font-size:9px;background:white;padding:1px 3px;border-radius:3px;">video_1</code>)</div>
       </div>
       <div style="background:var(--bg);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Pattern</div>
-        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">card01, card02…</div>
-        <div style="font-size:10px;color:var(--soft);margin-top:3px;">Or use the content topic (e.g. "RRSP", "Gold")</div>
+        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Result in Braze</div>
+        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">CTA_video_options</div>
+        <div style="font-size:10px;color:var(--soft);margin-top:3px;">Auto-generated — no HTML edits needed</div>
       </div>
+    </div>
+    <div style="margin-top:10px;background:rgba(26,127,75,.08);border-left:3px solid var(--green);border-radius:0 7px 7px 0;padding:9px 12px;font-size:11px;color:var(--soft);line-height:1.6;">
+      ⚠️ If the <code style="font-size:10px;background:white;padding:1px 3px;border-radius:3px;">id</code> field is missing or blank in the content block, the button alias won't fire in Braze analytics.
     </div>
   </div>
 
