@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>WS Video Breather — Visual Design Guides</title>
+<title>WS Video Reels — Design Guide</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 :root {
@@ -29,7 +29,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 .phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:66px;height:17px;background:#1c1c1c;border-radius:0 0 11px 11px;z-index:20;}
 .phone-sm{width:155px;height:336px;border-radius:28px;border-width:4px;}
 .phone-sm::before{width:54px;height:14px;}
-
 .phonel{width:165px;height:356px;background:#fcfcfc;border-radius:30px;border:5px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.18);flex-shrink:0;display:flex;flex-direction:column;}
 .phonel::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:15px;background:#1c1c1c;border-radius:0 0 10px 10px;z-index:20;}
 
@@ -47,15 +46,48 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 .sdots{position:absolute;right:5px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;z-index:10;}
 .sdot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.25);}
 .sdot.on{background:white;height:9px;border-radius:2px;}
-
 .person{position:absolute;left:50%;top:14%;transform:translateX(-50%);width:80px;height:115px;}
 .p-head{width:34px;height:34px;background:radial-gradient(circle at 40% 35%,#c8a880,#8a6840);border-radius:50%;margin:0 auto 3px;position:relative;}
 .p-head::after{content:'';position:absolute;top:-5px;left:-4px;width:42px;height:22px;background:#2a1a0a;border-radius:50% 50% 0 0;}
 .p-body{width:58px;height:74px;background:linear-gradient(180deg,#1a1a2e,#0f1520);border-radius:11px 11px 5px 5px;margin:0 auto;}
 .mic{position:absolute;width:5px;height:5px;background:#e0c070;border-radius:50%;top:26px;right:18px;}
-
 .lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--soft);text-align:center;margin-top:10px;}
 .badge-pill{display:inline-block;font-size:9px;font-weight:700;padding:3px 9px;border-radius:100px;color:white;}
+
+/* ── README TAB ── */
+.readme-hero{background:var(--brown);border-radius:18px;padding:32px 28px;margin-bottom:28px;color:white;position:relative;overflow:hidden;}
+.readme-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(201,169,110,.08);pointer-events:none;}
+.readme-hero::after{content:'';position:absolute;bottom:-60px;right:20px;width:140px;height:140px;border-radius:50%;background:rgba(201,169,110,.05);pointer-events:none;}
+.readme-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);margin-bottom:10px;}
+.readme-hero h1{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.2;margin-bottom:8px;}
+.readme-hero p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;max-width:520px;}
+.readme-meta{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap;}
+.readme-meta-item{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.5);}
+.readme-meta-item span{color:rgba(255,255,255,.8);font-weight:600;}
+
+.readme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:28px;}
+.readme-card{background:white;border-radius:14px;padding:18px;box-shadow:var(--card-shadow);cursor:pointer;transition:transform .15s,box-shadow .15s;border-top:3px solid transparent;}
+.readme-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.12);}
+.readme-card-icon{font-size:22px;margin-bottom:10px;}
+.readme-card-num{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--soft);margin-bottom:4px;}
+.readme-card-title{font-size:13px;font-weight:700;margin-bottom:5px;}
+.readme-card-desc{font-size:11px;color:var(--soft);line-height:1.5;}
+.readme-card-audience{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;margin-top:8px;}
+
+.readme-who{background:white;border-radius:14px;padding:20px;box-shadow:var(--card-shadow);margin-bottom:14px;}
+.readme-who h3{font-size:13px;font-weight:700;margin-bottom:14px;}
+.readme-who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;}
+.readme-who-item{background:var(--bg);border-radius:9px;padding:11px;}
+.readme-who-item h4{font-size:11px;font-weight:700;margin-bottom:4px;}
+.readme-who-item p{font-size:10px;color:var(--soft);line-height:1.5;}
+
+.readme-flow{background:white;border-radius:14px;padding:20px;box-shadow:var(--card-shadow);}
+.readme-flow h3{font-size:13px;font-weight:700;margin-bottom:14px;}
+.readme-flow-row{display:flex;align-items:center;flex-wrap:wrap;gap:0;}
+.readme-flow-step{background:var(--bg);border-radius:9px;padding:10px 13px;flex:1;min-width:110px;}
+.readme-flow-step h5{font-size:10px;font-weight:700;margin-bottom:2px;}
+.readme-flow-step p{font-size:9px;color:var(--soft);line-height:1.4;}
+.readme-flow-arrow{color:var(--gold);font-size:18px;padding:0 6px;flex-shrink:0;}
 
 /* ── SECTION 1 — TAP ZONES ── */
 .v1-row{display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;}
@@ -125,8 +157,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 .timing-card.gtm .timing-eg-item::before{background:var(--blue);}
 .timing-card.edu .timing-eg-item::before{background:var(--green);}
 .timing-card.personal .timing-eg-item::before{background:#826f8b;}
-
-/* timeline bar */
 .timeline-wrap{background:white;border-radius:16px;padding:24px;box-shadow:var(--card-shadow);margin-bottom:8px;}
 .timeline-wrap h4{font-size:12px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.7px;margin-bottom:18px;}
 .timeline-bar{position:relative;height:48px;background:var(--bg);border-radius:10px;overflow:hidden;display:flex;}
@@ -141,6 +171,38 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 .tl-lbl.gtm{flex:2;}
 .tl-lbl.edu{flex:0.5;}
 .tl-lbl.personal{flex:1;}
+
+/* ── HANDOFF TAB ── */
+.handoff-alert{background:linear-gradient(135deg,#1a3520,#2a5030);border-radius:14px;padding:20px 22px;margin-bottom:24px;display:flex;align-items:flex-start;gap:14px;}
+.handoff-alert-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+.handoff-alert h3{font-size:14px;font-weight:700;color:white;margin-bottom:4px;}
+.handoff-alert p{font-size:12px;color:rgba(255,255,255,.6);line-height:1.6;}
+
+.handoff-steps{display:flex;flex-direction:column;gap:14px;margin-bottom:28px;}
+.handoff-step{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);display:flex;gap:16px;align-items:flex-start;}
+.handoff-step-num{width:32px;height:32px;border-radius:50%;background:var(--brown);color:white;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.handoff-step-body h4{font-size:13px;font-weight:700;margin-bottom:5px;}
+.handoff-step-body p{font-size:12px;color:var(--soft);line-height:1.6;margin-bottom:8px;}
+.handoff-step-body p:last-child{margin-bottom:0;}
+.spec-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.spec-chip{background:var(--bg);border-radius:6px;padding:5px 9px;font-size:10px;font-weight:700;color:var(--brown);display:flex;align-items:center;gap:4px;}
+.spec-chip .chip-label{color:var(--soft);font-weight:500;}
+
+.handoff-naming{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);margin-bottom:14px;}
+.handoff-naming h4{font-size:13px;font-weight:700;margin-bottom:12px;}
+.naming-example{background:var(--bg);border-radius:9px;padding:13px 15px;font-family:monospace;font-size:12px;color:var(--brown);margin-bottom:10px;line-height:1.8;}
+.naming-example .hi{background:rgba(201,169,110,.25);padding:1px 3px;border-radius:3px;color:#9a7030;}
+.naming-parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;}
+.naming-part{background:var(--bg);border-radius:7px;padding:8px 10px;}
+.naming-part .np-key{font-size:9px;font-weight:700;color:var(--gold);font-family:monospace;margin-bottom:2px;}
+.naming-part .np-val{font-size:10px;color:var(--soft);}
+
+.handoff-checklist{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);}
+.handoff-checklist h4{font-size:13px;font-weight:700;margin-bottom:12px;}
+.checklist-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.checklist-item{display:flex;align-items:flex-start;gap:8px;background:var(--bg);border-radius:7px;padding:8px 10px;}
+.ci-box{width:14px;height:14px;border-radius:3px;border:1.5px solid rgba(0,0,0,.15);flex-shrink:0;margin-top:1px;}
+.ci-text{font-size:10px;color:var(--brown);line-height:1.4;}
 
 /* ── SECTION 5 — CONTENT BLOCK MAP ── */
 .v5-arch{background:#edeae5;border-radius:18px;padding:28px 20px;margin-bottom:32px;text-align:center;}
@@ -206,17 +268,112 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 <body>
 
 <nav class="nav">
-  <button class="nav-btn active" onclick="show(0)">① Tap Zones</button>
-  <button class="nav-btn" onclick="show(1)">② Screen Zones</button>
-  <button class="nav-btn" onclick="show(2)">③ Copy Guidelines</button>
-  <button class="nav-btn" onclick="show(3)">④ Content Timing</button>
-  <button class="nav-btn" onclick="show(4)">⑤ Content Block Map</button>
-  <button class="nav-btn" onclick="show(5)">⑥ User Journey</button>
+  <button class="nav-btn active" onclick="show(0)">☰ Overview</button>
+  <button class="nav-btn" onclick="show(1)">① Tap Zones</button>
+  <button class="nav-btn" onclick="show(2)">② Screen Zones</button>
+  <button class="nav-btn" onclick="show(3)">③ Copy Guidelines</button>
+  <button class="nav-btn" onclick="show(4)">④ Content Timing</button>
+  <button class="nav-btn" onclick="show(5)">⑤ Content Handoff</button>
+  <button class="nav-btn" onclick="show(6)">⑥ Reel Mapping</button>
+  <button class="nav-btn" onclick="show(7)">⑦ User Journey</button>
 </nav>
 
-<!-- ① TAP ZONES -->
+<!-- ☰ README / OVERVIEW -->
 <section class="section active" id="s0">
-  <div class="sec-hd"><h2>① Tap Zone Interaction Guide</h2><p>The Breather screen is divided into 3 horizontal tap zones. Each triggers a distinct interaction with visual feedback.</p></div>
+  <div class="readme-hero">
+    <div class="readme-eyebrow">Wealthsimple · Product Engagement</div>
+    <h1>Video Reels<br/>Design Guide</h1>
+    <p>Everything you need to create, review, and ship a Video Reels campaign — from content specs to Braze implementation. Use the tabs above to navigate.</p>
+    <div class="readme-meta">
+      <div class="readme-meta-item">🎬 <span>Format:</span> Full-screen vertical video (9:16)</div>
+      <div class="readme-meta-item">⚙️ <span>Delivery:</span> Braze In-App Message</div>
+      <div class="readme-meta-item">📱 <span>Platform:</span> iOS · Android</div>
+    </div>
+  </div>
+
+  <div class="readme-grid">
+    <div class="readme-card" onclick="show(1)" style="border-top-color:#e67e22">
+      <div class="readme-card-icon">👆</div>
+      <div class="readme-card-num">Tab ①</div>
+      <div class="readme-card-title">Tap Zones</div>
+      <div class="readme-card-desc">How users interact — rewind, play/pause, 2× speed, and sound toggle.</div>
+      <div class="readme-card-audience" style="background:rgba(230,126,34,.1);color:#c87522;">Design · Creative</div>
+    </div>
+    <div class="readme-card" onclick="show(2)" style="border-top-color:var(--red)">
+      <div class="readme-card-icon">📐</div>
+      <div class="readme-card-num">Tab ②</div>
+      <div class="readme-card-title">Screen Zones</div>
+      <div class="readme-card-desc">Safe zones for video subjects and copy. Includes video file specs.</div>
+      <div class="readme-card-audience" style="background:rgba(192,57,43,.1);color:var(--red);">Video · Design</div>
+    </div>
+    <div class="readme-card" onclick="show(3)" style="border-top-color:var(--green)">
+      <div class="readme-card-icon">✍️</div>
+      <div class="readme-card-num">Tab ③</div>
+      <div class="readme-card-title">Copy Guidelines</div>
+      <div class="readme-card-desc">Word limits, tone, and do/don't examples for headline, body, and CTA.</div>
+      <div class="readme-card-audience" style="background:rgba(26,127,75,.1);color:var(--green);">Creative · Lifecycle</div>
+    </div>
+    <div class="readme-card" onclick="show(4)" style="border-top-color:var(--blue)">
+      <div class="readme-card-icon">⏱</div>
+      <div class="readme-card-num">Tab ④</div>
+      <div class="readme-card-title">Content Timing</div>
+      <div class="readme-card-desc">Recommended video lengths by content type — educational, GTM, CEO, etc.</div>
+      <div class="readme-card-audience" style="background:rgba(41,128,185,.1);color:var(--blue);">Video · Stakeholders</div>
+    </div>
+    <div class="readme-card" onclick="show(5)" style="border-top-color:var(--gold)">
+      <div class="readme-card-icon">📦</div>
+      <div class="readme-card-num">Tab ⑤</div>
+      <div class="readme-card-title">Content Handoff</div>
+      <div class="readme-card-desc">How to provide MP4 files, posters, copy, and CTAs ready for production.</div>
+      <div class="readme-card-audience" style="background:rgba(201,169,110,.15);color:#9a7030;">Stakeholders · PM</div>
+    </div>
+    <div class="readme-card" onclick="show(6)" style="border-top-color:#826f8b">
+      <div class="readme-card-icon">🗺</div>
+      <div class="readme-card-num">Tab ⑥</div>
+      <div class="readme-card-title">Reel Mapping</div>
+      <div class="readme-card-desc">How each content field maps to a UI element inside the reel card.</div>
+      <div class="readme-card-audience" style="background:rgba(130,111,139,.1);color:#826f8b;">Lifecycle Marketing</div>
+    </div>
+    <div class="readme-card" onclick="show(7)" style="border-top-color:#2980b9">
+      <div class="readme-card-icon">🗺️</div>
+      <div class="readme-card-num">Tab ⑦</div>
+      <div class="readme-card-title">User Journey</div>
+      <div class="readme-card-desc">Three entry points — Home Tab, Security Page, and Notification Centre.</div>
+      <div class="readme-card-audience" style="background:rgba(41,128,185,.1);color:#2471a3;">PM · Stakeholders</div>
+    </div>
+  </div>
+
+  <div class="readme-who">
+    <h3>Who is this guide for?</h3>
+    <div class="readme-who-grid">
+      <div class="readme-who-item"><h4>📣 PMs & Stakeholders</h4><p>Tabs ④ ⑤ — timing guidelines and how to hand off video content for production.</p></div>
+      <div class="readme-who-item"><h4>📬 Lifecycle Marketing</h4><p>Tabs ⑤ ⑥ — content handoff checklist, Braze content block setup, and field mapping.</p></div>
+      <div class="readme-who-item"><h4>✍️ Creative & Copy</h4><p>Tab ③ — headline, body, and CTA rules with side-by-side do/don't examples.</p></div>
+      <div class="readme-who-item"><h4>🎬 Design & Video</h4><p>Tabs ① ② — safe zones, interaction model, and technical video specs.</p></div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px">
+  <div class="readme-flow">
+    <h3>How a reel goes from idea to live</h3>
+    <div class="readme-flow-row">
+      <div class="readme-flow-step"><h5>1. Brief</h5><p>Stakeholder defines topic, CTA goal, audience</p></div>
+      <div class="readme-flow-arrow">›</div>
+      <div class="readme-flow-step"><h5>2. Video</h5><p>Record to spec — 9:16, MP4, correct timing tier</p></div>
+      <div class="readme-flow-arrow">›</div>
+      <div class="readme-flow-step"><h5>3. Handoff</h5><p>Submit via Tab ⑤ checklist with copy & poster</p></div>
+      <div class="readme-flow-arrow">›</div>
+      <div class="readme-flow-step"><h5>4. Braze</h5><p>Content blocks built, Liquid templated, tested</p></div>
+      <div class="readme-flow-arrow">›</div>
+      <div class="readme-flow-step"><h5>5. Live</h5><p>IAM triggered via entry point, events fire</p></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ① TAP ZONES -->
+<section class="section" id="s1">
+  <div class="sec-hd"><h2>① Tap Zone Interaction Guide</h2><p>The reel screen is divided into 3 horizontal tap zones. Each triggers a distinct interaction with visual feedback.</p></div>
   <div class="v1-row">
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
       <div class="phone">
@@ -249,7 +406,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 </section>
 
 <!-- ② SCREEN ZONES -->
-<section class="section" id="s1">
+<section class="section" id="s2">
   <div class="sec-hd"><h2>② Screen Zone Anatomy</h2><p>The screen has 3 fixed vertical zones. Video producers and copywriters must respect these boundaries.</p></div>
   <div class="v2-row">
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
@@ -284,8 +441,8 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 </section>
 
 <!-- ③ COPY GUIDELINES -->
-<section class="section" id="s2">
-  <div class="sec-hd"><h2>③ Copy Guidelines</h2><p>Side-by-side good vs bad copy in the Breather UI.</p></div>
+<section class="section" id="s3">
+  <div class="sec-hd"><h2>③ Copy Guidelines</h2><p>Side-by-side good vs bad copy in the reel UI.</p></div>
   <div class="v3-row">
     <div class="v3-col">
       <div style="display:flex;align-items:center;gap:6px"><span style="font-size:16px">✅</span><span style="font-size:12px;font-weight:700;color:var(--green)">Do this</span></div>
@@ -306,71 +463,41 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 </section>
 
 <!-- ④ CONTENT TIMING -->
-<section class="section" id="s3">
+<section class="section" id="s4">
   <div class="sec-hd">
     <h2>④ Content Timing Guidelines</h2>
     <p>Rule of thumb: match video length to content type. Shorter isn't always better — some messages earn more time.</p>
   </div>
-
   <div class="timing-grid">
-    <!-- QUICK / SNIPPY -->
     <div class="timing-card quick">
       <div class="timing-badge">⚡ Quick &amp; Snippy</div>
       <div><span class="timing-dur">3–5</span><span class="timing-unit">sec</span></div>
       <div class="timing-name">Fast-hit awareness</div>
-      <div class="timing-desc">High-energy, single idea. Works when the message is instantly recognizable — no context needed. Hooks fast or loses the viewer.</div>
-      <div class="timing-eg">
-        <div class="timing-eg-lbl">Examples</div>
-        <div class="timing-eg-item">New feature badge drop</div>
-        <div class="timing-eg-item">Promotional offer reveal</div>
-        <div class="timing-eg-item">Price milestone alert</div>
-      </div>
+      <div class="timing-desc">High-energy, single idea. Works when the message is instantly recognizable — no context needed.</div>
+      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">New feature badge drop</div><div class="timing-eg-item">Promotional offer reveal</div><div class="timing-eg-item">Price milestone alert</div></div>
     </div>
-
-    <!-- GO TO MARKET -->
     <div class="timing-card gtm">
       <div class="timing-badge">🚀 Go-to-Market</div>
       <div><span class="timing-dur">5–7</span><span class="timing-unit">sec</span></div>
       <div class="timing-name">Product launch &amp; campaigns</div>
       <div class="timing-desc">Sweet spot for most marketing content. Enough time to land a benefit and a CTA without overstaying the welcome.</div>
-      <div class="timing-eg">
-        <div class="timing-eg-lbl">Examples</div>
-        <div class="timing-eg-item">Feature launch video</div>
-        <div class="timing-eg-item">Seasonal campaign</div>
-        <div class="timing-eg-item">Cross-sell moment</div>
-      </div>
+      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">Feature launch video</div><div class="timing-eg-item">Seasonal campaign</div><div class="timing-eg-item">Cross-sell moment</div></div>
     </div>
-
-    <!-- EDUCATIONAL -->
     <div class="timing-card edu">
       <div class="timing-badge">📚 Educational</div>
       <div><span class="timing-dur">~10</span><span class="timing-unit">sec</span></div>
       <div class="timing-name">Concepts &amp; how-tos</div>
-      <div class="timing-desc">Teaching takes time. Use this length when the viewer needs context to act — e.g. explaining a product mechanic before a CTA.</div>
-      <div class="timing-eg">
-        <div class="timing-eg-lbl">Examples</div>
-        <div class="timing-eg-item">How options work</div>
-        <div class="timing-eg-item">TFSA vs RRSP explainer</div>
-        <div class="timing-eg-item">Why gold hedges inflation</div>
-      </div>
+      <div class="timing-desc">Teaching takes time. Use this length when the viewer needs context to act before a CTA.</div>
+      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">How options work</div><div class="timing-eg-item">TFSA vs RRSP explainer</div><div class="timing-eg-item">Why gold hedges inflation</div></div>
     </div>
-
-    <!-- PERSONAL / CEO -->
     <div class="timing-card personal">
       <div class="timing-badge">🎙 Personal &amp; High-trust</div>
       <div><span class="timing-dur">10+</span><span class="timing-unit">sec</span></div>
       <div class="timing-name">CEO, founder &amp; leadership</div>
-      <div class="timing-desc">Personable messages earn more time. A face behind the brand builds trust — but the tone must feel genuine, not scripted.</div>
-      <div class="timing-eg">
-        <div class="timing-eg-lbl">Examples</div>
-        <div class="timing-eg-item">CEO market update</div>
-        <div class="timing-eg-item">Founder product message</div>
-        <div class="timing-eg-item">Team milestone moment</div>
-      </div>
+      <div class="timing-desc">Personable messages earn more time. A face behind the brand builds trust — tone must feel genuine, not scripted.</div>
+      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">CEO market update</div><div class="timing-eg-item">Founder product message</div><div class="timing-eg-item">Team milestone moment</div></div>
     </div>
   </div>
-
-  <!-- TIMELINE VIZ -->
   <div class="timeline-wrap">
     <h4>Duration spectrum at a glance</h4>
     <div class="timeline-bar">
@@ -388,12 +515,111 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
   </div>
 </section>
 
-<!-- ⑤ CONTENT BLOCK MAP -->
-<section class="section" id="s4">
-  <div class="sec-hd"><h2>⑤ Content Block → Screen Mapping</h2><p>Each field in <code style="background:var(--bg);padding:2px 5px;border-radius:3px;font-size:12px">reels_feed_v1</code> maps directly to a UI element on screen.</p></div>
+<!-- ⑤ CONTENT HANDOFF -->
+<section class="section" id="s5">
+  <div class="sec-hd">
+    <h2>⑤ Content Handoff Guide</h2>
+    <p>For stakeholders and PMs submitting video content for a Reels campaign. Follow these steps to ensure your files are production-ready.</p>
+  </div>
+
+  <div class="handoff-alert">
+    <div class="handoff-alert-icon">📌</div>
+    <div>
+      <h3>Before you record</h3>
+      <p>Check the timing tier in Tab ④ and the safe zones in Tab ② first. Videos that don't meet spec need to be re-recorded — this adds time to the launch timeline.</p>
+    </div>
+  </div>
+
+  <div class="handoff-steps">
+    <div class="handoff-step">
+      <div class="handoff-step-num">1</div>
+      <div class="handoff-step-body">
+        <h4>Export your video as MP4</h4>
+        <p>All reel videos must be delivered as MP4 files. No MOV, no Google Drive previews, no Loom links — the raw file only.</p>
+        <div class="spec-chips">
+          <div class="spec-chip"><span class="chip-label">Format</span> MP4 (H.264)</div>
+          <div class="spec-chip"><span class="chip-label">Ratio</span> 9:16 vertical</div>
+          <div class="spec-chip"><span class="chip-label">Resolution</span> 1080 × 1920px</div>
+          <div class="spec-chip"><span class="chip-label">Frame rate</span> ≤ 30fps</div>
+          <div class="spec-chip"><span class="chip-label">File size</span> 3–5 MB</div>
+          <div class="spec-chip"><span class="chip-label">Duration</span> See Tab ④</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="handoff-step">
+      <div class="handoff-step-num">2</div>
+      <div class="handoff-step-body">
+        <h4>Include a poster image</h4>
+        <p>A static poster (first-frame thumbnail) is required so the reel doesn't flash black on load. Export a single frame from your video as a PNG or JPG at the same resolution.</p>
+        <div class="spec-chips">
+          <div class="spec-chip"><span class="chip-label">Format</span> PNG or JPG</div>
+          <div class="spec-chip"><span class="chip-label">Resolution</span> 1080 × 1920px</div>
+          <div class="spec-chip"><span class="chip-label">Content</span> Frame 0–1s of the video</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="handoff-step">
+      <div class="handoff-step-num">3</div>
+      <div class="handoff-step-body">
+        <h4>Write your copy</h4>
+        <p>Provide the three text fields per reel, following the rules in Tab ③. Copy that's too long will be sent back.</p>
+        <div class="spec-chips">
+          <div class="spec-chip"><span class="chip-label">Headline</span> 3–6 words</div>
+          <div class="spec-chip"><span class="chip-label">Body</span> 1 sentence, 5–10 words</div>
+          <div class="spec-chip"><span class="chip-label">CTA label</span> 2–3 words, verb-first</div>
+          <div class="spec-chip"><span class="chip-label">CTA destination</span> wealthsimple:// deep link</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="handoff-step">
+      <div class="handoff-step-num">4</div>
+      <div class="handoff-step-body">
+        <h4>Name your files correctly</h4>
+        <p>Use the naming convention below so files can be matched to their content block without back-and-forth.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="handoff-naming">
+    <h4>File naming convention</h4>
+    <div class="naming-example">
+      <span class="hi">reels</span>_<span class="hi">rrsp-launch</span>_<span class="hi">v1</span>_<span class="hi">card01</span>.mp4<br/>
+      <span class="hi">reels</span>_<span class="hi">rrsp-launch</span>_<span class="hi">v1</span>_<span class="hi">card01</span>_poster.png
+    </div>
+    <div class="naming-parts">
+      <div class="naming-part"><div class="np-key">reels</div><div class="np-val">Always starts with "reels" — identifies the component</div></div>
+      <div class="naming-part"><div class="np-key">rrsp-launch</div><div class="np-val">Campaign or topic slug, lowercase, hyphens only</div></div>
+      <div class="naming-part"><div class="np-key">v1</div><div class="np-val">Version — increment if you re-record</div></div>
+      <div class="naming-part"><div class="np-key">card01</div><div class="np-val">Card position in the feed (card01, card02…)</div></div>
+    </div>
+  </div>
+
+  <div class="handoff-checklist" style="margin-top:14px">
+    <h4>Pre-submission checklist</h4>
+    <div class="checklist-grid">
+      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">MP4 exported (H.264, 9:16, 1080×1920)</div></div>
+      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">File size under 5 MB</div></div>
+      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Poster image included (PNG/JPG, same res)</div></div>
+      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Duration matches content type in Tab ④</div></div>
+      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Subject stays within the focal zone (Tab ②)</div></div>
+      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Headline 3–6 words, benefit-led</div></div>
+      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">CTA is 2–3 words, verb-first</div></div>
+      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Files named using the convention above</div></div>
+      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Deep link destination confirmed and tested</div></div>
+      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">All cards delivered together (not staggered)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ REEL MAPPING -->
+<section class="section" id="s6">
+  <div class="sec-hd"><h2>⑥ Reel Content Block Mapping</h2><p>Each field in <code style="background:var(--bg);padding:2px 5px;border-radius:3px;font-size:12px">reels_feed_v1</code> maps directly to a UI element on screen.</p></div>
   <div class="v5-arch">
     <div class="v5-arch-title">Content Block Architecture</div>
-    <div class="v5-arch-sub">How Braze Content Blocks feed into each video card</div>
+    <div class="v5-arch-sub">How Braze Content Blocks feed into each reel card</div>
     <div class="v5-arch-row">
       <div class="v5-card">
         <div class="v5-card-title">📦 Content Block (per card)</div>
@@ -407,16 +633,48 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
       </div>
       <div style="font-size:24px;color:var(--gold);flex-shrink:0">→</div>
       <div class="v5-card">
-        <div class="v5-card-title">⚙️ Breather IAM (HTML/JS)</div>
-        <div class="iam-row">📽 Renders video card UI</div>
+        <div class="v5-card-title">⚙️ Reels IAM (HTML/JS)</div>
+        <div class="iam-row">📽 Renders reel card UI</div>
         <div class="iam-row">▶ Handles playback logic</div>
         <div class="iam-row">↕ Manages scroll snapping</div>
         <div class="iam-row">🖼 Shows poster on load</div>
         <div class="iam-row">📊 Fires Braze events</div>
-        <div class="iam-note">Liquid variables resolve<br/>at IAM send time.<br/>Marketers swap content<br/>without touching code.</div>
+        <div class="iam-note">Liquid variables resolve<br/>at IAM send time.<br/>Lifecycle marketing swaps<br/>content without touching code.</div>
       </div>
     </div>
   </div>
+  <!-- BUTTON ALIAS -->
+  <div style="background:white;border-radius:14px;padding:20px;box-shadow:var(--card-shadow);margin-bottom:28px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;"></div>
+      <div style="font-size:13px;font-weight:700;">Button Click Aliases — <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:3px;">data-button-id</code></div>
+    </div>
+    <p style="font-size:12px;color:var(--soft);line-height:1.7;margin-bottom:14px;">Each reel card's <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">&lt;a&gt;</code> tag must include a <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">data-button-id</code> attribute. This is what Braze reads to attribute a button click alias to a specific card — without it, CTA taps won't register in campaign analytics. The value must match the alias configured in the Braze campaign.</p>
+    <div style="background:#1e1e1e;border-radius:10px;padding:16px 18px;font-family:monospace;font-size:11px;line-height:1.9;overflow-x:auto;margin-bottom:14px;">
+      <div><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">a</span> <span style="color:#ffab70;">href</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"{{OptionURL}}"</span></div>
+      <div style="padding-left:18px;"><span style="color:#ffab70;">id</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"ContentCard1"</span></div>
+      <div style="padding-left:18px;"><span style="color:#f97583;">data-button-id</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"<span style="background:rgba(201,169,110,.2);padding:1px 3px;border-radius:3px;color:#c9a96e;">Options</span>"</span></div>
+      <div style="padding-left:18px;"><span style="color:#ffab70;">aria-label</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"{{ContentCard1Title}}"</span><span style="color:#888;">&gt;</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+      <div style="background:var(--bg);border-radius:8px;padding:10px 12px;">
+        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Attribute</div>
+        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">data-button-id</div>
+        <div style="font-size:10px;color:var(--soft);margin-top:3px;">Required on every card <code style="font-size:9px;background:white;padding:1px 3px;border-radius:3px;">&lt;a&gt;</code></div>
+      </div>
+      <div style="background:var(--bg);border-radius:8px;padding:10px 12px;">
+        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Value</div>
+        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">"Options"</div>
+        <div style="font-size:10px;color:var(--soft);margin-top:3px;">Must match Braze button alias exactly</div>
+      </div>
+      <div style="background:var(--bg);border-radius:8px;padding:10px 12px;">
+        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Pattern</div>
+        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">card01, card02…</div>
+        <div style="font-size:10px;color:var(--soft);margin-top:3px;">Or use the content topic (e.g. "RRSP", "Gold")</div>
+      </div>
+    </div>
+  </div>
+
   <div style="font-size:13px;font-weight:700;margin-bottom:14px;text-align:center">Field → UI Element Mapping</div>
   <div class="v5-map-row">
     <div class="v5-fields">
@@ -459,9 +717,9 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
   </div>
 </section>
 
-<!-- ⑥ USER JOURNEY -->
-<section class="section" id="s5">
-  <div class="sec-hd"><h2>⑥ User Journey</h2><p>Three entry points that trigger the Video Breather — Home Tab, Account/Security page, and Notification Centre.</p></div>
+<!-- ⑦ USER JOURNEY -->
+<section class="section" id="s7">
+  <div class="sec-hd"><h2>⑦ User Journey</h2><p>Three entry points that trigger the Video Reels — Home Tab, Account/Security page, and Notification Centre.</p></div>
 
   <div class="j-section">
     <div class="j-title"><span class="badge-pill" style="background:#826f8b">Journey A</span>Home Tab — "For You" Marketing Card</div>
@@ -481,7 +739,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
               <div style="padding:5px 9px 3px;font-size:10px;font-weight:700;color:var(--brown)">For you</div>
               <div style="margin:0 9px;border-radius:9px;padding:9px;background:linear-gradient(135deg,#826f8b,#bf8f85);position:relative">
                 <div style="position:absolute;top:9px;right:9px;width:18px;height:18px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px">▶</div>
-                <div style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.7)">📹 VIDEO · 45S</div>
+                <div style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.7)">📹 REEL · 45S</div>
                 <div style="font-size:10px;font-weight:800;color:white;margin-top:2px">All the nerdy things</div>
                 <div style="font-size:8px;color:rgba(255,255,255,.8);margin-top:2px;max-width:80px;line-height:1.3">AI trading tools, RRSP accel…</div>
                 <div style="margin-top:7px;display:inline-block;background:white;color:var(--brown);font-size:7px;font-weight:700;padding:3px 7px;border-radius:100px">Discover tools</div>
@@ -490,7 +748,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Sees video card<br/>in For You rail</div>
+        <div class="j-step-lbl">Sees reel card<br/>in For You rail</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap card</div></div>
       <div class="j-step">
@@ -508,7 +766,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Breather</div></div>
+        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Reels</div></div>
         <div class="phonel" style="background:#0a0a0a">
           <div style="height:100%;position:relative;overflow:hidden">
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1008,#2a1f10,#1a1618,#0a0a0a)"></div>
@@ -524,7 +782,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Watches video,<br/>taps CTA</div>
+        <div class="j-step-lbl">Watches reel,<br/>taps CTA</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
       <div class="j-step">
@@ -546,7 +804,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
   </div>
 
   <div class="j-section">
-    <div class="j-title"><span class="badge-pill" style="background:#1a6b4a">Journey B</span>Account / Security Page — Learn Card (Gold, Options)</div>
+    <div class="j-title"><span class="badge-pill" style="background:#1a6b4a">Journey B</span>Account / Security Page — Learn Card</div>
     <div class="j-row">
       <div class="j-step">
         <div class="j-step-header"><div class="j-step-num" style="background:#1a6b4a">1</div><div class="j-step-name">Security Page</div></div>
@@ -565,7 +823,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
             <div style="display:flex;justify-content:space-between;padding:3px 9px;font-size:8px"><span style="color:var(--soft)">Total return</span><span style="font-weight:700;color:var(--green)">+$122.10</span></div>
             <div style="margin:5px 9px;border-radius:9px;padding:9px;background:linear-gradient(135deg,#1a3520,#2a5030);position:relative">
               <div style="position:absolute;top:9px;right:9px;width:18px;height:18px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">▶</div>
-              <div style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.6)">📹 LEARN · 30S</div>
+              <div style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.6)">📹 REEL · 30S</div>
               <div style="font-size:10px;font-weight:800;color:white;margin-top:2px">Why gold now?</div>
               <div style="font-size:7px;color:rgba(255,255,255,.7);margin-top:2px;max-width:80px;line-height:1.3">How gold hedges inflation</div>
               <div style="margin-top:7px;display:inline-block;background:white;color:var(--brown);font-size:7px;font-weight:700;padding:3px 7px;border-radius:100px">Watch now</div>
@@ -594,13 +852,12 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Breather</div></div>
+        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Reels</div></div>
         <div class="phonel" style="background:#0a0a0a">
           <div style="height:100%;position:relative;overflow:hidden">
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1200,#2a1e00,#1a1400,#0a0a0a)"></div>
             <div style="position:absolute;left:50%;top:12%;transform:translateX(-50%);width:80px;height:100px;display:flex;align-items:center;justify-content:center"><div style="width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe066,#c88000,#8a5500);box-shadow:0 4px 16px rgba(200,128,0,.4);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:rgba(255,255,255,.5)">Au</div></div>
             <div style="position:absolute;top:0;left:0;right:0;padding:19px 9px 5px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5"><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">‹</div><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">🔇</div></div>
-            <div style="position:absolute;right:4px;top:45%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:5"><div style="width:3px;height:8px;background:white;border-radius:2px"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div></div>
             <div style="position:absolute;bottom:0;left:0;right:0;padding:7px 9px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5">
               <div style="height:1.5px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px"><div style="height:100%;width:35%;background:var(--gold);border-radius:2px"></div></div>
               <div style="font-size:10px;font-weight:700;color:white">Why gold now?</div>
@@ -610,7 +867,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Gold education<br/>video plays</div>
+        <div class="j-step-lbl">Gold education<br/>reel plays</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
       <div class="j-step">
@@ -643,33 +900,15 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
             <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Notifications</div><div class="tn-ico">⚙</div></div>
             <div style="flex:1;overflow:hidden">
               <div style="padding:4px 9px 2px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--soft)">TODAY</div>
-              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06)">
-                <div style="width:24px;height:24px;border-radius:50%;background:#fee;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">🚀</div>
-                <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">TSLA reached <strong>$170.30 USD</strong></div><div style="font-size:7px;color:var(--soft);margin-top:1px">40 min ago</div></div>
-                <div style="width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:4px"></div>
-              </div>
-              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06);background:rgba(201,169,110,.1);border-left:2px solid var(--gold)">
-                <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#826f8b,#bf8f85);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">📹</div>
-                <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4"><strong>New for you:</strong> Learn about options trading in 45s</div><div style="font-size:7px;color:var(--soft);margin-top:1px">2 hours ago</div></div>
-                <div style="width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:4px"></div>
-              </div>
-              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06)">
-                <div style="width:24px;height:24px;border-radius:50%;background:#fff3e0;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">⚠️</div>
-                <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">Sign your TFSA transfer form</div><div style="font-size:7px;color:var(--soft);margin-top:1px">23 hours ago</div></div>
-              </div>
+              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06)"><div style="width:24px;height:24px;border-radius:50%;background:#fee;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">🚀</div><div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">TSLA reached <strong>$170.30 USD</strong></div><div style="font-size:7px;color:var(--soft);margin-top:1px">40 min ago</div></div><div style="width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:4px"></div></div>
+              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06);background:rgba(201,169,110,.1);border-left:2px solid var(--gold)"><div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#826f8b,#bf8f85);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">📹</div><div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4"><strong>New for you:</strong> Learn about options trading in 45s</div><div style="font-size:7px;color:var(--soft);margin-top:1px">2 hours ago</div></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:4px"></div></div>
+              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06)"><div style="width:24px;height:24px;border-radius:50%;background:#fff3e0;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">⚠️</div><div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">Sign your TFSA transfer form</div><div style="font-size:7px;color:var(--soft);margin-top:1px">23 hours ago</div></div></div>
               <div style="padding:4px 9px 2px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--soft);margin-top:2px">LAST WEEK</div>
-              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06)">
-                <div style="width:24px;height:24px;border-radius:50%;background:#fff8e1;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">₿</div>
-                <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">BTC price is <strong>$356.70 USD</strong></div><div style="font-size:7px;color:var(--soft);margin-top:1px">7 days ago</div></div>
-              </div>
-              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px">
-                <div style="width:24px;height:24px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">📈</div>
-                <div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">Add funds to your RRSP</div><div style="font-size:7px;color:var(--soft);margin-top:1px">11 days ago</div></div>
-              </div>
+              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px"><div style="width:24px;height:24px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">📈</div><div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">Add funds to your RRSP</div><div style="font-size:7px;color:var(--soft);margin-top:1px">11 days ago</div></div></div>
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Sees video notif<br/>(highlighted in gold)</div>
+        <div class="j-step-lbl">Sees reel notif<br/>(highlighted in gold)</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap notif</div></div>
       <div class="j-step">
@@ -687,13 +926,12 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Breather</div></div>
+        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Reels</div></div>
         <div class="phonel" style="background:#0a0a0a">
           <div style="height:100%;position:relative;overflow:hidden">
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,#080f1a,#102030,#0a1520,#0a0a0a)"></div>
-            <div style="position:absolute;left:50%;top:10%;transform:translateX(-50%);width:90px;height:110px;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:24px">📊</div><div style="background:rgba(41,128,185,.15);border:1px solid rgba(41,128,185,.3);border-radius:5px;padding:3px 7px;font-size:7px;font-weight:700;color:rgba(100,180,255,.8)">$0 OPTIONS</div><div style="display:flex;gap:2px;margin-top:3px"><div style="background:rgba(255,255,255,.06);border-radius:3px;padding:2px 4px;font-size:6px;color:rgba(255,255,255,.35)">CALL</div><div style="background:rgba(255,255,255,.06);border-radius:3px;padding:2px 4px;font-size:6px;color:rgba(255,255,255,.35)">PUT</div><div style="background:rgba(41,128,185,.3);border-radius:3px;padding:2px 4px;font-size:6px;color:rgba(100,180,255,.8)">SPREAD</div></div></div>
+            <div style="position:absolute;left:50%;top:10%;transform:translateX(-50%);width:90px;height:110px;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:24px">📊</div><div style="background:rgba(41,128,185,.15);border:1px solid rgba(41,128,185,.3);border-radius:5px;padding:3px 7px;font-size:7px;font-weight:700;color:rgba(100,180,255,.8)">$0 OPTIONS</div></div>
             <div style="position:absolute;top:0;left:0;right:0;padding:19px 9px 5px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5"><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">‹</div><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">🔇</div></div>
-            <div style="position:absolute;right:4px;top:45%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:5"><div style="width:3px;height:8px;background:white;border-radius:2px"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div></div>
             <div style="position:absolute;bottom:0;left:0;right:0;padding:7px 9px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5">
               <div style="height:1.5px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px"><div style="height:100%;width:70%;background:#2980b9;border-radius:2px"></div></div>
               <div style="font-size:10px;font-weight:700;color:white">Trade $0 options</div>
@@ -703,7 +941,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Options education<br/>video plays</div>
+        <div class="j-step-lbl">Options reel plays</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
       <div class="j-step">
@@ -714,7 +952,6 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
             <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Options</div><div class="tn-ico">?</div></div>
             <div style="flex:1;padding:9px;display:flex;flex-direction:column;gap:7px">
               <div style="background:white;border-radius:10px;padding:10px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="font-size:8px;color:var(--soft);font-weight:600;margin-bottom:3px">Active Trader</div><div style="font-size:12px;font-weight:800;color:var(--brown)">$0 options trading</div><div style="font-size:7px;color:var(--soft);margin-top:2px;line-height:1.5">No commissions. Advanced chains.</div><div style="background:var(--brown);color:white;font-size:7px;font-weight:700;padding:4px 8px;border-radius:100px;display:inline-block;margin-top:7px">Enable options</div></div>
-              <div style="background:white;border-radius:10px;padding:9px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="font-size:8px;color:var(--soft);font-weight:600;margin-bottom:4px">QUICK START</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0;border-bottom:.5px solid var(--bg)">Covered calls →</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0;border-bottom:.5px solid var(--bg)">Cash-secured puts →</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0">Options chains →</div></div>
             </div>
           </div>
         </div>
@@ -735,9 +972,10 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
 </section>
 
 <script>
-  function show(i) {
-    document.querySelectorAll('.section').forEach((s,j) => s.classList.toggle('active', i===j));
-    document.querySelectorAll('.nav-btn').forEach((b,j) => b.classList.toggle('active', i===j));
+  function show(i){
+    document.querySelectorAll('.section').forEach((s,j)=>s.classList.toggle('active',i===j));
+    document.querySelectorAll('.nav-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+    window.scrollTo(0,0);
   }
 </script>
 </body>
