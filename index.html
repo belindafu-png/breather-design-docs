@@ -276,6 +276,7 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
   <button class="nav-btn" onclick="show(5)">⑤ Content Handoff</button>
   <button class="nav-btn" onclick="show(6)">⑥ Reel Mapping</button>
   <button class="nav-btn" onclick="show(7)">⑦ User Journey</button>
+  <button class="nav-btn" onclick="show(8)">⑧ Half-Sheet Video</button>
 </nav>
 
 <!-- ☰ README / OVERVIEW -->
@@ -971,6 +972,149 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
       <div class="entry-card" style="border-left:3px solid #826f8b"><h5>🏠 Home Tab</h5><p>Marketing card in "For You" rail. Broad reach — any user who opens the home screen.</p></div>
       <div class="entry-card" style="border-left:3px solid #1a6b4a"><h5>📈 Account Page</h5><p>Learn card on security/asset page. High intent — user is already engaged with the product.</p></div>
       <div class="entry-card" style="border-left:3px solid #2980b9"><h5>🔔 Notification Centre</h5><p>Push notification tap → IAM. Re-engagement channel for users not actively browsing.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ HALF-SHEET VIDEO -->
+<section class="section" id="s8">
+  <div class="sec-hd">
+    <h2>⑧ Half-Sheet Video Modal</h2>
+    <p>An alternative format for longer-form, high-trust video content — embedded directly inside a standard half-sheet IAM. Best for CEO messages, product milestones, or anything that benefits from surrounding context and a single strong CTA.</p>
+  </div>
+
+  <!-- WHEN TO USE -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
+    <div style="background:white;border-radius:14px;padding:18px;box-shadow:var(--card-shadow);border-top:3px solid var(--green);">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--green);margin-bottom:10px;">✅ Use half-sheet video when</div>
+      <div style="font-size:11px;color:var(--soft);line-height:1.8;">
+        • Video is <strong style="color:var(--brown)">30–60s+</strong> and needs context around it<br>
+        • Message is from a <strong style="color:var(--brown)">named person</strong> (CEO, PM lead)<br>
+        • There's a <strong style="color:var(--brown)">single focused CTA</strong> (e.g. feedback form)<br>
+        • Supporting copy helps frame the video<br>
+        • Horizontal / landscape video is acceptable
+      </div>
+    </div>
+    <div style="background:white;border-radius:14px;padding:18px;box-shadow:var(--card-shadow);border-top:3px solid var(--red);">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--red);margin-bottom:10px;">❌ Use Reels instead when</div>
+      <div style="font-size:11px;color:var(--soft);line-height:1.8;">
+        • Video is <strong style="color:var(--brown)">under 15s</strong> and stands alone<br>
+        • You have <strong style="color:var(--brown)">multiple videos</strong> to show in a feed<br>
+        • Full-screen vertical 9:16 format is needed<br>
+        • Content is product-led or educational<br>
+        • Swipe navigation between cards matters
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON ROW -->
+  <div style="display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;margin-bottom:28px;">
+
+    <!-- PHONE MOCKUP -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0;">
+      <!-- light phone -->
+      <div class="phonel" style="height:420px;width:200px;border-radius:34px;">
+        <div style="flex:1;display:flex;flex-direction:column;background:#f5f4f4;">
+          <!-- fake app bg -->
+          <div style="height:100%;background:linear-gradient(160deg,#ecddc5,#e8d5e4,#ecd9c6);position:relative;border-radius:28px;overflow:hidden;">
+            <!-- half sheet -->
+            <div style="position:absolute;bottom:0;left:0;right:0;background:white;border-radius:22px 22px 0 0;padding:0 0 12px;box-shadow:0 -4px 24px rgba(0,0,0,.12);">
+              <!-- top nav -->
+              <div style="display:flex;justify-content:flex-end;padding:10px 12px 4px;">
+                <div style="width:20px;height:20px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--soft);">✕</div>
+              </div>
+              <!-- hero image -->
+              <div style="height:60px;margin:0 12px;border-radius:10px;background:linear-gradient(135deg,#d4c4b0,#c8b89a);display:flex;align-items:center;justify-content:center;">
+                <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:14px;">🏢</div>
+              </div>
+              <!-- title -->
+              <div style="padding:10px 12px 4px;font-size:11px;font-weight:800;color:var(--brown);line-height:1.3;">Business chequing is here — this one's for you.</div>
+              <!-- body -->
+              <div style="padding:0 12px 6px;font-size:8px;color:var(--soft);line-height:1.5;">Thanks for being part of the beta. Here's a short note from Christine, Head of Business Products.</div>
+              <!-- video embed -->
+              <div style="margin:0 12px;border-radius:9px;background:#111;overflow:hidden;position:relative;">
+                <div style="padding-bottom:56.25%;position:relative;">
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
+                    <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:9px;color:white;">▶</div>
+                    <div style="font-size:7px;color:rgba(255,255,255,.5);">0:00 / 0:57</div>
+                  </div>
+                </div>
+              </div>
+              <!-- CTA -->
+              <div style="margin:8px 12px 0;background:var(--brown);color:white;font-size:9px;font-weight:700;text-align:center;padding:10px;border-radius:100px;">Share your thoughts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lbl">Half-Sheet + Video</div>
+    </div>
+
+    <!-- SPEC STACK -->
+    <div style="display:flex;flex-direction:column;gap:12px;max-width:340px;">
+
+      <div style="background:white;border-radius:12px;padding:14px 16px;box-shadow:var(--card-shadow);">
+        <div style="font-size:11px;font-weight:700;margin-bottom:8px;">📐 Video specs</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+          <div class="specitem"><div class="k">Format</div><div class="v">MP4 (H.264)</div></div>
+          <div class="specitem"><div class="k">Ratio</div><div class="v">16:9 or 1:1</div></div>
+          <div class="specitem"><div class="k">Duration</div><div class="v">30–90s</div></div>
+          <div class="specitem"><div class="k">Controls</div><div class="v">Native (visible)</div></div>
+          <div class="specitem"><div class="k">Autoplay</div><div class="v">No</div></div>
+          <div class="specitem"><div class="k">Muted default</div><div class="v">No</div></div>
+        </div>
+      </div>
+
+      <div style="background:white;border-radius:12px;padding:14px 16px;box-shadow:var(--card-shadow);">
+        <div style="font-size:11px;font-weight:700;margin-bottom:8px;">✏️ Content fields</div>
+        <div style="font-size:10px;color:var(--soft);line-height:1.9;">
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--bg);padding-bottom:3px;margin-bottom:3px;"><span><strong style="color:var(--brown);">Title</strong></span><span>1–2 lines, bold headline</span></div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--bg);padding-bottom:3px;margin-bottom:3px;"><span><strong style="color:var(--brown);">Body 1</strong></span><span>1–2 sentences of context</span></div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--bg);padding-bottom:3px;margin-bottom:3px;"><span><strong style="color:var(--brown);">Body 2</strong></span><span>Optional — attribution or detail</span></div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--bg);padding-bottom:3px;margin-bottom:3px;"><span><strong style="color:var(--brown);">Video URL</strong></span><span>GitHub Pages hosted MP4</span></div>
+          <div style="display:flex;justify-content:space-between;"><span><strong style="color:var(--brown);">CTA</strong></span><span>Single button, verb-first</span></div>
+        </div>
+      </div>
+
+      <div style="background:white;border-radius:12px;padding:14px 16px;box-shadow:var(--card-shadow);">
+        <div style="font-size:11px;font-weight:700;margin-bottom:8px;">⚙️ How it's built</div>
+        <div style="font-size:10px;color:var(--soft);line-height:1.8;">
+          Uses the standard <code style="font-size:9px;background:var(--bg);padding:1px 4px;border-radius:3px;">Production-IAM_Half_Sheet_Styles</code> content block — the video is embedded as a native HTML <code style="font-size:9px;background:var(--bg);padding:1px 4px;border-radius:3px;">&lt;video&gt;</code> element inside the modal body, not as a Reels IAM. Liquid variables handle all copy and the video source URL.
+        </div>
+        <div style="background:#1e1e1e;border-radius:8px;padding:12px 14px;font-family:monospace;font-size:10px;line-height:1.8;margin-top:10px;overflow-x:auto;">
+          <div style="color:#888;">&lt;!-- Inside modal__body-group --&gt;</div>
+          <div><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">div</span> <span style="color:#ffab70;">class</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"modal__video-embed"</span><span style="color:#888;">&gt;</span></div>
+          <div style="padding-left:14px;"><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">video</span> <span style="color:#ffab70;">controls</span> <span style="color:#ffab70;">playsinline</span><span style="color:#888;">&gt;</span></div>
+          <div style="padding-left:28px;"><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">source</span> <span style="color:#ffab70;">src</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"<span style="color:#c9a96e;">{{VideoURL}}</span>"</span> <span style="color:#ffab70;">type</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"video/mp4"</span><span style="color:#888;">&gt;</span></div>
+          <div style="padding-left:14px;"><span style="color:#888;">&lt;/</span><span style="color:#79b8ff;">video</span><span style="color:#888;">&gt;</span></div>
+          <div><span style="color:#888;">&lt;/</span><span style="color:#79b8ff;">div</span><span style="color:#888;">&gt;</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FORMAT COMPARISON TABLE -->
+  <div style="background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);">
+    <div style="font-size:13px;font-weight:700;margin-bottom:14px;">Reels vs. Half-Sheet — format comparison</div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:11px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--bg);">
+            <th style="text-align:left;padding:7px 10px;color:var(--soft);font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-size:9px;"></th>
+            <th style="text-align:left;padding:7px 10px;color:var(--soft);font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-size:9px;">Reels</th>
+            <th style="text-align:left;padding:7px 10px;color:var(--soft);font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-size:9px;">Half-Sheet Video</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Video ratio</td><td style="padding:7px 10px;color:var(--soft);">9:16 vertical</td><td style="padding:7px 10px;color:var(--soft);">16:9 or 1:1</td></tr>
+          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Duration</td><td style="padding:7px 10px;color:var(--soft);">3–30s</td><td style="padding:7px 10px;color:var(--soft);">30s–90s+</td></tr>
+          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Autoplay</td><td style="padding:7px 10px;color:var(--soft);">Yes (muted)</td><td style="padding:7px 10px;color:var(--soft);">No — user-initiated</td></tr>
+          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Video count</td><td style="padding:7px 10px;color:var(--soft);">Multiple (feed)</td><td style="padding:7px 10px;color:var(--soft);">One</td></tr>
+          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Surrounding copy</td><td style="padding:7px 10px;color:var(--soft);">Overlay only (headline + body)</td><td style="padding:7px 10px;color:var(--soft);">Full title + body blocks</td></tr>
+          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Best for</td><td style="padding:7px 10px;color:var(--soft);">Product education, GTM, awareness</td><td style="padding:7px 10px;color:var(--soft);">CEO/leadership, beta thanks, milestones</td></tr>
+          <tr><td style="padding:7px 10px;font-weight:600;color:var(--brown);">IAM template</td><td style="padding:7px 10px;color:var(--soft);font-family:monospace;font-size:9px;">reels_feed_v1</td><td style="padding:7px 10px;color:var(--soft);font-family:monospace;font-size:9px;">Production-IAM_Half_Sheet_Styles</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
