@@ -3,848 +3,517 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>WS Video Reels — Design Guide</title>
+<title>WS In-App Video — Design Guide</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-:root {
-  --brown:#32302f; --cream:#fcfcfc; --soft:#686664; --bg:#f5f4f4;
-  --gold:#c9a96e; --green:#1a7f4b; --red:#c0392b; --blue:#2980b9;
+:root{
+  --brown:#32302f;--cream:#fcfcfc;--soft:#686664;--bg:#f5f4f4;
+  --gold:#c9a96e;--green:#1a7f4b;--red:#c0392b;--blue:#2980b9;
+  --purple:#826f8b;
   --card-shadow:0 4px 16px rgba(0,0,0,0.08),0 0 0 0.75px rgba(0,0,0,0.06);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
-
 .nav{position:sticky;top:0;z-index:100;background:var(--brown);display:flex;overflow-x:auto;scrollbar-width:none;}
 .nav::-webkit-scrollbar{display:none;}
 .nav-btn{padding:14px 18px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);white-space:nowrap;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;transition:all .2s;}
 .nav-btn:hover,.nav-btn.active{color:white;border-bottom-color:var(--gold);}
-
+.nav-divider{width:1px;background:rgba(255,255,255,.12);margin:10px 0;flex-shrink:0;}
 .section{display:none;padding:36px 24px;max-width:960px;margin:0 auto;}
 .section.active{display:block;}
 .sec-hd{margin-bottom:28px;}
 .sec-hd h2{font-size:20px;font-weight:800;letter-spacing:-.3px;}
 .sec-hd p{font-size:13px;color:var(--soft);margin-top:6px;line-height:1.6;}
+.format-note{background:rgba(41,128,185,.06);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:11px 14px;margin-bottom:24px;font-size:12px;color:var(--soft);line-height:1.7;}
+.card{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);margin-bottom:14px;}
+.card h3{font-size:13px;font-weight:700;margin-bottom:10px;}
+.specgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px;margin-top:8px;}
+.specitem{background:var(--bg);border-radius:6px;padding:7px 9px;}
+.specitem .k{font-size:8px;color:var(--soft);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.specitem .v{font-size:11px;font-weight:700;margin-top:2px;}
+.badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px;}
+table.spec-table{width:100%;border-collapse:collapse;font-size:11px;}
+table.spec-table th{text-align:left;padding:6px 10px;color:var(--soft);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--bg);}
+table.spec-table td{padding:7px 10px;border-bottom:1px solid var(--bg);color:var(--soft);}
+table.spec-table td:first-child{font-weight:600;color:var(--brown);}
+.code-block{background:#1e1e1e;border-radius:10px;padding:14px 16px;font-family:monospace;font-size:11px;line-height:1.9;overflow-x:auto;margin-top:10px;}
+.tip{background:rgba(26,127,75,.08);border-left:3px solid var(--green);border-radius:0 7px 7px 0;padding:9px 12px;font-size:11px;color:var(--soft);line-height:1.6;margin-top:10px;}
+.warn{background:rgba(192,57,43,.06);border-left:3px solid var(--red);border-radius:0 7px 7px 0;padding:9px 12px;font-size:11px;color:var(--soft);line-height:1.6;margin-top:8px;}
 
-.phone{width:190px;height:410px;background:#0a0a0a;border-radius:32px;border:5px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.28);flex-shrink:0;}
-.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:66px;height:17px;background:#1c1c1c;border-radius:0 0 11px 11px;z-index:20;}
-.phone-sm{width:155px;height:336px;border-radius:28px;border-width:4px;}
-.phone-sm::before{width:54px;height:14px;}
-.phonel{width:165px;height:356px;background:#fcfcfc;border-radius:30px;border:5px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.18);flex-shrink:0;display:flex;flex-direction:column;}
-.phonel::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:15px;background:#1c1c1c;border-radius:0 0 10px 10px;z-index:20;}
+/* ── PHONE COMPONENTS ── */
+.phone-dark{width:130px;height:282px;background:#0a0a0a;border-radius:24px;border:4px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 16px 40px rgba(0,0,0,.28);flex-shrink:0;}
+.phone-dark::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:46px;height:12px;background:#1c1c1c;border-radius:0 0 8px 8px;z-index:20;}
+.phone-light{width:130px;height:282px;background:#fcfcfc;border-radius:24px;border:4px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 16px 40px rgba(0,0,0,.18);flex-shrink:0;display:flex;flex-direction:column;}
+.phone-light::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:46px;height:12px;background:#1c1c1c;border-radius:0 0 8px 8px;z-index:20;}
+.phone-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--soft);text-align:center;margin-top:8px;}
 
-.vbg{position:absolute;inset:0;background:linear-gradient(180deg,#1a1008 0%,#2a1f10 30%,#1a1618 60%,#0a0a0a 100%);}
-.vtop{position:absolute;top:0;left:0;right:0;padding:21px 11px 7px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:10;}
-.ctrl{width:22px;height:22px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:white;}
-.vbot{position:absolute;bottom:0;left:0;right:0;padding:8px 11px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:10;}
-.v-prog{height:2px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:5px;}
-.v-fill{height:100%;background:white;border-radius:2px;}
-.v-head{font-size:11px;font-weight:700;color:white;line-height:1.2;}
-.v-sub{font-size:8px;color:rgba(255,255,255,.7);margin-top:2px;}
-.v-cta{background:var(--cream);color:var(--brown);font-size:9px;font-weight:700;text-align:center;padding:8px;border-radius:100px;margin-top:7px;}
-.v-hi{height:16px;display:flex;align-items:center;justify-content:center;}
-.v-hi-bar{width:50px;height:3px;background:rgba(255,255,255,.25);border-radius:100px;}
-.sdots{position:absolute;right:5px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;z-index:10;}
-.sdot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.25);}
-.sdot.on{background:white;height:9px;border-radius:2px;}
-.person{position:absolute;left:50%;top:14%;transform:translateX(-50%);width:80px;height:115px;}
-.p-head{width:34px;height:34px;background:radial-gradient(circle at 40% 35%,#c8a880,#8a6840);border-radius:50%;margin:0 auto 3px;position:relative;}
-.p-head::after{content:'';position:absolute;top:-5px;left:-4px;width:42px;height:22px;background:#2a1a0a;border-radius:50% 50% 0 0;}
-.p-body{width:58px;height:74px;background:linear-gradient(180deg,#1a1a2e,#0f1520);border-radius:11px 11px 5px 5px;margin:0 auto;}
-.mic{position:absolute;width:5px;height:5px;background:#e0c070;border-radius:50%;top:26px;right:18px;}
-.lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--soft);text-align:center;margin-top:10px;}
-.badge-pill{display:inline-block;font-size:9px;font-weight:700;padding:3px 9px;border-radius:100px;color:white;}
-
-/* ── README TAB ── */
-.readme-hero{background:var(--brown);border-radius:18px;padding:32px 28px;margin-bottom:28px;color:white;position:relative;overflow:hidden;}
-.readme-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(201,169,110,.08);pointer-events:none;}
-.readme-hero::after{content:'';position:absolute;bottom:-60px;right:20px;width:140px;height:140px;border-radius:50%;background:rgba(201,169,110,.05);pointer-events:none;}
-.readme-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);margin-bottom:10px;}
+/* ── OVERVIEW ── */
+.readme-hero{background:var(--brown);border-radius:18px;padding:32px 28px;margin-bottom:24px;color:white;position:relative;overflow:hidden;}
+.readme-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(201,169,110,.08);}
+.eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);margin-bottom:10px;}
 .readme-hero h1{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.2;margin-bottom:8px;}
 .readme-hero p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;max-width:520px;}
-.readme-meta{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap;}
-.readme-meta-item{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.5);}
-.readme-meta-item span{color:rgba(255,255,255,.8);font-weight:600;}
+.meta-row{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.5);}
+.meta-item span{color:rgba(255,255,255,.8);font-weight:600;}
+.format-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:24px;}
+.format-card{background:white;border-radius:16px;overflow:hidden;box-shadow:var(--card-shadow);cursor:pointer;transition:transform .15s;}
+.format-card:hover{transform:translateY(-2px);}
+.format-card-preview{padding:18px;display:flex;justify-content:center;}
+.format-card-body{padding:0 16px 16px;}
+.format-card-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;}
+.format-card-title{font-size:13px;font-weight:700;color:var(--brown);margin-bottom:5px;}
+.format-card-desc{font-size:11px;color:var(--soft);line-height:1.6;margin-bottom:10px;}
+.chip-row{display:flex;flex-wrap:wrap;gap:4px;}
+.chip{font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;}
+.applies-table{width:100%;border-collapse:collapse;font-size:11px;}
+.applies-table th{padding:6px 10px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--bg);text-align:center;}
+.applies-table th:first-child{text-align:left;}
+.applies-table td{padding:6px 10px;border-bottom:1px solid var(--bg);text-align:center;}
+.applies-table td:first-child{text-align:left;font-weight:600;color:var(--brown);}
+.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;}
+.who-item{background:var(--bg);border-radius:9px;padding:11px;}
+.who-item h4{font-size:11px;font-weight:700;margin-bottom:4px;}
+.who-item p{font-size:10px;color:var(--soft);line-height:1.5;}
 
-.readme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:28px;}
-.readme-card{background:white;border-radius:14px;padding:18px;box-shadow:var(--card-shadow);cursor:pointer;transition:transform .15s,box-shadow .15s;border-top:3px solid transparent;}
-.readme-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.12);}
-.readme-card-icon{font-size:22px;margin-bottom:10px;}
-.readme-card-num{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--soft);margin-bottom:4px;}
-.readme-card-title{font-size:13px;font-weight:700;margin-bottom:5px;}
-.readme-card-desc{font-size:11px;color:var(--soft);line-height:1.5;}
-.readme-card-audience{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;margin-top:8px;}
+/* ── JOURNEY ── */
+.j-row{display:flex;align-items:flex-start;overflow-x:auto;padding-bottom:8px;gap:0;}
+.j-step{display:flex;flex-direction:column;align-items:center;gap:7px;flex-shrink:0;}
+.j-con{width:44px;margin-top:46px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.j-line{height:1.5px;width:100%;background:linear-gradient(to right,var(--gold),#b8956a);}
+.j-arrow{color:var(--gold);font-size:14px;margin-top:-5px;}
+.j-clabel{font-size:7px;font-weight:700;color:var(--soft);text-align:center;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
+.j-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:white;flex-shrink:0;}
+.j-name{font-size:9px;font-weight:700;}
+.j-lbl{font-size:9px;color:var(--soft);text-align:center;max-width:120px;line-height:1.4;}
+.event-badge{font-size:8px;font-weight:700;padding:2px 7px;border-radius:5px;margin-top:3px;}
+.j-section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--soft);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.j-section-title::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.07);}
+.j-section{margin-bottom:36px;}
+.badge-pill{display:inline-block;font-size:9px;font-weight:700;padding:3px 9px;border-radius:100px;color:white;}
+.entry-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:14px;}
+.entry-card{background:var(--bg);border-radius:9px;padding:11px;}
+.entry-card h5{font-size:10px;font-weight:700;margin-bottom:3px;}
+.entry-card p{font-size:9px;color:var(--soft);line-height:1.5;}
 
-.readme-who{background:white;border-radius:14px;padding:20px;box-shadow:var(--card-shadow);margin-bottom:14px;}
-.readme-who h3{font-size:13px;font-weight:700;margin-bottom:14px;}
-.readme-who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;}
-.readme-who-item{background:var(--bg);border-radius:9px;padding:11px;}
-.readme-who-item h4{font-size:11px;font-weight:700;margin-bottom:4px;}
-.readme-who-item p{font-size:10px;color:var(--soft);line-height:1.5;}
-
-.readme-flow{background:white;border-radius:14px;padding:20px;box-shadow:var(--card-shadow);}
-.readme-flow h3{font-size:13px;font-weight:700;margin-bottom:14px;}
-.readme-flow-row{display:flex;align-items:center;flex-wrap:wrap;gap:0;}
-.readme-flow-step{background:var(--bg);border-radius:9px;padding:10px 13px;flex:1;min-width:110px;}
-.readme-flow-step h5{font-size:10px;font-weight:700;margin-bottom:2px;}
-.readme-flow-step p{font-size:9px;color:var(--soft);line-height:1.4;}
-.readme-flow-arrow{color:var(--gold);font-size:18px;padding:0 6px;flex-shrink:0;}
-
-/* ── SECTION 1 — TAP ZONES ── */
-.v1-row{display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;}
-.zones{position:absolute;inset:0;display:flex;top:18%;height:55%;}
-.zone{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
-.zone-l{border-right:1.5px dashed rgba(255,140,0,.45);background:rgba(255,140,0,.07);}
-.zone-c{background:rgba(255,255,255,.03);}
-.zone-r{border-left:1.5px dashed rgba(100,180,255,.45);background:rgba(100,180,255,.07);}
-.zone-ico{font-size:16px;}
-.zone-txt{font-size:7px;font-weight:700;color:rgba(255,255,255,.7);text-align:center;line-height:1.4;}
-.legend-stack{display:flex;flex-direction:column;gap:12px;max-width:260px;}
-.leg{background:white;border-radius:11px;padding:13px 15px;box-shadow:var(--card-shadow);}
-.leg h4{font-size:12px;font-weight:700;margin-bottom:3px;}
-.leg p{font-size:11px;color:var(--soft);line-height:1.5;}
-.leg .tag{font-size:9px;font-family:monospace;background:var(--bg);padding:2px 5px;border-radius:3px;display:inline-block;margin-top:4px;color:var(--brown);}
-
-/* ── SECTION 2 — SCREEN ZONES ── */
-.v2-row{display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap;}
-.zband{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;}
-.zb-t{top:0;height:25%;background:rgba(192,57,43,.18);border-bottom:1.5px dashed rgba(192,57,43,.5);z-index:5;}
-.zb-m{top:25%;height:50%;background:rgba(26,127,75,.1);border-bottom:1.5px dashed rgba(26,127,75,.4);z-index:5;}
-.zb-b{bottom:0;height:25%;background:rgba(41,128,185,.18);z-index:5;}
-.zb-lbl{font-size:7px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:2px 5px;border-radius:3px;}
-.zb-t .zb-lbl{color:rgba(192,57,43,.95);background:rgba(192,57,43,.15);}
-.zb-m .zb-lbl{color:rgba(26,127,75,.95);background:rgba(26,127,75,.15);}
-.zb-b .zb-lbl{color:rgba(41,128,185,.95);background:rgba(41,128,185,.15);}
-.specgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:7px;}
-.specitem{background:var(--bg);border-radius:5px;padding:5px 7px;}
-.specitem .k{font-size:8px;color:var(--soft);font-weight:600;}
-.specitem .v{font-size:10px;font-weight:700;margin-top:1px;}
-
-/* ── SECTION 3 — COPY ── */
-.v3-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
-.v3-col{display:flex;flex-direction:column;align-items:center;gap:10px;}
-.copy-rules{background:white;border-radius:11px;padding:13px;box-shadow:var(--card-shadow);max-width:190px;}
-.copy-rules h4{font-size:10px;font-weight:700;margin-bottom:7px;}
-.cr{font-size:9px;color:var(--soft);padding:3px 0;border-bottom:1px solid var(--bg);line-height:1.4;}
-.cr:last-child{border:none;}
-.cr strong{color:var(--brown);}
-
-/* ── SECTION 4 — CONTENT TIMING ── */
-.timing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px;}
-.timing-card{background:white;border-radius:16px;padding:20px;box-shadow:var(--card-shadow);position:relative;overflow:hidden;}
+/* ── TIMING ── */
+.timing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:24px;}
+.timing-card{background:white;border-radius:14px;padding:18px;box-shadow:var(--card-shadow);position:relative;overflow:hidden;}
 .timing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
 .timing-card.quick::before{background:linear-gradient(to right,#e67e22,#f39c12);}
 .timing-card.gtm::before{background:linear-gradient(to right,var(--blue),#5dade2);}
 .timing-card.edu::before{background:linear-gradient(to right,var(--green),#58d68d);}
-.timing-card.personal::before{background:linear-gradient(to right,#826f8b,#bf8f85);}
-.timing-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;padding:4px 10px;border-radius:100px;margin-bottom:12px;}
+.timing-card.personal::before{background:linear-gradient(to right,var(--purple),#bf8f85);}
+.timing-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;padding:3px 9px;border-radius:100px;margin-bottom:10px;}
 .timing-card.quick .timing-badge{background:rgba(230,126,34,.12);color:#c87522;}
 .timing-card.gtm .timing-badge{background:rgba(41,128,185,.12);color:#2471a3;}
 .timing-card.edu .timing-badge{background:rgba(26,127,75,.12);color:#1a7f4b;}
-.timing-card.personal .timing-badge{background:rgba(130,111,139,.12);color:#826f8b;}
-.timing-dur{font-size:32px;font-weight:800;letter-spacing:-1px;line-height:1;}
+.timing-card.personal .timing-badge{background:rgba(130,111,139,.12);color:var(--purple);}
+.timing-dur{font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1;}
 .timing-card.quick .timing-dur{color:#e67e22;}
 .timing-card.gtm .timing-dur{color:var(--blue);}
 .timing-card.edu .timing-dur{color:var(--green);}
-.timing-card.personal .timing-dur{color:#826f8b;}
-.timing-unit{font-size:13px;font-weight:600;color:var(--soft);margin-left:2px;}
-.timing-name{font-size:13px;font-weight:700;color:var(--brown);margin-top:8px;margin-bottom:4px;}
-.timing-desc{font-size:11px;color:var(--soft);line-height:1.6;}
-.timing-eg{margin-top:10px;background:var(--bg);border-radius:8px;padding:8px 10px;}
-.timing-eg-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--soft);margin-bottom:5px;}
-.timing-eg-item{font-size:10px;color:var(--brown);padding:2px 0;display:flex;align-items:center;gap:5px;}
-.timing-eg-item::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.timing-card.personal .timing-dur{color:var(--purple);}
+.timing-unit{font-size:12px;font-weight:600;color:var(--soft);margin-left:2px;}
+.timing-name{font-size:12px;font-weight:700;margin-top:6px;margin-bottom:3px;}
+.timing-desc{font-size:10px;color:var(--soft);line-height:1.6;}
+.timing-eg{margin-top:8px;background:var(--bg);border-radius:7px;padding:7px 9px;}
+.timing-eg-lbl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--soft);margin-bottom:4px;}
+.timing-eg-item{font-size:9px;color:var(--brown);padding:2px 0;display:flex;align-items:center;gap:5px;}
+.timing-eg-item::before{content:'';width:4px;height:4px;border-radius:50%;flex-shrink:0;}
 .timing-card.quick .timing-eg-item::before{background:#e67e22;}
 .timing-card.gtm .timing-eg-item::before{background:var(--blue);}
 .timing-card.edu .timing-eg-item::before{background:var(--green);}
-.timing-card.personal .timing-eg-item::before{background:#826f8b;}
-.timeline-wrap{background:white;border-radius:16px;padding:24px;box-shadow:var(--card-shadow);margin-bottom:8px;}
-.timeline-wrap h4{font-size:12px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.7px;margin-bottom:18px;}
-.timeline-bar{position:relative;height:48px;background:var(--bg);border-radius:10px;overflow:hidden;display:flex;}
-.tl-seg{display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white;white-space:nowrap;padding:0 6px;}
+.timing-card.personal .timing-eg-item::before{background:var(--purple);}
+.tl-bar{height:40px;background:var(--bg);border-radius:8px;overflow:hidden;display:flex;margin-top:14px;}
+.tl-seg{display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:white;}
 .tl-seg.quick{background:linear-gradient(to right,#e67e22,#f39c12);flex:3;}
 .tl-seg.gtm{background:linear-gradient(to right,var(--blue),#5dade2);flex:2;}
-.tl-seg.edu{background:linear-gradient(to right,var(--green),#58d68d);flex:0.5;}
-.tl-seg.personal{background:linear-gradient(to right,#826f8b,#bf8f85);flex:1;}
-.tl-labels{display:flex;margin-top:7px;}
-.tl-lbl{font-size:9px;color:var(--soft);text-align:center;}
-.tl-lbl.quick{flex:3;}
-.tl-lbl.gtm{flex:2;}
-.tl-lbl.edu{flex:0.5;}
-.tl-lbl.personal{flex:1;}
+.tl-seg.edu{background:linear-gradient(to right,var(--green),#58d68d);flex:1;}
+.tl-seg.personal{background:linear-gradient(to right,var(--purple),#bf8f85);flex:1.5;}
 
-/* ── HANDOFF TAB ── */
-.handoff-alert{background:linear-gradient(135deg,#1a3520,#2a5030);border-radius:14px;padding:20px 22px;margin-bottom:24px;display:flex;align-items:flex-start;gap:14px;}
-.handoff-alert-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
-.handoff-alert h3{font-size:14px;font-weight:700;color:white;margin-bottom:4px;}
-.handoff-alert p{font-size:12px;color:rgba(255,255,255,.6);line-height:1.6;}
-
-.handoff-steps{display:flex;flex-direction:column;gap:14px;margin-bottom:28px;}
-.handoff-step{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);display:flex;gap:16px;align-items:flex-start;}
-.handoff-step-num{width:32px;height:32px;border-radius:50%;background:var(--brown);color:white;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.handoff-step-body h4{font-size:13px;font-weight:700;margin-bottom:5px;}
-.handoff-step-body p{font-size:12px;color:var(--soft);line-height:1.6;margin-bottom:8px;}
-.handoff-step-body p:last-child{margin-bottom:0;}
-.spec-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
-.spec-chip{background:var(--bg);border-radius:6px;padding:5px 9px;font-size:10px;font-weight:700;color:var(--brown);display:flex;align-items:center;gap:4px;}
-.spec-chip .chip-label{color:var(--soft);font-weight:500;}
-
-.handoff-naming{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);margin-bottom:14px;}
-.handoff-naming h4{font-size:13px;font-weight:700;margin-bottom:12px;}
-.naming-example{background:var(--bg);border-radius:9px;padding:13px 15px;font-family:monospace;font-size:12px;color:var(--brown);margin-bottom:10px;line-height:1.8;}
-.naming-example .hi{background:rgba(201,169,110,.25);padding:1px 3px;border-radius:3px;color:#9a7030;}
-.naming-parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;}
+/* ── HANDOFF ── */
+.handoff-step{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);display:flex;gap:14px;margin-bottom:12px;}
+.handoff-num{width:30px;height:30px;border-radius:50%;background:var(--brown);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.handoff-body h4{font-size:13px;font-weight:700;margin-bottom:5px;}
+.handoff-body p{font-size:12px;color:var(--soft);line-height:1.6;margin-bottom:8px;}
+.ratio-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
+.ratio-card{background:var(--bg);border-radius:9px;padding:10px 12px;text-align:center;}
+.ratio-viz{background:var(--brown);border-radius:4px;margin:0 auto 6px;opacity:.15;}
+.ratio-label{font-size:11px;font-weight:800;color:var(--brown);margin-bottom:2px;}
+.ratio-sub{font-size:9px;color:var(--soft);}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;}
+.cl-item{display:flex;align-items:flex-start;gap:7px;background:var(--bg);border-radius:7px;padding:7px 9px;}
+.cl-box{width:13px;height:13px;border-radius:3px;border:1.5px solid rgba(0,0,0,.15);flex-shrink:0;margin-top:1px;}
+.cl-text{font-size:10px;color:var(--brown);line-height:1.4;}
+.naming-block{background:#1e1e1e;border-radius:9px;padding:13px 15px;font-family:monospace;font-size:11px;line-height:1.9;margin:10px 0;}
+.naming-parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:7px;margin-top:8px;}
 .naming-part{background:var(--bg);border-radius:7px;padding:8px 10px;}
-.naming-part .np-key{font-size:9px;font-weight:700;color:var(--gold);font-family:monospace;margin-bottom:2px;}
-.naming-part .np-val{font-size:10px;color:var(--soft);}
+.np-key{font-size:9px;font-weight:700;color:var(--gold);font-family:monospace;margin-bottom:2px;}
+.np-val{font-size:9px;color:var(--soft);}
 
-.handoff-checklist{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);}
-.handoff-checklist h4{font-size:13px;font-weight:700;margin-bottom:12px;}
-.checklist-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.checklist-item{display:flex;align-items:flex-start;gap:8px;background:var(--bg);border-radius:7px;padding:8px 10px;}
-.ci-box{width:14px;height:14px;border-radius:3px;border:1.5px solid rgba(0,0,0,.15);flex-shrink:0;margin-top:1px;}
-.ci-text{font-size:10px;color:var(--brown);line-height:1.4;}
+/* ── REELS SPECIFIC ── */
+.vbg{position:absolute;inset:0;background:linear-gradient(180deg,#1a1008 0%,#2a1f10 30%,#0a0a0a 100%);}
+.vtop{position:absolute;top:0;left:0;right:0;padding:18px 9px 5px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:10;}
+.vctrl{width:20px;height:20px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;}
+.vbot{position:absolute;bottom:0;left:0;right:0;padding:7px 9px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:10;}
+.vprog{height:2px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px;}
+.vfill{height:100%;background:white;border-radius:2px;}
+.person{position:absolute;left:50%;top:16%;transform:translateX(-50%);}
+.p-head{width:26px;height:26px;background:radial-gradient(circle at 40% 35%,#c8a880,#8a6840);border-radius:50%;margin:0 auto 2px;position:relative;}
+.p-head::after{content:'';position:absolute;top:-4px;left:-3px;width:32px;height:17px;background:#2a1a0a;border-radius:50% 50% 0 0;}
+.p-body{width:44px;height:58px;background:linear-gradient(180deg,#1a1a2e,#0f1520);border-radius:9px 9px 4px 4px;margin:0 auto;}
+.zones{position:absolute;inset:0;display:flex;top:18%;height:52%;}
+.zone{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;}
+.zone-l{border-right:1px dashed rgba(255,140,0,.4);background:rgba(255,140,0,.06);}
+.zone-c{background:rgba(255,255,255,.02);}
+.zone-r{border-left:1px dashed rgba(100,180,255,.4);background:rgba(100,180,255,.06);}
+.zone-ico{font-size:13px;}
+.zone-txt{font-size:6px;font-weight:700;color:rgba(255,255,255,.7);text-align:center;line-height:1.3;}
+.zband{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;}
+.zb-t{top:0;height:25%;background:rgba(192,57,43,.18);border-bottom:1px dashed rgba(192,57,43,.5);z-index:5;}
+.zb-m{top:25%;height:50%;background:rgba(26,127,75,.08);border-bottom:1px dashed rgba(26,127,75,.4);z-index:5;}
+.zb-b{bottom:0;height:25%;background:rgba(41,128,185,.15);z-index:5;}
+.zb-lbl{font-size:6px;font-weight:800;text-transform:uppercase;padding:1px 4px;border-radius:2px;}
+.zb-t .zb-lbl{color:rgba(192,57,43,.95);background:rgba(192,57,43,.15);}
+.zb-m .zb-lbl{color:rgba(26,127,75,.95);background:rgba(26,127,75,.15);}
+.zb-b .zb-lbl{color:rgba(41,128,185,.95);background:rgba(41,128,185,.15);}
+.sdot-col{position:absolute;right:4px;top:44%;display:flex;flex-direction:column;gap:2px;z-index:10;}
+.sdot{width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.25);}
+.sdot.on{height:7px;border-radius:2px;background:white;}
+.leg-stack{display:flex;flex-direction:column;gap:10px;max-width:240px;}
+.leg{background:white;border-radius:10px;padding:11px 13px;box-shadow:var(--card-shadow);}
+.leg h4{font-size:11px;font-weight:700;margin-bottom:3px;}
+.leg p{font-size:10px;color:var(--soft);line-height:1.5;}
+.leg .tag{font-size:8px;font-family:monospace;background:var(--bg);padding:2px 5px;border-radius:3px;display:inline-block;margin-top:3px;}
+.copy-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.copy-col{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.copy-rules{background:white;border-radius:10px;padding:11px;box-shadow:var(--card-shadow);max-width:170px;}
+.copy-rules h4{font-size:9px;font-weight:700;margin-bottom:6px;}
+.cr{font-size:8px;color:var(--soft);padding:2px 0;border-bottom:1px solid var(--bg);line-height:1.4;}
+.cr:last-child{border:none;}
+.cr strong{color:var(--brown);}
+.v5-map-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.v5-fields{display:flex;flex-direction:column;gap:4px;}
+.v5-field{background:white;border-radius:6px;padding:6px 10px;box-shadow:var(--card-shadow);display:flex;align-items:center;gap:7px;}
+.v5-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.v5-key{font-size:9px;font-family:monospace;font-weight:700;min-width:80px;}
+.v5-val{font-size:8px;color:var(--soft);font-family:monospace;}
+.v5-leg{display:flex;flex-direction:column;gap:5px;}
+.v5-leg-item{display:flex;align-items:flex-start;gap:6px;background:white;border-radius:6px;padding:6px 9px;box-shadow:var(--card-shadow);}
+.v5-leg-dot{width:8px;height:8px;border-radius:3px;flex-shrink:0;margin-top:2px;}
 
-/* ── SECTION 5 — CONTENT BLOCK MAP ── */
-.v5-arch{background:#edeae5;border-radius:18px;padding:28px 20px;margin-bottom:32px;text-align:center;}
-.v5-arch-title{font-size:18px;font-weight:800;letter-spacing:-.3px;margin-bottom:3px;}
-.v5-arch-sub{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--soft);margin-bottom:24px;}
-.v5-arch-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
-.v5-card{background:white;border-radius:14px;padding:18px;min-width:200px;text-align:left;box-shadow:0 4px 20px rgba(0,0,0,.07);}
-.v5-card-title{font-size:13px;font-weight:700;margin-bottom:12px;}
-.fld{margin-bottom:6px;}
-.fld-key{font-size:8px;font-weight:700;letter-spacing:.5px;color:var(--soft);font-family:monospace;margin-bottom:2px;text-transform:uppercase;}
-.fld-val{background:var(--bg);border-radius:4px;padding:4px 7px;font-size:9px;font-family:monospace;color:var(--brown);}
-.iam-row{padding:6px 0;border-bottom:1px solid var(--bg);font-size:11px;color:var(--soft);}
-.iam-row:last-child{border:none;}
-.iam-note{background:var(--bg);border-radius:7px;padding:9px 11px;font-size:9px;font-family:monospace;color:var(--soft);line-height:1.7;margin-top:10px;}
-.v5-map-row{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;}
-.v5-fields{display:flex;flex-direction:column;gap:5px;}
-.v5-field{background:white;border-radius:7px;padding:7px 11px;box-shadow:var(--card-shadow);display:flex;align-items:center;gap:8px;}
-.v5-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.v5-key{font-size:10px;font-family:monospace;font-weight:700;min-width:90px;}
-.v5-val{font-size:9px;color:var(--soft);font-family:monospace;}
-.v5-legend{display:flex;flex-direction:column;gap:7px;max-width:190px;}
-.v5-leg-item{display:flex;align-items:flex-start;gap:7px;background:white;border-radius:7px;padding:7px 10px;box-shadow:var(--card-shadow);}
-.v5-leg-dot{width:9px;height:9px;border-radius:3px;flex-shrink:0;margin-top:2px;}
-
-/* ── SECTION 6 — USER JOURNEY ── */
-.j-section{margin-bottom:44px;}
-.j-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--soft);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
-.j-title::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.08);}
-.j-row{display:flex;align-items:flex-start;overflow-x:auto;padding-bottom:8px;gap:0;}
-.j-step{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;}
-.j-con{width:52px;margin-top:50px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;}
-.j-line{height:1.5px;width:100%;background:linear-gradient(to right,var(--gold),#b8956a);}
-.j-arrow{color:var(--gold);font-size:15px;margin-top:-6px;}
-.j-clabel{font-size:8px;font-weight:700;color:var(--soft);text-align:center;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
-.j-step-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;flex-shrink:0;}
-.j-step-header{display:flex;align-items:center;gap:5px;}
-.j-step-name{font-size:10px;font-weight:700;}
-.j-step-lbl{font-size:10px;color:var(--soft);text-align:center;max-width:130px;line-height:1.4;}
-.event-badge{font-size:9px;font-weight:700;padding:3px 8px;border-radius:5px;text-align:center;}
-.braze-screen{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;padding:18px;background:var(--brown);}
-.braze-icon{width:38px;height:38px;background:rgba(255,255,255,.1);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.15);}
-.braze-tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);font-size:8px;font-weight:700;padding:3px 9px;border-radius:100px;border:1px solid rgba(255,255,255,.15);}
-.braze-title{font-size:11px;font-weight:700;color:white;text-align:center;line-height:1.4;}
-.braze-sub{font-size:8px;color:rgba(255,255,255,.45);text-align:center;line-height:1.6;}
-.braze-dots{display:flex;gap:4px;}
-.braze-dot{width:5px;height:5px;background:rgba(255,255,255,.2);border-radius:50%;animation:pulse 1.4s ease-in-out infinite;}
-@keyframes pulse{0%,80%,100%{opacity:.3;transform:scale(.8);}40%{opacity:1;transform:scale(1);}}
-.sb{height:22px;display:flex;align-items:center;justify-content:space-between;padding:0 11px;margin-top:15px;font-size:9px;font-weight:700;color:var(--brown);}
-.tnl{display:flex;align-items:center;justify-content:space-between;padding:3px 10px 5px;}
-.tn-ico{width:22px;height:22px;background:rgba(0,0,0,.06);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;}
-.tn-ttl{font-size:11px;font-weight:700;color:var(--brown);}
-.bnav{border-top:.75px solid rgba(0,0,0,.08);display:flex;padding:5px 0 9px;margin-top:auto;}
-.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;font-size:7px;color:var(--soft);font-weight:600;}
+/* journeys inside phones */
+.sb{height:18px;display:flex;align-items:center;justify-content:space-between;padding:0 9px;margin-top:12px;font-size:8px;font-weight:700;color:var(--brown);}
+.tnl{display:flex;align-items:center;justify-content:space-between;padding:2px 8px 3px;}
+.tn-ico{width:18px;height:18px;background:rgba(0,0,0,.06);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;}
+.tn-ttl{font-size:9px;font-weight:700;color:var(--brown);}
+.bnav{border-top:.75px solid rgba(0,0,0,.07);display:flex;padding:4px 0 7px;margin-top:auto;}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;font-size:6px;color:var(--soft);}
 .bnav-item.on{color:var(--brown);}
-.entry-sum{background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);margin-top:4px;}
-.entry-sum h4{font-size:12px;font-weight:700;margin-bottom:12px;}
-.entry-cards{display:flex;gap:10px;flex-wrap:wrap;}
-.entry-card{flex:1;min-width:150px;background:var(--bg);border-radius:9px;padding:11px;}
-.entry-card h5{font-size:10px;font-weight:700;margin-bottom:3px;}
-.entry-card p{font-size:9px;color:var(--soft);line-height:1.5;}
+.braze-screen{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:14px;background:var(--brown);}
+.braze-icon{width:30px;height:30px;background:rgba(255,255,255,.1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;border:1px solid rgba(255,255,255,.15);}
+.braze-tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);font-size:7px;font-weight:700;padding:2px 7px;border-radius:100px;}
+.braze-title{font-size:9px;font-weight:700;color:white;text-align:center;line-height:1.4;}
+.braze-sub{font-size:7px;color:rgba(255,255,255,.45);text-align:center;line-height:1.5;}
+.braze-dots{display:flex;gap:3px;}
+.braze-dot{width:4px;height:4px;background:rgba(255,255,255,.2);border-radius:50%;animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,80%,100%{opacity:.3;transform:scale(.8);}40%{opacity:1;transform:scale(1);}}
+@keyframes progAnim{0%{width:0%;}80%{width:100%;}100%{width:0%;}}
 </style>
 </head>
 <body>
-
 <nav class="nav">
   <button class="nav-btn active" onclick="show(0)">☰ Overview</button>
-  <button class="nav-btn" onclick="show(1)">① Tap Zones</button>
-  <button class="nav-btn" onclick="show(2)">② Screen Zones</button>
-  <button class="nav-btn" onclick="show(3)">③ Copy Guidelines</button>
-  <button class="nav-btn" onclick="show(4)">④ Content Timing</button>
-  <button class="nav-btn" onclick="show(5)">⑤ Content Handoff</button>
-  <button class="nav-btn" onclick="show(6)">⑥ Reel Mapping</button>
-  <button class="nav-btn" onclick="show(7)">⑦ User Journey</button>
-  <button class="nav-btn" onclick="show(8)">⑧ Half-Sheet Video</button>
+  <button class="nav-btn" onclick="show(1)">User Journey</button>
+  <button class="nav-btn" onclick="show(2)">Content Timing</button>
+  <div class="nav-divider"></div>
+  <button class="nav-btn" onclick="show(3)">▶ Reels Feed</button>
+  <button class="nav-btn" onclick="show(4)">▶ Half-Sheet</button>
+  <button class="nav-btn" onclick="show(5)">▶ Silent Loop</button>
+  <div class="nav-divider"></div>
+  <button class="nav-btn" onclick="show(6)">Content Handoff</button>
 </nav>
 
-<!-- ☰ README / OVERVIEW -->
+<!-- ── 0. OVERVIEW ── -->
 <section class="section active" id="s0">
   <div class="readme-hero">
-    <div class="readme-eyebrow">Wealthsimple · Product Engagement</div>
-    <h1>Video Reels<br/>Design Guide</h1>
-    <p>Everything you need to create, review, and ship a Video Reels campaign — from content specs to Braze implementation. Use the tabs above to navigate.</p>
-    <div class="readme-meta">
-      <div class="readme-meta-item">🎬 <span>Format:</span> Full-screen vertical video (9:16)</div>
-      <div class="readme-meta-item">⚙️ <span>Delivery:</span> Braze In-App Message</div>
-      <div class="readme-meta-item">📱 <span>Platform:</span> iOS · Android</div>
+    <div class="eyebrow">Wealthsimple · Product Engagement</div>
+    <h1>In-App Video<br/>Design Guide</h1>
+    <p>A reference for every way video is integrated in-app — full-screen Reels feeds, half-sheet modals, and silent looping UI demos. Use the format selector below to find the right pattern.</p>
+    <div class="meta-row">
+      <div class="meta-item">🎬 <span>Formats:</span> Reels · Half-Sheet · Silent Loop</div>
+      <div class="meta-item">⚙️ <span>Delivery:</span> Braze IAM</div>
+      <div class="meta-item">📱 <span>Platform:</span> iOS · Android</div>
     </div>
   </div>
 
-  <div class="readme-grid">
-    <div class="readme-card" onclick="show(1)" style="border-top-color:#e67e22">
-      <div class="readme-card-icon">👆</div>
-      <div class="readme-card-num">Tab ①</div>
-      <div class="readme-card-title">Tap Zones</div>
-      <div class="readme-card-desc">How users interact — rewind, play/pause, 2× speed, and sound toggle.</div>
-      <div class="readme-card-audience" style="background:rgba(230,126,34,.1);color:#c87522;">Design · Creative</div>
+  <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--soft);margin-bottom:12px;">Choose a format</div>
+  <div class="format-cards">
+
+    <!-- REELS -->
+    <div class="format-card" onclick="show(3)">
+      <div class="format-card-preview" style="background:#0a0a0a;">
+        <div class="phone-dark" style="width:72px;height:128px;border-radius:14px;border-width:3px;">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1008,#2a1f10,#0a0a0a);"></div>
+          <div style="position:absolute;left:50%;top:14%;transform:translateX(-50%);">
+            <div style="width:16px;height:16px;background:radial-gradient(circle at 40% 35%,#c8a880,#8a6840);border-radius:50%;margin:0 auto 1px;"></div>
+            <div style="width:26px;height:36px;background:linear-gradient(180deg,#1a1a2e,#0f1520);border-radius:5px 5px 2px 2px;margin:0 auto;"></div>
+          </div>
+          <div style="position:absolute;top:0;left:0;right:0;padding:11px 5px 3px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5;">
+            <div style="width:13px;height:13px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:6px;color:white;">‹</div>
+            <div style="width:13px;height:13px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:6px;color:white;">🔇</div>
+          </div>
+          <div style="position:absolute;right:3px;top:40%;display:flex;flex-direction:column;gap:1px;z-index:5;">
+            <div style="width:2px;height:6px;background:white;border-radius:1px;"></div>
+            <div style="width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.3);"></div>
+            <div style="width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.3);"></div>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:5px 6px 2px;background:linear-gradient(0deg,rgba(0,0,0,.9),transparent);z-index:5;">
+            <div style="height:1px;background:rgba(255,255,255,.2);margin-bottom:3px;"><div style="width:55%;height:100%;background:white;"></div></div>
+            <div style="font-size:5px;font-weight:700;color:white;line-height:1.2;">All the nerdy things</div>
+            <div style="background:white;border-radius:100px;padding:3px;text-align:center;font-size:4px;font-weight:700;color:#333;margin-top:3px;">Discover tools</div>
+          </div>
+        </div>
+      </div>
+      <div class="format-card-body">
+        <div class="format-card-label" style="color:var(--gold);">Reels Feed</div>
+        <div class="format-card-title">Full-screen scroll-snap feed</div>
+        <div class="format-card-desc">Multiple short videos in a swipeable 9:16 carousel. Copy and CTA overlay the video.</div>
+        <div class="chip-row">
+          <span class="chip" style="background:rgba(201,169,110,.12);color:#9a7030;">9:16 · 3–30s</span>
+          <span class="chip" style="background:rgba(201,169,110,.12);color:#9a7030;">Autoplay muted</span>
+          <span class="chip" style="background:rgba(201,169,110,.12);color:#9a7030;">Multi-card feed</span>
+        </div>
+      </div>
     </div>
-    <div class="readme-card" onclick="show(2)" style="border-top-color:var(--red)">
-      <div class="readme-card-icon">📐</div>
-      <div class="readme-card-num">Tab ②</div>
-      <div class="readme-card-title">Screen Zones</div>
-      <div class="readme-card-desc">Safe zones for video subjects and copy. Includes video file specs.</div>
-      <div class="readme-card-audience" style="background:rgba(192,57,43,.1);color:var(--red);">Video · Design</div>
+
+    <!-- HALF-SHEET -->
+    <div class="format-card" onclick="show(4)">
+      <div class="format-card-preview" style="background:#f0ece6;">
+        <div style="width:72px;height:128px;background:#fcfcfc;border-radius:14px;border:3px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 8px 20px rgba(0,0,0,.14);">
+          <div style="position:absolute;inset:0;background:linear-gradient(160deg,#ecddc5,#e8d5e4);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;background:white;border-radius:8px 8px 0 0;padding:4px 5px 5px;box-shadow:0 -2px 8px rgba(0,0,0,.09);">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:2px;"><div style="width:7px;height:7px;border-radius:50%;background:var(--bg);"></div></div>
+            <div style="height:24px;background:#111;border-radius:4px;margin-bottom:3px;display:flex;align-items:center;justify-content:center;">
+              <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.12);font-size:5px;color:white;display:flex;align-items:center;justify-content:center;">▶</div>
+            </div>
+            <div style="font-size:4px;font-weight:700;color:var(--brown);line-height:1.3;margin-bottom:2px;">Business chequing is here</div>
+            <div style="font-size:3.5px;color:var(--soft);line-height:1.4;margin-bottom:3px;">A short note from Christine, Head of Business Products.</div>
+            <div style="background:var(--brown);border-radius:100px;padding:2.5px;text-align:center;font-size:3.5px;font-weight:700;color:white;">Share your thoughts</div>
+          </div>
+        </div>
+      </div>
+      <div class="format-card-body">
+        <div class="format-card-label" style="color:var(--purple);">Half-Sheet Modal</div>
+        <div class="format-card-title">Video embedded in a modal</div>
+        <div class="format-card-desc">Single video inside a half-sheet IAM. Copy and CTA live outside the video frame.</div>
+        <div class="chip-row">
+          <span class="chip" style="background:rgba(130,111,139,.1);color:var(--purple);">16:9 · 30–90s</span>
+          <span class="chip" style="background:rgba(130,111,139,.1);color:var(--purple);">User-initiated</span>
+          <span class="chip" style="background:rgba(130,111,139,.1);color:var(--purple);">CEO / milestone</span>
+        </div>
+      </div>
     </div>
-    <div class="readme-card" onclick="show(3)" style="border-top-color:var(--green)">
-      <div class="readme-card-icon">✍️</div>
-      <div class="readme-card-num">Tab ③</div>
-      <div class="readme-card-title">Copy Guidelines</div>
-      <div class="readme-card-desc">Word limits, tone, and do/don't examples for headline, body, and CTA.</div>
-      <div class="readme-card-audience" style="background:rgba(26,127,75,.1);color:var(--green);">Creative · Lifecycle</div>
-    </div>
-    <div class="readme-card" onclick="show(4)" style="border-top-color:var(--blue)">
-      <div class="readme-card-icon">⏱</div>
-      <div class="readme-card-num">Tab ④</div>
-      <div class="readme-card-title">Content Timing</div>
-      <div class="readme-card-desc">Recommended video lengths by content type — educational, GTM, CEO, etc.</div>
-      <div class="readme-card-audience" style="background:rgba(41,128,185,.1);color:var(--blue);">Video · Stakeholders</div>
-    </div>
-    <div class="readme-card" onclick="show(5)" style="border-top-color:var(--gold)">
-      <div class="readme-card-icon">📦</div>
-      <div class="readme-card-num">Tab ⑤</div>
-      <div class="readme-card-title">Content Handoff</div>
-      <div class="readme-card-desc">How to provide MP4 files, posters, copy, and CTAs ready for production.</div>
-      <div class="readme-card-audience" style="background:rgba(201,169,110,.15);color:#9a7030;">Stakeholders · PM</div>
-    </div>
-    <div class="readme-card" onclick="show(6)" style="border-top-color:#826f8b">
-      <div class="readme-card-icon">🗺</div>
-      <div class="readme-card-num">Tab ⑥</div>
-      <div class="readme-card-title">Reel Mapping</div>
-      <div class="readme-card-desc">How each content field maps to a UI element inside the reel card.</div>
-      <div class="readme-card-audience" style="background:rgba(130,111,139,.1);color:#826f8b;">Lifecycle Marketing</div>
-    </div>
-    <div class="readme-card" onclick="show(7)" style="border-top-color:#2980b9">
-      <div class="readme-card-icon">🗺️</div>
-      <div class="readme-card-num">Tab ⑦</div>
-      <div class="readme-card-title">User Journey</div>
-      <div class="readme-card-desc">Three entry points — Home Tab, Security Page, and Notification Centre.</div>
-      <div class="readme-card-audience" style="background:rgba(41,128,185,.1);color:#2471a3;">PM · Stakeholders</div>
+
+    <!-- SILENT LOOP -->
+    <div class="format-card" onclick="show(5)">
+      <div class="format-card-preview" style="background:#f0ece6;">
+        <div style="width:72px;height:128px;background:#fcfcfc;border-radius:14px;border:3px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 8px 20px rgba(0,0,0,.14);">
+          <div style="position:absolute;inset:0;background:linear-gradient(160deg,#ecddc5,#e8d5e4);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;background:white;border-radius:8px 8px 0 0;padding:4px 5px 5px;box-shadow:0 -2px 8px rgba(0,0,0,.09);">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:2px;"><div style="width:7px;height:7px;border-radius:50%;background:var(--bg);"></div></div>
+            <div style="height:30px;background:linear-gradient(135deg,#1a1a2e,#0f1520);border-radius:5px;margin-bottom:3px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+              <div style="width:22px;height:24px;background:rgba(255,255,255,.07);border-radius:3px;border:1px solid rgba(255,255,255,.15);"></div>
+              <div style="position:absolute;bottom:3px;left:4px;right:4px;height:1.5px;background:rgba(255,255,255,.1);border-radius:1px;"><div style="height:100%;background:rgba(255,255,255,.4);border-radius:1px;animation:progAnim 2s ease-in-out infinite;width:40%;"></div></div>
+            </div>
+            <div style="font-size:4px;font-weight:700;color:var(--brown);margin-bottom:1px;">Order a cheque</div>
+            <div style="font-size:3.5px;color:var(--soft);line-height:1.3;margin-bottom:3px;">See how easy it is to get a cheque delivered.</div>
+            <div style="background:var(--brown);border-radius:100px;padding:2.5px;text-align:center;font-size:3.5px;font-weight:700;color:white;">Order now</div>
+          </div>
+        </div>
+      </div>
+      <div class="format-card-body">
+        <div class="format-card-label" style="color:var(--blue);">Silent Loop</div>
+        <div class="format-card-title">Autoplaying UI demo animation</div>
+        <div class="format-card-desc">Silent looping animation showing a product flow. No controls, no sound. Copy and CTA outside the video.</div>
+        <div class="chip-row">
+          <span class="chip" style="background:rgba(41,128,185,.1);color:var(--blue);">9:16 or 1:1 · 3–8s</span>
+          <span class="chip" style="background:rgba(41,128,185,.1);color:var(--blue);">Autoplay loop</span>
+          <span class="chip" style="background:rgba(41,128,185,.1);color:var(--blue);">No audio</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="readme-who">
+  <!-- APPLIES TABLE -->
+  <div class="card" style="margin-bottom:14px;">
+    <h3>Which guidelines apply to each format</h3>
+    <table class="applies-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;">Guideline</th>
+          <th style="color:var(--gold);">Reels</th>
+          <th style="color:var(--purple);">Half-Sheet</th>
+          <th style="color:var(--blue);">Silent Loop</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Tap zones</td><td>✓</td><td style="color:#ccc;">—</td><td style="color:#ccc;">—</td></tr>
+        <tr><td>Screen zones</td><td>✓</td><td style="color:#ccc;">—</td><td style="color:#ccc;">—</td></tr>
+        <tr><td>Copy guidelines</td><td>✓</td><td style="color:#ccc;">—</td><td style="color:#ccc;">—</td></tr>
+        <tr><td>Content timing</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Content handoff</td><td>✓</td><td>✓</td><td>✓</td></tr>
+      </tbody>
+    </table>
+    <div class="tip" style="margin-top:10px;">Tap zones, screen zones, and copy guidelines apply to Reels only — because copy and CTA overlay the video. For half-sheet and silent loop, those elements live in the modal's own layout, so those constraints don't apply.</div>
+  </div>
+
+  <!-- WHO IS THIS FOR -->
+  <div class="card">
     <h3>Who is this guide for?</h3>
-    <div class="readme-who-grid">
-      <div class="readme-who-item"><h4>📣 PMs & Stakeholders</h4><p>Tabs ④ ⑤ — timing guidelines and how to hand off video content for production.</p></div>
-      <div class="readme-who-item"><h4>📬 Lifecycle Marketing</h4><p>Tabs ⑤ ⑥ — content handoff checklist, Braze content block setup, and field mapping.</p></div>
-      <div class="readme-who-item"><h4>✍️ Creative & Copy</h4><p>Tab ③ — headline, body, and CTA rules with side-by-side do/don't examples.</p></div>
-      <div class="readme-who-item"><h4>🎬 Design & Video</h4><p>Tabs ① ② — safe zones, interaction model, and technical video specs.</p></div>
+    <div class="who-grid">
+      <div class="who-item"><h4>📣 PMs & Stakeholders</h4><p>Content Timing + Content Handoff — timing guidelines and how to prepare and submit video files.</p></div>
+      <div class="who-item"><h4>📬 Lifecycle Marketing</h4><p>Content Handoff + format tabs — content block setup, field mapping, and button aliases.</p></div>
+      <div class="who-item"><h4>✍️ Creative & Copy</h4><p>Reels Feed tab — headline, body, and CTA rules with do/don't examples. Applies to Reels only.</p></div>
+      <div class="who-item"><h4>🎬 Design & Video</h4><p>Reels Feed tab — screen zones, safe areas, and all format-specific video specs.</p></div>
     </div>
-  </div>
-
-  <div style="margin-top:14px">
-  <div class="readme-flow">
-    <h3>How a reel goes from idea to live</h3>
-    <div class="readme-flow-row">
-      <div class="readme-flow-step"><h5>1. Brief</h5><p>Stakeholder defines topic, CTA goal, audience</p></div>
-      <div class="readme-flow-arrow">›</div>
-      <div class="readme-flow-step"><h5>2. Video</h5><p>Record to spec — 9:16, MP4, correct timing tier</p></div>
-      <div class="readme-flow-arrow">›</div>
-      <div class="readme-flow-step"><h5>3. Handoff</h5><p>Submit via Tab ⑤ checklist with copy & poster</p></div>
-      <div class="readme-flow-arrow">›</div>
-      <div class="readme-flow-step"><h5>4. Braze</h5><p>Content blocks built, Liquid templated, tested</p></div>
-      <div class="readme-flow-arrow">›</div>
-      <div class="readme-flow-step"><h5>5. Live</h5><p>IAM triggered via entry point, events fire</p></div>
-    </div>
-  </div>
   </div>
 </section>
 
-<!-- ① TAP ZONES -->
+<!-- ── 1. USER JOURNEY ── -->
 <section class="section" id="s1">
-  <div class="sec-hd"><h2>① Tap Zone Interaction Guide</h2><p>The reel screen is divided into 3 horizontal tap zones. Each triggers a distinct interaction with visual feedback.</p></div>
-  <div class="v1-row">
-    <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-      <div class="phone">
-        <div class="vbg"></div>
-        <div class="person"><div class="p-head"></div><div class="p-body"><div class="mic"></div></div></div>
-        <div class="vtop"><div class="ctrl">‹</div><div class="ctrl">🔇</div></div>
-        <div class="zones">
-          <div class="zone zone-l"><div class="zone-ico">↺</div><div class="zone-txt">Rewind<br/>2 sec</div></div>
-          <div class="zone zone-c"><div class="zone-ico">⏸</div><div class="zone-txt">Play /<br/>Pause</div></div>
-          <div class="zone zone-r"><div class="zone-ico">⚡</div><div class="zone-txt">Hold<br/>2×</div></div>
-        </div>
-        <div class="sdots"><div class="sdot on"></div><div class="sdot"></div><div class="sdot"></div></div>
-        <div class="vbot">
-          <div class="v-prog"><div class="v-fill" style="width:55%"></div></div>
-          <div class="v-head">All the nerdy things</div>
-          <div class="v-sub">AI trading tools, RRSP accelerators</div>
-          <div class="v-cta">Discover tools for you</div>
-          <div class="v-hi"><div class="v-hi-bar"></div></div>
-        </div>
-      </div>
-      <div class="lbl">Tap Zones Active</div>
-    </div>
-    <div class="legend-stack">
-      <div class="leg" style="border-left:3px solid #e67e22"><h4>↺ Left — Rewind 2s</h4><p>Tap left ⅓ to rewind. Ripple animation confirms.</p><span class="tag">Visual: ripple animation</span></div>
-      <div class="leg" style="border-left:3px solid #888"><h4>⏸ Centre — Play / Pause</h4><p>Tap middle ⅓ to toggle playback. Icon flashes briefly.</p><span class="tag">Visual: play/pause icon flash</span></div>
-      <div class="leg" style="border-left:3px solid var(--blue)"><h4>⚡ Right — 2× Speed</h4><p>Long-press right ⅓ for 2× speed. "2×" badge appears.</p><span class="tag">Visual: "2×" on-screen indicator</span></div>
-      <div class="leg" style="border-left:3px solid var(--gold)"><h4>🔇 Sound Toggle</h4><p>Speaker icon top-right. First tap anywhere also unmutes. Persists all session.</p><span class="tag">Visual: sound wave animation</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ② SCREEN ZONES -->
-<section class="section" id="s2">
-  <div class="sec-hd"><h2>② Screen Zone Anatomy</h2><p>The screen has 3 fixed vertical zones. Video producers and copywriters must respect these boundaries.</p></div>
-  <div class="v2-row">
-    <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-      <div class="phone">
-        <div class="vbg"></div>
-        <div class="person"><div class="p-head"></div><div class="p-body"><div class="mic"></div></div></div>
-        <div class="zband zb-t"><span class="zb-lbl">Top Safe Zone · 25%</span></div>
-        <div class="zband zb-m"><span class="zb-lbl">Focal Area · 50%</span></div>
-        <div class="zband zb-b"><span class="zb-lbl">Bottom Safe · 25%</span></div>
-        <div style="position:absolute;top:22px;left:10px;width:22px;height:22px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:white;z-index:10">‹</div>
-        <div style="position:absolute;top:24px;right:10px;font-size:10px;color:rgba(255,255,255,.7);z-index:10">🔇</div>
-        <div style="position:absolute;top:30%;left:12%;right:12%;bottom:30%;border:1.5px dashed rgba(255,255,255,.2);border-radius:6px;z-index:6;display:flex;align-items:center;justify-content:center">
-          <div style="font-size:7px;color:rgba(255,255,255,.4);text-align:center;line-height:1.5">Main subject<br/>face · product<br/>key visual</div>
-        </div>
-        <div class="vbot" style="z-index:10">
-          <div class="v-prog"><div class="v-fill" style="width:55%"></div></div>
-          <div class="v-head" style="font-size:10px">All the nerdy things</div>
-          <div class="v-sub">AI trading tools</div>
-          <div class="v-cta" style="font-size:8px;padding:7px">Discover tools for you</div>
-          <div class="v-hi"><div class="v-hi-bar"></div></div>
-        </div>
-      </div>
-      <div class="lbl">375×812pt · 9:16</div>
-    </div>
-    <div class="legend-stack" style="max-width:300px">
-      <div class="leg"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:3px;background:rgba(192,57,43,.5)"></div><h4 style="margin:0">🔴 Top Safe Zone — 25%</h4></div><p>Back arrow (DS: ScreenTop), sound toggle, device status bar. No video subject or copy.</p></div>
-      <div class="leg"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:3px;background:rgba(26,127,75,.5)"></div><h4 style="margin:0">🟢 Focal Area — 50%</h4></div><p>Main subject centred, equal horizontal margins. Key moment within first 2 seconds. No UI elements.</p></div>
-      <div class="leg"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:3px;background:rgba(41,128,185,.5)"></div><h4 style="margin:0">🔵 Bottom Safe — 25%</h4></div><p>Progress bar, headline, body copy, DSButton pill (#32302F), DSScreenBottom + home indicator.</p></div>
-      <div class="leg" style="border-left:3px solid var(--gold)"><h4>📐 Video Specs</h4><div class="specgrid"><div class="specitem"><div class="k">Ratio</div><div class="v">9:16</div></div><div class="specitem"><div class="k">Res</div><div class="v">1080×1920</div></div><div class="specitem"><div class="k">Format</div><div class="v">MP4 H.264</div></div><div class="specitem"><div class="k">FPS</div><div class="v">≤ 30fps</div></div><div class="specitem"><div class="k">Size</div><div class="v">3–5 MB</div></div><div class="specitem"><div class="k">Duration</div><div class="v">10–15s</div></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ③ COPY GUIDELINES -->
-<section class="section" id="s3">
-  <div class="sec-hd"><h2>③ Copy Guidelines</h2><p>Side-by-side good vs bad copy in the reel UI.</p></div>
-  <div class="v3-row">
-    <div class="v3-col">
-      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:16px">✅</span><span style="font-size:12px;font-weight:700;color:var(--green)">Do this</span></div>
-      <div class="phone" style="height:380px"><div class="vbg" style="background:linear-gradient(180deg,#0a180a,#152515,#0a1a0a,#0a0a0a)"></div><div class="person"><div class="p-head"></div><div class="p-body"><div class="mic"></div></div></div><div class="vtop"><div class="ctrl">‹</div><div class="ctrl">🔇</div></div><div class="vbot"><div class="v-prog"><div class="v-fill" style="width:55%"></div></div><div class="v-head">Trade $0 options</div><div class="v-sub">Advanced strategies for active traders</div><div class="v-cta">Get started</div><div class="v-hi"><div class="v-hi-bar"></div></div></div></div>
-      <div class="copy-rules"><h4>✅ Headline</h4><div class="cr"><strong>3–6 words</strong> max</div><div class="cr"><strong>Benefit-led</strong>, not feature-led</div><div class="cr" style="color:var(--green);font-weight:600">"Trade $0 options" ✓</div></div>
-      <div class="copy-rules"><h4>✅ Body copy</h4><div class="cr"><strong>1 sentence</strong>, 5–10 words</div><div class="cr">Start with capital letter</div><div class="cr" style="color:var(--green);font-weight:600">"Advanced strategies…" ✓</div></div>
-      <div class="copy-rules"><h4>✅ CTA</h4><div class="cr"><strong>2–3 words</strong>, verb-first</div><div class="cr">Sentence case</div><div class="cr" style="color:var(--green);font-weight:600">"Get started" ✓</div></div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:center;color:#ccc;font-size:24px;margin-top:50px">VS</div>
-    <div class="v3-col">
-      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:16px">❌</span><span style="font-size:12px;font-weight:700;color:var(--red)">Avoid this</span></div>
-      <div class="phone" style="height:380px"><div class="vbg" style="background:linear-gradient(180deg,#1a0808,#351515,#1a0c0c,#0a0a0a)"></div><div class="person"><div class="p-head"></div><div class="p-body"><div class="mic"></div></div></div><div class="vtop"><div class="ctrl">‹</div><div class="ctrl">🔇</div></div><div class="vbot"><div class="v-prog"><div class="v-fill" style="width:30%"></div></div><div class="v-head" style="font-size:8px;opacity:.7">Options trading feature now available for our clients today</div><div class="v-sub" style="font-size:7px">advanced strategies for active traders who want more</div><div class="v-cta" style="font-size:8px">discover all the tools available to you now</div><div class="v-hi"><div class="v-hi-bar"></div></div></div></div>
-      <div class="copy-rules"><h4>❌ Headline</h4><div class="cr">Too long — truncates</div><div class="cr">Feature-led, not benefit-led</div><div class="cr" style="color:var(--red);font-weight:600">"Options trading feature now…" ✗</div></div>
-      <div class="copy-rules"><h4>❌ Body copy</h4><div class="cr">Lowercase start</div><div class="cr">Too long, wraps badly</div><div class="cr" style="color:var(--red);font-weight:600">"advanced strategies for…" ✗</div></div>
-      <div class="copy-rules"><h4>❌ CTA</h4><div class="cr">Too long for pill</div><div class="cr">Vague, no clear action</div><div class="cr" style="color:var(--red);font-weight:600">"discover all the tools…" ✗</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ④ CONTENT TIMING -->
-<section class="section" id="s4">
-  <div class="sec-hd">
-    <h2>④ Content Timing Guidelines</h2>
-    <p>Rule of thumb: match video length to content type. Shorter isn't always better — some messages earn more time.</p>
-  </div>
-  <div class="timing-grid">
-    <div class="timing-card quick">
-      <div class="timing-badge">⚡ Quick &amp; Snippy</div>
-      <div><span class="timing-dur">3–5</span><span class="timing-unit">sec</span></div>
-      <div class="timing-name">Fast-hit awareness</div>
-      <div class="timing-desc">High-energy, single idea. Works when the message is instantly recognizable — no context needed.</div>
-      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">New feature badge drop</div><div class="timing-eg-item">Promotional offer reveal</div><div class="timing-eg-item">Price milestone alert</div></div>
-    </div>
-    <div class="timing-card gtm">
-      <div class="timing-badge">🚀 Go-to-Market</div>
-      <div><span class="timing-dur">5–7</span><span class="timing-unit">sec</span></div>
-      <div class="timing-name">Product launch &amp; campaigns</div>
-      <div class="timing-desc">Sweet spot for most marketing content. Enough time to land a benefit and a CTA without overstaying the welcome.</div>
-      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">Feature launch video</div><div class="timing-eg-item">Seasonal campaign</div><div class="timing-eg-item">Cross-sell moment</div></div>
-    </div>
-    <div class="timing-card edu">
-      <div class="timing-badge">📚 Educational</div>
-      <div><span class="timing-dur">~10</span><span class="timing-unit">sec</span></div>
-      <div class="timing-name">Concepts &amp; how-tos</div>
-      <div class="timing-desc">Teaching takes time. Use this length when the viewer needs context to act before a CTA.</div>
-      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">How options work</div><div class="timing-eg-item">TFSA vs RRSP explainer</div><div class="timing-eg-item">Why gold hedges inflation</div></div>
-    </div>
-    <div class="timing-card personal">
-      <div class="timing-badge">🎙 Personal &amp; High-trust</div>
-      <div><span class="timing-dur">10+</span><span class="timing-unit">sec</span></div>
-      <div class="timing-name">CEO, founder &amp; leadership</div>
-      <div class="timing-desc">Personable messages earn more time. A face behind the brand builds trust — tone must feel genuine, not scripted.</div>
-      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">CEO market update</div><div class="timing-eg-item">Founder product message</div><div class="timing-eg-item">Team milestone moment</div></div>
-    </div>
-  </div>
-  <div class="timeline-wrap">
-    <h4>Duration spectrum at a glance</h4>
-    <div class="timeline-bar">
-      <div class="tl-seg quick">3–5s</div>
-      <div class="tl-seg gtm">5–7s</div>
-      <div class="tl-seg edu">~10s</div>
-      <div class="tl-seg personal">10s+</div>
-    </div>
-    <div class="tl-labels">
-      <div class="tl-lbl quick" style="color:#c87522;font-weight:700">Quick &amp; Snippy</div>
-      <div class="tl-lbl gtm" style="color:#2471a3;font-weight:700">Go-to-Market</div>
-      <div class="tl-lbl edu" style="color:#1a7f4b;font-weight:700;font-size:8px">Edu</div>
-      <div class="tl-lbl personal" style="color:#826f8b;font-weight:700">Personal</div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑤ CONTENT HANDOFF -->
-<section class="section" id="s5">
-  <div class="sec-hd">
-    <h2>⑤ Content Handoff Guide</h2>
-    <p>For stakeholders and PMs submitting video content for a Reels campaign. Follow these steps to ensure your files are production-ready.</p>
-  </div>
-
-  <div class="handoff-alert">
-    <div class="handoff-alert-icon">📌</div>
-    <div>
-      <h3>Before you record</h3>
-      <p>Check the timing tier in Tab ④ and the safe zones in Tab ② first. Videos that don't meet spec need to be re-recorded — this adds time to the launch timeline.</p>
-    </div>
-  </div>
-
-  <div class="handoff-steps">
-    <div class="handoff-step">
-      <div class="handoff-step-num">1</div>
-      <div class="handoff-step-body">
-        <h4>Export your video as MP4</h4>
-        <p>All reel videos must be delivered as MP4 files. No MOV, no Google Drive previews, no Loom links — the raw file only.</p>
-        <div class="spec-chips">
-          <div class="spec-chip"><span class="chip-label">Format</span> MP4 (H.264)</div>
-          <div class="spec-chip"><span class="chip-label">Ratio</span> 9:16 vertical</div>
-          <div class="spec-chip"><span class="chip-label">Resolution</span> 1080 × 1920px</div>
-          <div class="spec-chip"><span class="chip-label">Frame rate</span> ≤ 30fps</div>
-          <div class="spec-chip"><span class="chip-label">File size</span> 3–5 MB</div>
-          <div class="spec-chip"><span class="chip-label">Duration</span> See Tab ④</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="handoff-step">
-      <div class="handoff-step-num">2</div>
-      <div class="handoff-step-body">
-        <h4>Include a poster image</h4>
-        <p>A static poster (first-frame thumbnail) is required so the reel doesn't flash black on load. Export a single frame from your video as a PNG or JPG at the same resolution.</p>
-        <div class="spec-chips">
-          <div class="spec-chip"><span class="chip-label">Format</span> PNG or JPG</div>
-          <div class="spec-chip"><span class="chip-label">Resolution</span> 1080 × 1920px</div>
-          <div class="spec-chip"><span class="chip-label">Content</span> Frame 0–1s of the video</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="handoff-step">
-      <div class="handoff-step-num">3</div>
-      <div class="handoff-step-body">
-        <h4>Write your copy</h4>
-        <p>Provide the three text fields per reel, following the rules in Tab ③. Copy that's too long will be sent back.</p>
-        <div class="spec-chips">
-          <div class="spec-chip"><span class="chip-label">Headline</span> 3–6 words</div>
-          <div class="spec-chip"><span class="chip-label">Body</span> 1 sentence, 5–10 words</div>
-          <div class="spec-chip"><span class="chip-label">CTA label</span> 2–3 words, verb-first</div>
-          <div class="spec-chip"><span class="chip-label">CTA destination</span> wealthsimple:// deep link</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="handoff-step">
-      <div class="handoff-step-num">4</div>
-      <div class="handoff-step-body">
-        <h4>Name your files correctly</h4>
-        <p>Use the naming convention below so files can be matched to their content block without back-and-forth.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="handoff-naming">
-    <h4>File naming convention</h4>
-    <div class="naming-example">
-      <span class="hi">reels</span>_<span class="hi">rrsp-launch</span>_<span class="hi">v1</span>_<span class="hi">card01</span>.mp4<br/>
-      <span class="hi">reels</span>_<span class="hi">rrsp-launch</span>_<span class="hi">v1</span>_<span class="hi">card01</span>_poster.png
-    </div>
-    <div class="naming-parts">
-      <div class="naming-part"><div class="np-key">reels</div><div class="np-val">Always starts with "reels" — identifies the component</div></div>
-      <div class="naming-part"><div class="np-key">rrsp-launch</div><div class="np-val">Campaign or topic slug, lowercase, hyphens only</div></div>
-      <div class="naming-part"><div class="np-key">v1</div><div class="np-val">Version — increment if you re-record</div></div>
-      <div class="naming-part"><div class="np-key">card01</div><div class="np-val">Card position in the feed (card01, card02…)</div></div>
-    </div>
-  </div>
-
-  <div class="handoff-checklist" style="margin-top:14px">
-    <h4>Pre-submission checklist</h4>
-    <div class="checklist-grid">
-      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">MP4 exported (H.264, 9:16, 1080×1920)</div></div>
-      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">File size under 5 MB</div></div>
-      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Poster image included (PNG/JPG, same res)</div></div>
-      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Duration matches content type in Tab ④</div></div>
-      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Subject stays within the focal zone (Tab ②)</div></div>
-      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Headline 3–6 words, benefit-led</div></div>
-      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">CTA is 2–3 words, verb-first</div></div>
-      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Files named using the convention above</div></div>
-      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">Deep link destination confirmed and tested</div></div>
-      <div class="checklist-item"><div class="ci-box"></div><div class="ci-text">All cards delivered together (not staggered)</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑥ REEL MAPPING -->
-<section class="section" id="s6">
-  <div class="sec-hd"><h2>⑥ Reel Content Block Mapping</h2><p>Each field in <code style="background:var(--bg);padding:2px 5px;border-radius:3px;font-size:12px">reels_feed_v1</code> maps directly to a UI element on screen.</p></div>
-  <div class="v5-arch">
-    <div class="v5-arch-title">Content Block Architecture</div>
-    <div class="v5-arch-sub">How Braze Content Blocks feed into each reel card</div>
-    <div class="v5-arch-row">
-      <div class="v5-card">
-        <div class="v5-card-title">📦 Content Block (per card)</div>
-        <div class="fld"><div class="fld-key">VIDEO_URL</div><div class="fld-val">https://cdn.ws.com/v1.mp4</div></div>
-        <div class="fld"><div class="fld-key">POSTER_URL</div><div class="fld-val">https://cdn.ws.com/p1.jpg</div></div>
-        <div class="fld"><div class="fld-key">HEADLINE</div><div class="fld-val">All the nerdy things</div></div>
-        <div class="fld"><div class="fld-key">BODY_COPY</div><div class="fld-val">AI tools, RRSP accel...</div></div>
-        <div class="fld"><div class="fld-key">CTA_TEXT</div><div class="fld-val">Discover tools for you</div></div>
-        <div class="fld"><div class="fld-key">CTA_DESTINATION</div><div class="fld-val">ws://invest/tools</div></div>
-        <div class="fld"><div class="fld-key">VIDEO_ID</div><div class="fld-val">video_1</div></div>
-      </div>
-      <div style="font-size:24px;color:var(--gold);flex-shrink:0">→</div>
-      <div class="v5-card">
-        <div class="v5-card-title">⚙️ Reels IAM (HTML/JS)</div>
-        <div class="iam-row">📽 Renders reel card UI</div>
-        <div class="iam-row">▶ Handles playback logic</div>
-        <div class="iam-row">↕ Manages scroll snapping</div>
-        <div class="iam-row">🖼 Shows poster on load</div>
-        <div class="iam-row">📊 Fires Braze events</div>
-        <div class="iam-note">Liquid variables resolve<br/>at IAM send time.<br/>Lifecycle marketing swaps<br/>content without touching code.</div>
-      </div>
-    </div>
-  </div>
-      <!-- BUTTON ALIAS -->
-  <div style="background:white;border-radius:14px;padding:20px;box-shadow:var(--card-shadow);margin-bottom:28px;">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
-      <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;"></div>
-      <div style="font-size:13px;font-weight:700;">Button Click Aliases — <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:3px;">data-button-id</code></div>
-    </div>
-    <p style="font-size:12px;color:var(--soft);line-height:1.7;margin-bottom:14px;">You <strong style="color:var(--brown)">do not need to touch the HTML.</strong> The IAM code automatically generates <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">data-button-id</code> from the <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">id</code> field you set in the content block. The only thing to configure is the <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">id</code> field inside each video object in <code style="font-size:10px;background:var(--bg);padding:1px 4px;border-radius:3px;">reels_feed_v1</code>.</p>
-    <div style="background:#1e1e1e;border-radius:10px;padding:16px 18px;font-family:monospace;font-size:11px;line-height:1.9;overflow-x:auto;margin-bottom:14px;">
-      <div style="color:#6a9955;margin-bottom:4px;">// The IAM generates this automatically:</div>
-      <div><span style="color:#ffab70;">data-button-id</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"CTA_<span style="color:#c9a96e;">${item.id}</span>"</span></div>
-      <div style="margin-top:10px;color:#6a9955;">// So in reels_feed_v1, you just set the id field:</div>
-      <div style="margin-top:4px;"><span style="color:#9ecbff;">"id"</span><span style="color:#888;">: </span><span style="color:#9ecbff;">"<span style="background:rgba(201,169,110,.2);padding:1px 3px;border-radius:3px;color:#c9a96e;">video_options</span>"</span></div>
-      <div style="color:#6a9955;margin-top:2px;">// → Braze alias becomes: CTA_video_options</div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
-      <div style="background:var(--bg);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Set this</div>
-        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">id field</div>
-        <div style="font-size:10px;color:var(--soft);margin-top:3px;">In <code style="font-size:9px;background:white;padding:1px 3px;border-radius:3px;">reels_feed_v1</code> content block</div>
-      </div>
-      <div style="background:var(--bg);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Naming</div>
-        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">video_options</div>
-        <div style="font-size:10px;color:var(--soft);margin-top:3px;">Topic-based, not positional (not <code style="font-size:9px;background:white;padding:1px 3px;border-radius:3px;">video_1</code>)</div>
-      </div>
-      <div style="background:var(--bg);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Result in Braze</div>
-        <div style="font-family:monospace;font-size:11px;font-weight:700;color:var(--brown);">CTA_video_options</div>
-        <div style="font-size:10px;color:var(--soft);margin-top:3px;">Auto-generated — no HTML edits needed</div>
-      </div>
-    </div>
-    <div style="margin-top:10px;background:rgba(26,127,75,.08);border-left:3px solid var(--green);border-radius:0 7px 7px 0;padding:9px 12px;font-size:11px;color:var(--soft);line-height:1.6;">
-      ⚠️ If the <code style="font-size:10px;background:white;padding:1px 3px;border-radius:3px;">id</code> field is missing or blank in the content block, the button alias won't fire in Braze analytics.
-    </div>
-  </div>
-
-  <div style="font-size:13px;font-weight:700;margin-bottom:14px;text-align:center">Field → UI Element Mapping</div>
-  <div class="v5-map-row">
-    <div class="v5-fields">
-      <div style="font-size:10px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Content Block Fields</div>
-      <div class="v5-field"><div class="v5-dot" style="background:#e74c3c"></div><div class="v5-key">video_url</div><div class="v5-val">MP4 on S3/CDN</div></div>
-      <div class="v5-field"><div class="v5-dot" style="background:#e67e22"></div><div class="v5-key">poster_url</div><div class="v5-val">1080×1920 PNG/JPG</div></div>
-      <div class="v5-field"><div class="v5-dot" style="background:#f1c40f"></div><div class="v5-key">headline</div><div class="v5-val">3–6 words</div></div>
-      <div class="v5-field"><div class="v5-dot" style="background:#2ecc71"></div><div class="v5-key">body</div><div class="v5-val">1 sentence, 5–10 words</div></div>
-      <div class="v5-field"><div class="v5-dot" style="background:#3498db"></div><div class="v5-key">cta_text</div><div class="v5-val">2–3 words, verb-first</div></div>
-      <div class="v5-field"><div class="v5-dot" style="background:#9b59b6"></div><div class="v5-key">cta_url</div><div class="v5-val">wealthsimple:// link</div></div>
-      <div class="v5-field"><div class="v5-dot" style="background:#95a5a6"></div><div class="v5-key">id</div><div class="v5-val">fires CTA_video_id</div></div>
-    </div>
-    <div style="font-size:24px;color:var(--gold)">→</div>
-    <div style="position:relative">
-      <div class="phone" style="height:360px">
-        <div style="position:absolute;inset:0;background:linear-gradient(180deg,#100c08,#201810,#180e0c,#0a0a0a)"></div>
-        <div class="person" style="z-index:2"><div class="p-head"></div><div class="p-body"><div class="mic"></div></div></div>
-        <div class="vtop" style="z-index:10"><div class="ctrl">‹</div><div class="ctrl">🔇</div></div>
-        <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);background:rgba(231,76,60,.8);border-radius:3px;padding:2px 5px;font-size:7px;font-weight:700;color:white;z-index:15">video_url</div>
-        <div style="position:absolute;top:24px;left:50%;transform:translateX(-50%);background:rgba(230,126,34,.8);border-radius:3px;padding:2px 5px;font-size:7px;font-weight:700;color:white;z-index:15">poster_url</div>
-        <div class="vbot" style="z-index:10">
-          <div class="v-prog"><div class="v-fill" style="width:55%"></div></div>
-          <div style="background:rgba(241,196,15,.2);border-radius:3px;padding:1px 3px"><div class="v-head" style="font-size:10px">All the nerdy things</div></div>
-          <div style="background:rgba(46,204,113,.2);border-radius:3px;padding:1px 3px;margin-top:2px"><div class="v-sub">AI trading tools, RRSP accel…</div></div>
-          <div style="background:rgba(52,152,219,.3);border-radius:100px;padding:8px;text-align:center;font-size:9px;font-weight:700;color:white;margin-top:7px">Discover tools for you</div>
-          <div class="v-hi"><div class="v-hi-bar"></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="v5-legend">
-      <div style="font-size:10px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Maps to</div>
-      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#e74c3c"></div><div><div style="font-size:10px;font-weight:700">video_url</div><div style="font-size:9px;color:var(--soft)">Full-screen video player</div></div></div>
-      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#e67e22"></div><div><div style="font-size:10px;font-weight:700">poster_url</div><div style="font-size:9px;color:var(--soft)">First-paint (no black flash)</div></div></div>
-      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#f1c40f"></div><div><div style="font-size:10px;font-weight:700">headline</div><div style="font-size:9px;color:var(--soft)">Bold text, bottom overlay</div></div></div>
-      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#2ecc71"></div><div><div style="font-size:10px;font-weight:700">body</div><div style="font-size:9px;color:var(--soft)">Subtitle below headline</div></div></div>
-      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#3498db"></div><div><div style="font-size:10px;font-weight:700">cta_text</div><div style="font-size:9px;color:var(--soft)">DSButton pill label</div></div></div>
-      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#9b59b6"></div><div><div style="font-size:10px;font-weight:700">cta_url</div><div style="font-size:9px;color:var(--soft)">Button destination</div></div></div>
-      <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#95a5a6"></div><div><div style="font-size:10px;font-weight:700">id</div><div style="font-size:9px;color:var(--soft)">Fires CTA_video_<em>id</em></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑦ USER JOURNEY -->
-<section class="section" id="s7">
-  <div class="sec-hd"><h2>⑦ User Journey</h2><p>Three entry points that trigger the Video Reels — Home Tab, Account/Security page, and Notification Centre.</p></div>
+  <div class="sec-hd"><h2>User Journey</h2><p>Three entry points that trigger the Video Reels IAM — Home Tab, Account/Security page, and Notification Centre.</p></div>
 
   <div class="j-section">
-    <div class="j-title"><span class="badge-pill" style="background:#826f8b">Journey A</span>Home Tab — "For You" Marketing Card</div>
+    <div class="j-section-title"><span class="badge-pill" style="background:#826f8b;">Journey A</span> Home Tab — "For You" marketing card</div>
     <div class="j-row">
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:#826f8b">1</div><div class="j-step-name">Home Tab</div></div>
-        <div class="phonel">
-          <div style="background:linear-gradient(160deg,#ecddc5,#e8d5e4,#d4c4d8,#ecd9c6);flex:1;display:flex;flex-direction:column">
-            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
-            <div class="tnl"><div class="tn-ico">🎁</div><div class="tn-ttl">Home</div><div style="display:flex;gap:3px"><div class="tn-ico">🔔</div><div class="tn-ico">👤</div></div></div>
-            <div style="padding:5px 9px"><div style="font-size:7px;color:var(--soft)">Total portfolio</div><div style="font-size:19px;font-weight:800;color:var(--brown);letter-spacing:-.5px">$312,155.55</div></div>
-            <div style="display:flex;gap:4px;padding:4px 9px;background:#fcfcfc">
-              <div style="flex:1;background:white;border-radius:8px;padding:6px;box-shadow:0 1px 5px rgba(0,0,0,.06)"><div style="font-size:7px;color:var(--soft)">Spend & save</div><div style="font-size:9px;font-weight:700;color:var(--brown)">$12,105</div><div style="font-size:7px;color:var(--green)">+$140 this mo</div></div>
-              <div style="flex:1;background:white;border-radius:8px;padding:6px;box-shadow:0 1px 5px rgba(0,0,0,.06)"><div style="font-size:7px;color:var(--soft)">Invest</div><div style="font-size:9px;font-weight:700;color:var(--brown)">$300,050</div><div style="font-size:7px;color:var(--green)">+14.02% all time</div></div>
-            </div>
-            <div style="background:#fcfcfc;flex:1;display:flex;flex-direction:column">
-              <div style="padding:5px 9px 3px;font-size:10px;font-weight:700;color:var(--brown)">For you</div>
-              <div style="margin:0 9px;border-radius:9px;padding:9px;background:linear-gradient(135deg,#826f8b,#bf8f85);position:relative">
-                <div style="position:absolute;top:9px;right:9px;width:18px;height:18px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px">▶</div>
-                <div style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.7)">📹 REEL · 45S</div>
-                <div style="font-size:10px;font-weight:800;color:white;margin-top:2px">All the nerdy things</div>
-                <div style="font-size:8px;color:rgba(255,255,255,.8);margin-top:2px;max-width:80px;line-height:1.3">AI trading tools, RRSP accel…</div>
-                <div style="margin-top:7px;display:inline-block;background:white;color:var(--brown);font-size:7px;font-weight:700;padding:3px 7px;border-radius:100px">Discover tools</div>
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:#826f8b;">1</div><div class="j-name">Home Tab</div></div>
+        <div class="phone-light" style="width:130px;height:240px;">
+          <div style="background:linear-gradient(160deg,#ecddc5,#e8d5e4,#ecd9c6);flex:1;display:flex;flex-direction:column;">
+            <div class="sb"><span>9:41</span><span>▌▌◈▮</span></div>
+            <div class="tnl"><div class="tn-ico">🎁</div><div class="tn-ttl">Home</div><div style="display:flex;gap:2px;"><div class="tn-ico">🔔</div><div class="tn-ico">👤</div></div></div>
+            <div style="padding:4px 7px;"><div style="font-size:6px;color:var(--soft);">Total portfolio</div><div style="font-size:14px;font-weight:800;color:var(--brown);">$312,155</div></div>
+            <div style="background:#fcfcfc;flex:1;display:flex;flex-direction:column;padding:3px 7px;">
+              <div style="font-size:8px;font-weight:700;color:var(--brown);margin-bottom:4px;">For you</div>
+              <div style="border-radius:7px;padding:7px;background:linear-gradient(135deg,#826f8b,#bf8f85);position:relative;">
+                <div style="position:absolute;top:7px;right:7px;width:14px;height:14px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:6px;">▶</div>
+                <div style="font-size:5px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.7);">📹 REEL · 45S</div>
+                <div style="font-size:8px;font-weight:800;color:white;margin-top:1px;">All the nerdy things</div>
+                <div style="margin-top:4px;display:inline-block;background:white;color:var(--brown);font-size:5px;font-weight:700;padding:2px 6px;border-radius:100px;">Discover tools</div>
               </div>
               <div class="bnav"><div class="bnav-item on">🏠</div><div class="bnav-item">🔍</div><div class="bnav-item">⇄</div><div class="bnav-item">🕐</div></div>
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Sees reel card<br/>in For You rail</div>
+        <div class="j-lbl">Sees reel card<br/>in For You rail</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap card</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:#444">2</div><div class="j-step-name">Braze IAM</div></div>
-        <div class="phonel" style="background:var(--brown)">
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:#444;">2</div><div class="j-name">Braze IAM</div></div>
+        <div class="phone-light" style="width:130px;height:240px;background:var(--brown);">
           <div class="braze-screen">
             <div class="braze-icon">⚡</div>
             <div class="braze-tag">Braze IAM Fired</div>
-            <div class="braze-title">Fetching Content<br/>Blocks</div>
-            <div class="braze-sub">Liquid variables resolve<br/>video_url, poster_url<br/>headline, CTA…</div>
+            <div class="braze-title">Fetching Content Blocks</div>
+            <div class="braze-sub">Liquid variables resolve<br/>video_url, poster_url,<br/>headline, CTA…</div>
             <div class="braze-dots"><div class="braze-dot"></div><div class="braze-dot" style="animation-delay:.2s"></div><div class="braze-dot" style="animation-delay:.4s"></div></div>
           </div>
         </div>
-        <div class="j-step-lbl">IAM loads,<br/>poster shown first</div>
+        <div class="j-lbl">IAM loads,<br/>poster shown first</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Reels</div></div>
-        <div class="phonel" style="background:#0a0a0a">
-          <div style="height:100%;position:relative;overflow:hidden">
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1008,#2a1f10,#1a1618,#0a0a0a)"></div>
-            <div style="position:absolute;left:50%;top:13%;transform:translateX(-50%);width:70px;height:100px"><div style="width:28px;height:28px;background:radial-gradient(circle at 40% 35%,#c8a880,#8a6840);border-radius:50%;margin:0 auto 2px;position:relative"><div style="position:absolute;top:-4px;left:-3px;width:34px;height:18px;background:#2a1a0a;border-radius:50% 50% 0 0"></div></div><div style="width:50px;height:64px;background:linear-gradient(180deg,#1a1a2e,#0f1520);border-radius:9px 9px 4px 4px;margin:0 auto"></div></div>
-            <div style="position:absolute;top:0;left:0;right:0;padding:19px 9px 5px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5"><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">‹</div><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">🔇</div></div>
-            <div style="position:absolute;right:4px;top:45%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:5"><div style="width:3px;height:8px;background:white;border-radius:2px"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div><div style="width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div></div>
-            <div style="position:absolute;bottom:0;left:0;right:0;padding:7px 9px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5">
-              <div style="height:1.5px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px"><div style="height:100%;width:55%;background:white;border-radius:2px"></div></div>
-              <div style="font-size:10px;font-weight:700;color:white">All the nerdy things</div>
-              <div style="font-size:7px;color:rgba(255,255,255,.7);margin-top:1px">AI trading tools, RRSP accel…</div>
-              <div style="background:white;color:var(--brown);font-size:8px;font-weight:700;text-align:center;padding:7px;border-radius:100px;margin-top:6px">Discover tools for you</div>
-              <div style="height:14px;display:flex;align-items:center;justify-content:center"><div style="width:44px;height:3px;background:rgba(255,255,255,.25);border-radius:100px"></div></div>
-            </div>
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:var(--brown);">3</div><div class="j-name">Video Reels</div></div>
+        <div class="phone-dark" style="width:130px;height:240px;">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1008,#2a1f10,#0a0a0a);"></div>
+          <div style="position:absolute;left:50%;top:14%;transform:translateX(-50%);">
+            <div style="width:20px;height:20px;background:radial-gradient(circle at 40% 35%,#c8a880,#8a6840);border-radius:50%;margin:0 auto 1px;position:relative;"><div style="position:absolute;top:-3px;left:-2px;width:24px;height:12px;background:#2a1a0a;border-radius:50% 50% 0 0;"></div></div>
+            <div style="width:32px;height:44px;background:linear-gradient(180deg,#1a1a2e,#0f1520);border-radius:6px 6px 3px 3px;margin:0 auto;"></div>
+          </div>
+          <div style="position:absolute;top:0;left:0;right:0;padding:14px 7px 4px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5;">
+            <div style="width:16px;height:16px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;color:white;">‹</div>
+            <div style="width:16px;height:16px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;color:white;">🔇</div>
+          </div>
+          <div style="position:absolute;right:4px;top:42%;display:flex;flex-direction:column;gap:2px;z-index:5;">
+            <div style="width:2px;height:6px;background:white;border-radius:1px;"></div>
+            <div style="width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.3);"></div>
+            <div style="width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.3);"></div>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:6px 7px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5;">
+            <div style="height:1.5px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:3px;"><div style="height:100%;width:55%;background:white;border-radius:2px;"></div></div>
+            <div style="font-size:8px;font-weight:700;color:white;">All the nerdy things</div>
+            <div style="font-size:6px;color:rgba(255,255,255,.7);margin-top:1px;">AI trading tools, RRSP accel…</div>
+            <div style="background:white;color:var(--brown);font-size:7px;font-weight:700;text-align:center;padding:5px;border-radius:100px;margin-top:5px;">Discover tools for you</div>
+            <div style="height:11px;display:flex;align-items:center;justify-content:center;"><div style="width:34px;height:2px;background:rgba(255,255,255,.25);border-radius:100px;"></div></div>
           </div>
         </div>
-        <div class="j-step-lbl">Watches reel,<br/>taps CTA</div>
+        <div class="j-lbl">Watches reel,<br/>taps CTA</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:var(--green)">4</div><div class="j-step-name">Destination</div></div>
-        <div class="phonel">
-          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc">
-            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:var(--green);">4</div><div class="j-name">Destination</div></div>
+        <div class="phone-light" style="width:130px;height:240px;">
+          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc;">
+            <div class="sb"><span>9:41</span><span>▌▌◈▮</span></div>
             <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Invest</div><div class="tn-ico">⋯</div></div>
-            <div style="flex:1;padding:9px;display:flex;flex-direction:column;gap:7px">
-              <div style="background:white;border-radius:10px;padding:10px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="font-size:8px;color:var(--soft);font-weight:600">Active Trader</div><div style="font-size:12px;font-weight:800;color:var(--brown);margin-top:1px">Tools for you</div><div style="font-size:7px;color:var(--soft);margin-top:2px;line-height:1.5">$0 options, advanced charts, real-time data</div><div style="background:var(--brown);color:white;font-size:7px;font-weight:700;padding:4px 8px;border-radius:100px;display:inline-block;margin-top:7px">Get started</div></div>
-              <div style="background:white;border-radius:10px;padding:9px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="font-size:8px;color:var(--soft);font-weight:600;margin-bottom:4px">RELATED</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0;border-bottom:.5px solid var(--bg)">Options trading →</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0;border-bottom:.5px solid var(--bg)">RRSP accelerator →</div><div style="font-size:8px;font-weight:700;color:var(--brown);padding:3px 0">AI insights →</div></div>
+            <div style="flex:1;padding:7px;display:flex;flex-direction:column;gap:5px;">
+              <div style="background:white;border-radius:8px;padding:8px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+                <div style="font-size:6px;color:var(--soft);font-weight:600;">Active Trader</div>
+                <div style="font-size:9px;font-weight:800;color:var(--brown);margin-top:1px;">Tools for you</div>
+                <div style="font-size:5px;color:var(--soft);margin-top:2px;line-height:1.5;">$0 options, advanced charts</div>
+                <div style="background:var(--brown);color:white;font-size:5px;font-weight:700;padding:3px 6px;border-radius:100px;display:inline-block;margin-top:5px;">Get started</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Deep linked to<br/>feature destination</div>
-        <div class="event-badge" style="background:rgba(26,127,75,.1);color:var(--green)">🎯 CTA_video_1 fired</div>
+        <div class="j-lbl">Deep linked to<br/>feature</div>
+        <div class="event-badge" style="background:rgba(26,127,75,.1);color:var(--green);">🎯 CTA_video_1</div>
       </div>
     </div>
   </div>
 
+  <!-- JOURNEY B -->
   <div class="j-section">
-    <div class="j-title"><span class="badge-pill" style="background:#1a6b4a">Journey B</span>Account / Security Page — Learn Card</div>
+    <div class="j-section-title"><span class="badge-pill" style="background:var(--green);">Journey B</span> Account / Security Page — Learn card</div>
     <div class="j-row">
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:#1a6b4a">1</div><div class="j-step-name">Security Page</div></div>
-        <div class="phonel">
-          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc">
-            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
-            <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Gold (XAU)</div><div style="display:flex;gap:3px"><div class="tn-ico">☆</div><div class="tn-ico">🔔</div></div></div>
-            <div style="padding:7px 9px">
-              <div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#f0c060,#c88000);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:white">Au</div><div style="font-size:8px;color:var(--soft);font-weight:600">Gold (XAU/CAD)</div></div>
-              <div style="font-size:19px;font-weight:800;color:var(--brown);letter-spacing:-.5px">$3,842.50</div>
-              <div style="font-size:8px;color:var(--green);font-weight:700;margin-top:1px">+$62.34 (+1.65%) past day</div>
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:var(--green);">1</div><div class="j-name">Security Page</div></div>
+        <div class="phone-light" style="width:130px;height:240px;">
+          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc;">
+            <div class="sb"><span>9:41</span><span>▌▌◈▮</span></div>
+            <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Gold (XAU)</div><div style="display:flex;gap:2px;"><div class="tn-ico">☆</div><div class="tn-ico">🔔</div></div></div>
+            <div style="padding:5px 8px;">
+              <div style="display:flex;align-items:center;gap:4px;margin-bottom:2px;">
+                <div style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#f0c060,#c88000);display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:800;color:white;">Au</div>
+                <div style="font-size:6px;color:var(--soft);">Gold (XAU/CAD)</div>
+              </div>
+              <div style="font-size:13px;font-weight:800;color:var(--brown);">$3,842.50</div>
+              <div style="font-size:6px;color:var(--green);font-weight:700;">+$62.34 (+1.65%)</div>
             </div>
-            <div style="height:40px;margin:0 9px;border-radius:4px;background:rgba(26,127,75,.06);position:relative;overflow:hidden"><svg viewBox="0 0 140 36" style="width:100%;height:100%;position:absolute;bottom:0"><polyline points="0,28 20,23 40,26 60,16 80,13 100,18 120,10 140,6" fill="none" stroke="#1a7f4b" stroke-width="1.5"/><polygon points="0,28 20,23 40,26 60,16 80,13 100,18 120,10 140,6 140,36 0,36" fill="rgba(26,127,75,.08)"/></svg></div>
-            <div style="padding:5px 9px 2px;font-size:9px;font-weight:700;color:var(--brown);border-top:.5px solid rgba(0,0,0,.06);margin-top:4px">Holdings</div>
-            <div style="display:flex;justify-content:space-between;padding:3px 9px;font-size:8px"><span style="color:var(--soft)">0.24 oz</span><span style="font-weight:700">$922.20 CAD</span></div>
-            <div style="display:flex;justify-content:space-between;padding:3px 9px;font-size:8px"><span style="color:var(--soft)">Total return</span><span style="font-weight:700;color:var(--green)">+$122.10</span></div>
-            <div style="margin:5px 9px;border-radius:9px;padding:9px;background:linear-gradient(135deg,#1a3520,#2a5030);position:relative">
-              <div style="position:absolute;top:9px;right:9px;width:18px;height:18px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">▶</div>
-              <div style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.6)">📹 REEL · 30S</div>
-              <div style="font-size:10px;font-weight:800;color:white;margin-top:2px">Why gold now?</div>
-              <div style="font-size:7px;color:rgba(255,255,255,.7);margin-top:2px;max-width:80px;line-height:1.3">How gold hedges inflation</div>
-              <div style="margin-top:7px;display:inline-block;background:white;color:var(--brown);font-size:7px;font-weight:700;padding:3px 7px;border-radius:100px">Watch now</div>
+            <div style="height:28px;margin:0 8px;border-radius:3px;background:rgba(26,127,75,.06);position:relative;overflow:hidden;">
+              <svg viewBox="0 0 100 28" style="width:100%;height:100%;position:absolute;bottom:0;"><polyline points="0,20 20,16 40,18 60,11 80,9 100,4" fill="none" stroke="#1a7f4b" stroke-width="1.2"/><polygon points="0,20 20,16 40,18 60,11 80,9 100,4 100,28 0,28" fill="rgba(26,127,75,.08)"/></svg>
             </div>
-            <div style="border-top:.75px solid rgba(0,0,0,.08);display:flex;gap:5px;padding:6px 9px 10px;margin-top:auto">
-              <div style="flex:1;background:var(--brown);color:white;font-size:9px;font-weight:700;text-align:center;padding:8px;border-radius:100px">Trade</div>
-              <div style="flex:1;border:1.5px solid rgba(0,0,0,.12);color:var(--brown);font-size:9px;font-weight:700;text-align:center;padding:8px;border-radius:100px">Transfer</div>
+            <div style="margin:4px 8px;border-radius:7px;padding:6px;background:linear-gradient(135deg,#1a3520,#2a5030);position:relative;">
+              <div style="position:absolute;top:6px;right:6px;width:12px;height:12px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:5px;color:white;">▶</div>
+              <div style="font-size:5px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.6);">📹 REEL · 30S</div>
+              <div style="font-size:7px;font-weight:800;color:white;margin-top:1px;">Why gold now?</div>
+              <div style="font-size:5px;color:rgba(255,255,255,.7);margin-top:1px;">How gold hedges inflation</div>
+              <div style="margin-top:4px;display:inline-block;background:white;color:var(--brown);font-size:5px;font-weight:700;padding:2px 5px;border-radius:100px;">Watch now</div>
+            </div>
+            <div style="border-top:.5px solid rgba(0,0,0,.07);display:flex;gap:4px;padding:5px 8px 8px;margin-top:auto;">
+              <div style="flex:1;background:var(--brown);color:white;font-size:7px;font-weight:700;text-align:center;padding:6px;border-radius:100px;">Trade</div>
+              <div style="flex:1;border:1px solid rgba(0,0,0,.1);color:var(--brown);font-size:7px;font-weight:700;text-align:center;padding:6px;border-radius:100px;">Transfer</div>
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Browsing Gold<br/>security page</div>
+        <div class="j-lbl">Browsing Gold<br/>security page</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap learn card</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:#444">2</div><div class="j-step-name">Braze IAM</div></div>
-        <div class="phonel" style="background:var(--brown)">
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:#444;">2</div><div class="j-name">Braze IAM</div></div>
+        <div class="phone-light" style="width:130px;height:240px;background:var(--brown);">
           <div class="braze-screen">
             <div class="braze-icon">⚡</div>
             <div class="braze-tag">Braze IAM Fired</div>
@@ -853,72 +522,95 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
             <div class="braze-dots"><div class="braze-dot"></div><div class="braze-dot" style="animation-delay:.2s"></div><div class="braze-dot" style="animation-delay:.4s"></div></div>
           </div>
         </div>
-        <div class="j-step-lbl">Context-aware IAM<br/>loads gold content</div>
+        <div class="j-lbl">Context-aware IAM<br/>loads gold content</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Reels</div></div>
-        <div class="phonel" style="background:#0a0a0a">
-          <div style="height:100%;position:relative;overflow:hidden">
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1200,#2a1e00,#1a1400,#0a0a0a)"></div>
-            <div style="position:absolute;left:50%;top:12%;transform:translateX(-50%);width:80px;height:100px;display:flex;align-items:center;justify-content:center"><div style="width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe066,#c88000,#8a5500);box-shadow:0 4px 16px rgba(200,128,0,.4);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:rgba(255,255,255,.5)">Au</div></div>
-            <div style="position:absolute;top:0;left:0;right:0;padding:19px 9px 5px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5"><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">‹</div><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">🔇</div></div>
-            <div style="position:absolute;bottom:0;left:0;right:0;padding:7px 9px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5">
-              <div style="height:1.5px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px"><div style="height:100%;width:35%;background:var(--gold);border-radius:2px"></div></div>
-              <div style="font-size:10px;font-weight:700;color:white">Why gold now?</div>
-              <div style="font-size:7px;color:rgba(255,255,255,.7);margin-top:1px">Inflation hedge explained in 30s</div>
-              <div style="background:white;color:var(--brown);font-size:8px;font-weight:700;text-align:center;padding:7px;border-radius:100px;margin-top:6px">Buy gold</div>
-              <div style="height:14px;display:flex;align-items:center;justify-content:center"><div style="width:44px;height:3px;background:rgba(255,255,255,.25);border-radius:100px"></div></div>
-            </div>
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:var(--brown);">3</div><div class="j-name">Video Reels</div></div>
+        <div class="phone-dark" style="width:130px;height:240px;">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1200,#2a1e00,#0a0a0a);"></div>
+          <!-- gold circle -->
+          <div style="position:absolute;left:50%;top:16%;transform:translateX(-50%);width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe066,#c88000,#8a5500);box-shadow:0 3px 12px rgba(200,128,0,.4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:rgba(255,255,255,.5);">Au</div>
+          <div style="position:absolute;top:0;left:0;right:0;padding:14px 7px 4px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5;">
+            <div style="width:16px;height:16px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;color:white;">‹</div>
+            <div style="width:16px;height:16px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;color:white;">🔇</div>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:6px 7px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5;">
+            <div style="height:1.5px;background:rgba(255,255,255,.2);margin-bottom:3px;"><div style="width:35%;height:100%;background:var(--gold);border-radius:2px;"></div></div>
+            <div style="font-size:8px;font-weight:700;color:white;">Why gold now?</div>
+            <div style="font-size:6px;color:rgba(255,255,255,.7);margin-top:1px;">Inflation hedge in 30s</div>
+            <div style="background:white;color:var(--brown);font-size:7px;font-weight:700;text-align:center;padding:5px;border-radius:100px;margin-top:5px;">Buy gold</div>
+            <div style="height:11px;display:flex;align-items:center;justify-content:center;"><div style="width:34px;height:2px;background:rgba(255,255,255,.25);border-radius:100px;"></div></div>
           </div>
         </div>
-        <div class="j-step-lbl">Gold education<br/>reel plays</div>
+        <div class="j-lbl">Gold education<br/>reel plays</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:var(--green)">4</div><div class="j-step-name">Trade Gold</div></div>
-        <div class="phonel">
-          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc">
-            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
-            <div class="tnl"><div class="tn-ico">✕</div><div class="tn-ttl">Buy Gold</div><div style="width:22px"></div></div>
-            <div style="flex:1;padding:9px;display:flex;flex-direction:column;gap:7px">
-              <div style="background:white;border-radius:10px;padding:10px;box-shadow:0 2px 7px rgba(0,0,0,.06);text-align:center"><div style="font-size:8px;color:var(--soft);font-weight:600">Amount</div><div style="font-size:24px;font-weight:800;color:var(--brown);letter-spacing:-.5px">$500</div><div style="font-size:7px;color:var(--soft);margin-top:1px">≈ 0.13 oz at $3,842.50</div></div>
-              <div style="background:white;border-radius:10px;padding:9px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="display:flex;justify-content:space-between;font-size:8px;padding:3px 0;border-bottom:.5px solid var(--bg)"><span style="color:var(--soft)">From</span><span style="font-weight:700">Chequing</span></div><div style="display:flex;justify-content:space-between;font-size:8px;padding:3px 0"><span style="color:var(--soft)">Fee</span><span style="font-weight:700">$0.00</span></div></div>
-              <div style="background:var(--brown);color:white;font-size:10px;font-weight:700;text-align:center;padding:10px;border-radius:100px;margin-top:auto">Confirm purchase</div>
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:var(--green);">4</div><div class="j-name">Trade Gold</div></div>
+        <div class="phone-light" style="width:130px;height:240px;">
+          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc;">
+            <div class="sb"><span>9:41</span><span>▌▌◈▮</span></div>
+            <div class="tnl"><div class="tn-ico">✕</div><div class="tn-ttl">Buy Gold</div><div style="width:18px;"></div></div>
+            <div style="flex:1;padding:7px;display:flex;flex-direction:column;gap:5px;">
+              <div style="background:white;border-radius:8px;padding:8px;box-shadow:0 2px 6px rgba(0,0,0,.05);text-align:center;">
+                <div style="font-size:6px;color:var(--soft);">Amount</div>
+                <div style="font-size:18px;font-weight:800;color:var(--brown);">$500</div>
+                <div style="font-size:5px;color:var(--soft);">≈ 0.13 oz at $3,842.50</div>
+              </div>
+              <div style="background:var(--brown);color:white;font-size:8px;font-weight:700;text-align:center;padding:8px;border-radius:100px;margin-top:auto;">Confirm purchase</div>
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Taken to<br/>Gold trade flow</div>
-        <div class="event-badge" style="background:rgba(26,127,75,.1);color:var(--green)">🎯 CTA_video_gold fired</div>
+        <div class="j-lbl">Taken to<br/>Gold trade flow</div>
+        <div class="event-badge" style="background:rgba(26,127,75,.1);color:var(--green);">🎯 CTA_video_gold</div>
       </div>
     </div>
   </div>
 
+  <!-- JOURNEY C -->
   <div class="j-section">
-    <div class="j-title"><span class="badge-pill" style="background:#2980b9">Journey C</span>Notification Centre — Push Notification</div>
+    <div class="j-section-title"><span class="badge-pill" style="background:var(--blue);">Journey C</span> Notification Centre — Push notification</div>
     <div class="j-row">
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:#2980b9">1</div><div class="j-step-name">Notifications</div></div>
-        <div class="phonel">
-          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc">
-            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:var(--blue);">1</div><div class="j-name">Notifications</div></div>
+        <div class="phone-light" style="width:130px;height:240px;">
+          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc;">
+            <div class="sb"><span>9:41</span><span>▌▌◈▮</span></div>
             <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Notifications</div><div class="tn-ico">⚙</div></div>
-            <div style="flex:1;overflow:hidden">
-              <div style="padding:4px 9px 2px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--soft)">TODAY</div>
-              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06)"><div style="width:24px;height:24px;border-radius:50%;background:#fee;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">🚀</div><div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">TSLA reached <strong>$170.30 USD</strong></div><div style="font-size:7px;color:var(--soft);margin-top:1px">40 min ago</div></div><div style="width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:4px"></div></div>
-              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06);background:rgba(201,169,110,.1);border-left:2px solid var(--gold)"><div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#826f8b,#bf8f85);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">📹</div><div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4"><strong>New for you:</strong> Learn about options trading in 45s</div><div style="font-size:7px;color:var(--soft);margin-top:1px">2 hours ago</div></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:4px"></div></div>
-              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px;border-bottom:.5px solid rgba(0,0,0,.06)"><div style="width:24px;height:24px;border-radius:50%;background:#fff3e0;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">⚠️</div><div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">Sign your TFSA transfer form</div><div style="font-size:7px;color:var(--soft);margin-top:1px">23 hours ago</div></div></div>
-              <div style="padding:4px 9px 2px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--soft);margin-top:2px">LAST WEEK</div>
-              <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 9px"><div style="width:24px;height:24px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">📈</div><div style="flex:1"><div style="font-size:8px;color:var(--brown);line-height:1.4">Add funds to your RRSP</div><div style="font-size:7px;color:var(--soft);margin-top:1px">11 days ago</div></div></div>
+            <div style="flex:1;overflow:hidden;font-size:0;">
+              <div style="padding:3px 8px 1px;font-size:6px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--soft);">TODAY</div>
+              <!-- normal notif -->
+              <div style="display:flex;align-items:flex-start;gap:4px;padding:4px 8px;border-bottom:.5px solid rgba(0,0,0,.05);">
+                <div style="width:18px;height:18px;border-radius:50%;background:#fee;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;">🚀</div>
+                <div style="flex:1;"><div style="font-size:7px;color:var(--brown);line-height:1.4;">TSLA reached <strong>$170.30</strong></div><div style="font-size:6px;color:var(--soft);margin-top:1px;">40 min ago</div></div>
+                <div style="width:4px;height:4px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:3px;"></div>
+              </div>
+              <!-- highlighted video notif -->
+              <div style="display:flex;align-items:flex-start;gap:4px;padding:4px 8px;border-bottom:.5px solid rgba(0,0,0,.05);background:rgba(201,169,110,.1);border-left:2px solid var(--gold);">
+                <div style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#826f8b,#bf8f85);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;">📹</div>
+                <div style="flex:1;"><div style="font-size:7px;color:var(--brown);line-height:1.4;"><strong>New for you:</strong> Learn options in 45s</div><div style="font-size:6px;color:var(--soft);margin-top:1px;">2 hours ago</div></div>
+                <div style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:3px;"></div>
+              </div>
+              <!-- normal notif -->
+              <div style="display:flex;align-items:flex-start;gap:4px;padding:4px 8px;border-bottom:.5px solid rgba(0,0,0,.05);">
+                <div style="width:18px;height:18px;border-radius:50%;background:#fff3e0;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;">⚠️</div>
+                <div style="flex:1;"><div style="font-size:7px;color:var(--brown);line-height:1.4;">Sign your TFSA transfer form</div><div style="font-size:6px;color:var(--soft);margin-top:1px;">23 hours ago</div></div>
+              </div>
+              <div style="padding:3px 8px 1px;font-size:6px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--soft);">LAST WEEK</div>
+              <div style="display:flex;align-items:flex-start;gap:4px;padding:4px 8px;">
+                <div style="width:18px;height:18px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;">📈</div>
+                <div style="flex:1;"><div style="font-size:7px;color:var(--brown);line-height:1.4;">Add funds to your RRSP</div><div style="font-size:6px;color:var(--soft);margin-top:1px;">11 days ago</div></div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Sees reel notif<br/>(highlighted in gold)</div>
+        <div class="j-lbl">Sees reel notif<br/>(highlighted in gold)</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">Tap notif</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:#444">2</div><div class="j-step-name">Braze IAM</div></div>
-        <div class="phonel" style="background:var(--brown)">
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:#444;">2</div><div class="j-name">Braze IAM</div></div>
+        <div class="phone-light" style="width:130px;height:240px;background:var(--brown);">
           <div class="braze-screen">
             <div class="braze-icon">⚡</div>
             <div class="braze-tag">Braze IAM Fired</div>
@@ -927,204 +619,574 @@ body{font-family:'Inter',sans-serif;background:#edeae5;color:var(--brown);}
             <div class="braze-dots"><div class="braze-dot"></div><div class="braze-dot" style="animation-delay:.2s"></div><div class="braze-dot" style="animation-delay:.4s"></div></div>
           </div>
         </div>
-        <div class="j-step-lbl">Push → IAM<br/>handoff</div>
+        <div class="j-lbl">Push → IAM<br/>handoff</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">IAM opens</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:var(--brown)">3</div><div class="j-step-name">Video Reels</div></div>
-        <div class="phonel" style="background:#0a0a0a">
-          <div style="height:100%;position:relative;overflow:hidden">
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#080f1a,#102030,#0a1520,#0a0a0a)"></div>
-            <div style="position:absolute;left:50%;top:10%;transform:translateX(-50%);width:90px;height:110px;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:24px">📊</div><div style="background:rgba(41,128,185,.15);border:1px solid rgba(41,128,185,.3);border-radius:5px;padding:3px 7px;font-size:7px;font-weight:700;color:rgba(100,180,255,.8)">$0 OPTIONS</div></div>
-            <div style="position:absolute;top:0;left:0;right:0;padding:19px 9px 5px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5"><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">‹</div><div style="width:19px;height:19px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white">🔇</div></div>
-            <div style="position:absolute;bottom:0;left:0;right:0;padding:7px 9px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5">
-              <div style="height:1.5px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px"><div style="height:100%;width:70%;background:#2980b9;border-radius:2px"></div></div>
-              <div style="font-size:10px;font-weight:700;color:white">Trade $0 options</div>
-              <div style="font-size:7px;color:rgba(255,255,255,.7);margin-top:1px">Advanced strategies, explained</div>
-              <div style="background:white;color:var(--brown);font-size:8px;font-weight:700;text-align:center;padding:7px;border-radius:100px;margin-top:6px">Start trading options</div>
-              <div style="height:14px;display:flex;align-items:center;justify-content:center"><div style="width:44px;height:3px;background:rgba(255,255,255,.25);border-radius:100px"></div></div>
-            </div>
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:var(--brown);">3</div><div class="j-name">Video Reels</div></div>
+        <div class="phone-dark" style="width:130px;height:240px;">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,#080f1a,#102030,#0a0a0a);"></div>
+          <div style="position:absolute;left:50%;top:14%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;">
+            <div style="font-size:18px;">📊</div>
+            <div style="background:rgba(41,128,185,.15);border:1px solid rgba(41,128,185,.3);border-radius:4px;padding:2px 5px;font-size:5px;font-weight:700;color:rgba(100,180,255,.8);">$0 OPTIONS</div>
+          </div>
+          <div style="position:absolute;top:0;left:0;right:0;padding:14px 7px 4px;display:flex;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent);z-index:5;">
+            <div style="width:16px;height:16px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;color:white;">‹</div>
+            <div style="width:16px;height:16px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;color:white;">🔇</div>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:6px 7px 0;background:linear-gradient(0deg,rgba(0,0,0,.88),transparent);z-index:5;">
+            <div style="height:1.5px;background:rgba(255,255,255,.2);margin-bottom:3px;"><div style="width:70%;height:100%;background:var(--blue);border-radius:2px;"></div></div>
+            <div style="font-size:8px;font-weight:700;color:white;">Trade $0 options</div>
+            <div style="font-size:6px;color:rgba(255,255,255,.7);margin-top:1px;">Advanced strategies</div>
+            <div style="background:white;color:var(--brown);font-size:7px;font-weight:700;text-align:center;padding:5px;border-radius:100px;margin-top:5px;">Start trading</div>
+            <div style="height:11px;display:flex;align-items:center;justify-content:center;"><div style="width:34px;height:2px;background:rgba(255,255,255,.25);border-radius:100px;"></div></div>
           </div>
         </div>
-        <div class="j-step-lbl">Options reel plays</div>
+        <div class="j-lbl">Options reel plays</div>
       </div>
       <div class="j-con"><div class="j-line"></div><div class="j-arrow">›</div><div class="j-clabel">CTA tap</div></div>
       <div class="j-step">
-        <div class="j-step-header"><div class="j-step-num" style="background:var(--green)">4</div><div class="j-step-name">Options Trading</div></div>
-        <div class="phonel">
-          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc">
-            <div class="sb"><span>9:41</span><span>▌▌ ◈ ▮</span></div>
+        <div style="display:flex;align-items:center;gap:4px;"><div class="j-num" style="background:var(--green);">4</div><div class="j-name">Options</div></div>
+        <div class="phone-light" style="width:130px;height:240px;">
+          <div style="flex:1;display:flex;flex-direction:column;background:#fcfcfc;">
+            <div class="sb"><span>9:41</span><span>▌▌◈▮</span></div>
             <div class="tnl"><div class="tn-ico">‹</div><div class="tn-ttl">Options</div><div class="tn-ico">?</div></div>
-            <div style="flex:1;padding:9px;display:flex;flex-direction:column;gap:7px">
-              <div style="background:white;border-radius:10px;padding:10px;box-shadow:0 2px 7px rgba(0,0,0,.06)"><div style="font-size:8px;color:var(--soft);font-weight:600;margin-bottom:3px">Active Trader</div><div style="font-size:12px;font-weight:800;color:var(--brown)">$0 options trading</div><div style="font-size:7px;color:var(--soft);margin-top:2px;line-height:1.5">No commissions. Advanced chains.</div><div style="background:var(--brown);color:white;font-size:7px;font-weight:700;padding:4px 8px;border-radius:100px;display:inline-block;margin-top:7px">Enable options</div></div>
+            <div style="flex:1;padding:7px;display:flex;flex-direction:column;gap:5px;">
+              <div style="background:white;border-radius:8px;padding:8px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+                <div style="font-size:6px;color:var(--soft);font-weight:600;margin-bottom:2px;">Active Trader</div>
+                <div style="font-size:9px;font-weight:800;color:var(--brown);">$0 options trading</div>
+                <div style="font-size:5px;color:var(--soft);margin-top:2px;line-height:1.5;">No commissions. Advanced chains.</div>
+                <div style="background:var(--brown);color:white;font-size:5px;font-weight:700;padding:3px 6px;border-radius:100px;display:inline-block;margin-top:5px;">Enable options</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="j-step-lbl">Deep linked to<br/>Options feature</div>
-        <div class="event-badge" style="background:rgba(41,128,185,.1);color:var(--blue)">🎯 CTA_video_options fired</div>
+        <div class="j-lbl">Deep linked to<br/>Options feature</div>
+        <div class="event-badge" style="background:rgba(41,128,185,.1);color:var(--blue);">🎯 CTA_video_options</div>
       </div>
     </div>
   </div>
 
-  <div class="entry-sum">
-    <h4>Entry Point Summary</h4>
+  <div class="card">
+    <h3>Entry Point Summary</h3>
     <div class="entry-cards">
-      <div class="entry-card" style="border-left:3px solid #826f8b"><h5>🏠 Home Tab</h5><p>Marketing card in "For You" rail. Broad reach — any user who opens the home screen.</p></div>
-      <div class="entry-card" style="border-left:3px solid #1a6b4a"><h5>📈 Account Page</h5><p>Learn card on security/asset page. High intent — user is already engaged with the product.</p></div>
-      <div class="entry-card" style="border-left:3px solid #2980b9"><h5>🔔 Notification Centre</h5><p>Push notification tap → IAM. Re-engagement channel for users not actively browsing.</p></div>
+      <div class="entry-card" style="border-left:3px solid #826f8b;"><h5>🏠 Home Tab</h5><p>Marketing card in "For You" rail. Broad reach — any user who opens the home screen.</p></div>
+      <div class="entry-card" style="border-left:3px solid var(--green);"><h5>📈 Account Page</h5><p>Learn card on security/asset page. High intent — user is already engaged with the product.</p></div>
+      <div class="entry-card" style="border-left:3px solid var(--blue);"><h5>🔔 Notification Centre</h5><p>Push notification tap → IAM. Re-engagement channel for users not actively browsing.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ⑧ HALF-SHEET VIDEO -->
-<section class="section" id="s8">
-  <div class="sec-hd">
-    <h2>⑧ Half-Sheet Video Modal</h2>
-    <p>An alternative format for longer-form, high-trust video content — embedded directly inside a standard half-sheet IAM. Best for CEO messages, product milestones, or anything that benefits from surrounding context and a single strong CTA.</p>
+<!-- ── 2. CONTENT TIMING ── -->
+<section class="section" id="s2">
+  <div class="sec-hd"><h2>Content Timing</h2><p>Match video length to content type. Applies to all formats — Reels, half-sheet, and silent loop.</p></div>
+  <div class="timing-grid">
+    <div class="timing-card quick">
+      <div class="timing-badge">⚡ Quick & Snippy</div>
+      <div><span class="timing-dur">3–5</span><span class="timing-unit">sec</span></div>
+      <div class="timing-name">Fast-hit awareness</div>
+      <div class="timing-desc">High-energy, single idea. No context needed — hooks fast or loses the viewer.</div>
+      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">New feature badge drop</div><div class="timing-eg-item">Promotional offer reveal</div><div class="timing-eg-item">UI animation snippet</div></div>
+    </div>
+    <div class="timing-card gtm">
+      <div class="timing-badge">🚀 Go-to-Market</div>
+      <div><span class="timing-dur">5–7</span><span class="timing-unit">sec</span></div>
+      <div class="timing-name">Product launch & campaigns</div>
+      <div class="timing-desc">Sweet spot for most marketing content. Enough time to land a benefit and a CTA.</div>
+      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">Feature launch video</div><div class="timing-eg-item">Seasonal campaign</div><div class="timing-eg-item">Cross-sell moment</div></div>
+    </div>
+    <div class="timing-card edu">
+      <div class="timing-badge">📚 Educational</div>
+      <div><span class="timing-dur">~10</span><span class="timing-unit">sec</span></div>
+      <div class="timing-name">Concepts & how-tos</div>
+      <div class="timing-desc">Teaching takes time. Use this length when the viewer needs context before the CTA.</div>
+      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">How options work</div><div class="timing-eg-item">TFSA vs RRSP explainer</div><div class="timing-eg-item">UI demo flow (4 steps)</div></div>
+    </div>
+    <div class="timing-card personal">
+      <div class="timing-badge">🎙 Personal / CEO</div>
+      <div><span class="timing-dur">10+</span><span class="timing-unit">sec</span></div>
+      <div class="timing-name">Leadership & high-trust</div>
+      <div class="timing-desc">Personable messages earn more time. Tone must feel genuine, not scripted.</div>
+      <div class="timing-eg"><div class="timing-eg-lbl">Examples</div><div class="timing-eg-item">CEO market update</div><div class="timing-eg-item">Founder product message</div><div class="timing-eg-item">Beta thank-you video</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Duration spectrum</h3>
+    <div class="tl-bar">
+      <div class="tl-seg quick">3–5s</div>
+      <div class="tl-seg gtm">5–7s</div>
+      <div class="tl-seg edu">~10s</div>
+      <div class="tl-seg personal">10s+</div>
+    </div>
+    <div style="display:flex;margin-top:6px;font-size:9px;font-weight:700;">
+      <div style="flex:3;color:#c87522;">Quick</div>
+      <div style="flex:2;color:var(--blue);">GTM</div>
+      <div style="flex:1;color:var(--green);">Edu</div>
+      <div style="flex:1.5;color:var(--purple);">Personal</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. REELS FEED ── -->
+<section class="section" id="s3">
+  <div class="sec-hd"><h2>▶ Reels Feed</h2><p>Full-screen vertical scroll-snap feed. Multiple cards, each with a video, overlaid copy, and CTA. Tap zones, screen zones, and copy guidelines all apply here.</p></div>
+
+  <!-- SPECS -->
+  <div class="card">
+    <h3>Video specs</h3>
+    <div class="specgrid">
+      <div class="specitem"><div class="k">Ratio</div><div class="v">9:16 vertical</div></div>
+      <div class="specitem"><div class="k">Resolution</div><div class="v">1080×1920</div></div>
+      <div class="specitem"><div class="k">Format</div><div class="v">MP4 H.264</div></div>
+      <div class="specitem"><div class="k">FPS</div><div class="v">≤ 30fps</div></div>
+      <div class="specitem"><div class="k">File size</div><div class="v">3–5 MB</div></div>
+      <div class="specitem"><div class="k">Duration</div><div class="v">3–30s</div></div>
+      <div class="specitem"><div class="k">Autoplay</div><div class="v">Yes, muted</div></div>
+      <div class="specitem"><div class="k">Cards</div><div class="v">3–10 per feed</div></div>
+    </div>
   </div>
 
-  <!-- WHEN TO USE -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
-    <div style="background:white;border-radius:14px;padding:18px;box-shadow:var(--card-shadow);border-top:3px solid var(--green);">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--green);margin-bottom:10px;">✅ Use half-sheet video when</div>
-      <div style="font-size:11px;color:var(--soft);line-height:1.8;">
-        • Video is <strong style="color:var(--brown)">30–60s+</strong> and needs context around it<br>
-        • Message is from a <strong style="color:var(--brown)">named person</strong> (CEO, PM lead)<br>
-        • There's a <strong style="color:var(--brown)">single focused CTA</strong> (e.g. feedback form)<br>
-        • Supporting copy helps frame the video<br>
-        • Horizontal / landscape video is acceptable
+  <!-- TAP ZONES + SCREEN ZONES side by side -->
+  <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:14px;">
+
+    <!-- TAP ZONES phone -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div class="phone-dark" style="width:130px;height:240px;">
+        <div class="vbg"></div>
+        <div class="person">
+          <div class="p-head"></div>
+          <div class="p-body"></div>
+        </div>
+        <div class="vtop"><div class="vctrl">‹</div><div class="vctrl">🔇</div></div>
+        <div class="zones">
+          <div class="zone zone-l"><div class="zone-ico">↺</div><div class="zone-txt">Rewind<br/>2s</div></div>
+          <div class="zone zone-c"><div class="zone-ico">⏸</div><div class="zone-txt">Play /<br/>Pause</div></div>
+          <div class="zone zone-r"><div class="zone-ico">⚡</div><div class="zone-txt">Hold<br/>2×</div></div>
+        </div>
+        <div class="sdot-col"><div class="sdot on"></div><div class="sdot"></div><div class="sdot"></div></div>
+        <div class="vbot">
+          <div class="vprog"><div class="vfill" style="width:55%;"></div></div>
+          <div style="font-size:8px;font-weight:700;color:white;">All the nerdy things</div>
+          <div style="font-size:6px;color:rgba(255,255,255,.7);margin-top:1px;">AI trading tools</div>
+          <div style="background:var(--cream);color:var(--brown);font-size:7px;font-weight:700;text-align:center;padding:6px;border-radius:100px;margin-top:5px;">Discover tools</div>
+          <div style="height:11px;display:flex;align-items:center;justify-content:center;"><div style="width:34px;height:2px;background:rgba(255,255,255,.25);border-radius:100px;"></div></div>
+        </div>
       </div>
+      <div class="phone-label">Tap Zones</div>
     </div>
-    <div style="background:white;border-radius:14px;padding:18px;box-shadow:var(--card-shadow);border-top:3px solid var(--red);">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--red);margin-bottom:10px;">❌ Use Reels instead when</div>
-      <div style="font-size:11px;color:var(--soft);line-height:1.8;">
-        • Video is <strong style="color:var(--brown)">under 15s</strong> and stands alone<br>
-        • You have <strong style="color:var(--brown)">multiple videos</strong> to show in a feed<br>
-        • Full-screen vertical 9:16 format is needed<br>
-        • Content is product-led or educational<br>
-        • Swipe navigation between cards matters
+
+    <!-- TAP ZONE LEGEND -->
+    <div class="leg-stack" style="margin-top:8px;">
+      <div class="leg" style="border-left:3px solid #e67e22;"><h4>↺ Left — Rewind 2s</h4><p>Tap left ⅓ to rewind. Ripple animation confirms.</p><span class="tag">Visual: ripple</span></div>
+      <div class="leg" style="border-left:3px solid #888;"><h4>⏸ Centre — Play/Pause</h4><p>Tap middle ⅓ to toggle playback. Icon flashes briefly.</p><span class="tag">Visual: icon flash</span></div>
+      <div class="leg" style="border-left:3px solid var(--blue);"><h4>⚡ Right — 2× Speed</h4><p>Long-press right ⅓ for 2× speed.</p><span class="tag">Visual: "2×" badge</span></div>
+      <div class="leg" style="border-left:3px solid var(--gold);"><h4>🔇 Sound Toggle</h4><p>Top-right icon. First tap also unmutes. Persists all session.</p><span class="tag">Visual: sound wave</span></div>
+    </div>
+
+    <!-- SCREEN ZONES phone -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div class="phone-dark" style="width:130px;height:240px;">
+        <div class="vbg"></div>
+        <div class="person"><div class="p-head"></div><div class="p-body"></div></div>
+        <div class="zband zb-t"><span class="zb-lbl">Top Safe · 25%</span></div>
+        <div class="zband zb-m"><span class="zb-lbl">Focal Area · 50%</span></div>
+        <div class="zband zb-b"><span class="zb-lbl">Bottom Safe · 25%</span></div>
+        <div style="position:absolute;top:14px;left:7px;width:16px;height:16px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;color:white;z-index:10;">‹</div>
+        <div style="position:absolute;top:14px;right:7px;font-size:8px;color:rgba(255,255,255,.7);z-index:10;">🔇</div>
+        <div class="vbot" style="z-index:10;">
+          <div class="vprog"><div class="vfill" style="width:55%;"></div></div>
+          <div style="font-size:7px;font-weight:700;color:white;">All the nerdy things</div>
+          <div style="background:var(--cream);color:var(--brown);font-size:6px;font-weight:700;text-align:center;padding:5px;border-radius:100px;margin-top:4px;">Discover tools</div>
+          <div style="height:11px;display:flex;align-items:center;justify-content:center;"><div style="width:34px;height:2px;background:rgba(255,255,255,.25);border-radius:100px;"></div></div>
+        </div>
+      </div>
+      <div class="phone-label">Screen Zones</div>
+    </div>
+
+    <!-- SCREEN ZONE LEGEND -->
+    <div class="leg-stack" style="margin-top:8px;">
+      <div class="leg"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:10px;height:10px;border-radius:3px;background:rgba(192,57,43,.5);"></div><h4 style="margin:0;">🔴 Top Safe — 25%</h4></div><p>Back arrow, sound toggle, status bar. No subject or copy.</p></div>
+      <div class="leg"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:10px;height:10px;border-radius:3px;background:rgba(26,127,75,.5);"></div><h4 style="margin:0;">🟢 Focal Area — 50%</h4></div><p>Main subject centred. Key moment within first 2s. No UI elements.</p></div>
+      <div class="leg"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:10px;height:10px;border-radius:3px;background:rgba(41,128,185,.5);"></div><h4 style="margin:0;">🔵 Bottom Safe — 25%</h4></div><p>Progress bar, headline, body copy, CTA pill, home indicator.</p></div>
+    </div>
+  </div>
+
+  <!-- COPY GUIDELINES -->
+  <div class="card" style="margin-bottom:14px;">
+    <h3>Copy guidelines — overlay only, Reels format</h3>
+    <div class="format-note" style="margin-bottom:14px;">Copy overlays the video directly. These limits exist because there's no surrounding layout — the video is the only canvas.</div>
+    <div class="copy-row">
+      <div class="copy-col">
+        <div style="display:flex;align-items:center;gap:5px;"><span style="font-size:14px;">✅</span><span style="font-size:11px;font-weight:700;color:var(--green);">Do this</span></div>
+        <div class="phone-dark" style="width:110px;height:200px;">
+          <div class="vbg" style="background:linear-gradient(180deg,#0a180a,#152515,#0a0a0a);"></div>
+          <div class="person"><div class="p-head"></div><div class="p-body"></div></div>
+          <div class="vtop"><div class="vctrl">‹</div><div class="vctrl">🔇</div></div>
+          <div class="vbot"><div class="vprog"><div class="vfill" style="width:55%;"></div></div><div style="font-size:8px;font-weight:700;color:white;">Trade $0 options</div><div style="font-size:6px;color:rgba(255,255,255,.7);margin-top:1px;">Advanced strategies for traders</div><div style="background:var(--cream);color:var(--brown);font-size:7px;font-weight:700;text-align:center;padding:5px;border-radius:100px;margin-top:5px;">Get started</div><div style="height:9px;display:flex;align-items:center;justify-content:center;"><div style="width:28px;height:2px;background:rgba(255,255,255,.25);border-radius:100px;"></div></div></div>
+        </div>
+        <div class="copy-rules"><h4>✅ Headline</h4><div class="cr"><strong>3–6 words</strong> max</div><div class="cr"><strong>Benefit-led</strong>, not feature-led</div><div class="cr" style="color:var(--green);font-weight:600;">"Trade $0 options" ✓</div></div>
+        <div class="copy-rules"><h4>✅ Body</h4><div class="cr"><strong>1 sentence</strong>, 5–10 words</div><div class="cr">Capital letter start</div></div>
+        <div class="copy-rules"><h4>✅ CTA</h4><div class="cr"><strong>2–3 words</strong>, verb-first</div><div class="cr">Sentence case</div><div class="cr" style="color:var(--green);font-weight:600;">"Get started" ✓</div></div>
+      </div>
+      <div style="display:flex;align-items:center;color:#ccc;font-size:20px;margin-top:40px;">VS</div>
+      <div class="copy-col">
+        <div style="display:flex;align-items:center;gap:5px;"><span style="font-size:14px;">❌</span><span style="font-size:11px;font-weight:700;color:var(--red);">Avoid this</span></div>
+        <div class="phone-dark" style="width:110px;height:200px;">
+          <div class="vbg" style="background:linear-gradient(180deg,#1a0808,#351515,#0a0a0a);"></div>
+          <div class="person"><div class="p-head"></div><div class="p-body"></div></div>
+          <div class="vtop"><div class="vctrl">‹</div><div class="vctrl">🔇</div></div>
+          <div class="vbot"><div class="vprog"><div class="vfill" style="width:30%;"></div></div><div style="font-size:6px;color:rgba(255,255,255,.6);">Options trading feature now available for our clients today</div><div style="font-size:5px;color:rgba(255,255,255,.5);margin-top:1px;">advanced strategies for active traders who want more</div><div style="background:var(--cream);color:var(--brown);font-size:6px;font-weight:700;text-align:center;padding:5px;border-radius:100px;margin-top:4px;">discover all the tools available</div><div style="height:9px;display:flex;align-items:center;justify-content:center;"><div style="width:28px;height:2px;background:rgba(255,255,255,.25);border-radius:100px;"></div></div></div>
+        </div>
+        <div class="copy-rules"><h4>❌ Headline</h4><div class="cr">Too long — truncates</div><div class="cr">Feature-led copy</div><div class="cr" style="color:var(--red);font-weight:600;">"Options trading feature…" ✗</div></div>
+        <div class="copy-rules"><h4>❌ Body</h4><div class="cr">Lowercase start</div><div class="cr">Too long, wraps badly</div></div>
+        <div class="copy-rules"><h4>❌ CTA</h4><div class="cr">Too long for pill</div><div class="cr">Vague, no clear action</div><div class="cr" style="color:var(--red);font-weight:600;">"discover all the tools…" ✗</div></div>
       </div>
     </div>
   </div>
 
-  <!-- COMPARISON ROW -->
-  <div style="display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;margin-bottom:28px;">
-
-    <!-- PHONE MOCKUP -->
-    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0;">
-      <!-- light phone -->
-      <div class="phonel" style="height:420px;width:200px;border-radius:34px;">
-        <div style="flex:1;display:flex;flex-direction:column;background:#f5f4f4;">
-          <!-- fake app bg -->
-          <div style="height:100%;background:linear-gradient(160deg,#ecddc5,#e8d5e4,#ecd9c6);position:relative;border-radius:28px;overflow:hidden;">
-            <!-- half sheet -->
-            <div style="position:absolute;bottom:0;left:0;right:0;background:white;border-radius:22px 22px 0 0;padding:0 0 12px;box-shadow:0 -4px 24px rgba(0,0,0,.12);">
-              <!-- top nav -->
-              <div style="display:flex;justify-content:flex-end;padding:10px 12px 4px;">
-                <div style="width:20px;height:20px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--soft);">✕</div>
-              </div>
-              <!-- hero image -->
-              <div style="height:60px;margin:0 12px;border-radius:10px;background:linear-gradient(135deg,#d4c4b0,#c8b89a);display:flex;align-items:center;justify-content:center;">
-                <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:14px;">🏢</div>
-              </div>
-              <!-- title -->
-              <div style="padding:10px 12px 4px;font-size:11px;font-weight:800;color:var(--brown);line-height:1.3;">Business chequing is here — this one's for you.</div>
-              <!-- body -->
-              <div style="padding:0 12px 6px;font-size:8px;color:var(--soft);line-height:1.5;">Thanks for being part of the beta. Here's a short note from Christine, Head of Business Products.</div>
-              <!-- video embed -->
-              <div style="margin:0 12px;border-radius:9px;background:#111;overflow:hidden;position:relative;">
-                <div style="padding-bottom:56.25%;position:relative;">
-                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
-                    <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:9px;color:white;">▶</div>
-                    <div style="font-size:7px;color:rgba(255,255,255,.5);">0:00 / 0:57</div>
-                  </div>
-                </div>
-              </div>
-              <!-- CTA -->
-              <div style="margin:8px 12px 0;background:var(--brown);color:white;font-size:9px;font-weight:700;text-align:center;padding:10px;border-radius:100px;">Share your thoughts</div>
-            </div>
+  <!-- CONTENT BLOCK MAPPING -->
+  <div class="card">
+    <h3>Content block → screen mapping</h3>
+    <div style="font-size:11px;color:var(--soft);margin-bottom:14px;">Each field in <code style="background:var(--bg);padding:1px 5px;border-radius:3px;">reels_feed_v1</code> maps directly to a UI element on screen. The IAM handles all rendering — lifecycle marketing only updates the content block.</div>
+    <div class="v5-map-row">
+      <div class="v5-fields">
+        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Content Block Fields</div>
+        <div class="v5-field"><div class="v5-dot" style="background:#e74c3c;"></div><div class="v5-key">video_url</div><div class="v5-val">MP4 on GitHub/CDN</div></div>
+        <div class="v5-field"><div class="v5-dot" style="background:#e67e22;"></div><div class="v5-key">poster_url</div><div class="v5-val">1080×1920 PNG/JPG</div></div>
+        <div class="v5-field"><div class="v5-dot" style="background:#f1c40f;"></div><div class="v5-key">headline</div><div class="v5-val">3–6 words</div></div>
+        <div class="v5-field"><div class="v5-dot" style="background:#2ecc71;"></div><div class="v5-key">body</div><div class="v5-val">1 sentence, 5–10 words</div></div>
+        <div class="v5-field"><div class="v5-dot" style="background:#3498db;"></div><div class="v5-key">cta_text</div><div class="v5-val">2–3 words, verb-first</div></div>
+        <div class="v5-field"><div class="v5-dot" style="background:#9b59b6;"></div><div class="v5-key">cta_url</div><div class="v5-val">wealthsimple:// deep link</div></div>
+        <div class="v5-field"><div class="v5-dot" style="background:#95a5a6;"></div><div class="v5-key">id</div><div class="v5-val">fires CTA_[id] in Braze</div></div>
+      </div>
+      <div style="font-size:20px;color:var(--gold);">→</div>
+      <div style="position:relative;">
+        <div class="phone-dark" style="width:110px;height:220px;">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,#100c08,#201810,#0a0a0a);"></div>
+          <div class="person" style="z-index:2;"><div class="p-head"></div><div class="p-body"></div></div>
+          <div class="vtop" style="z-index:10;"><div class="vctrl">‹</div><div class="vctrl">🔇</div></div>
+          <div style="position:absolute;top:7px;left:50%;transform:translateX(-50%);background:rgba(231,76,60,.8);border-radius:3px;padding:2px 4px;font-size:6px;font-weight:700;color:white;z-index:15;">video_url</div>
+          <div style="position:absolute;top:19px;left:50%;transform:translateX(-50%);background:rgba(230,126,34,.8);border-radius:3px;padding:2px 4px;font-size:6px;font-weight:700;color:white;z-index:15;">poster_url</div>
+          <div class="vbot" style="z-index:10;">
+            <div class="vprog"><div class="vfill" style="width:55%;"></div></div>
+            <div style="background:rgba(241,196,15,.2);border-radius:2px;padding:1px 2px;"><div style="font-size:7px;font-weight:700;color:white;">All the nerdy things</div></div>
+            <div style="background:rgba(46,204,113,.2);border-radius:2px;padding:1px 2px;margin-top:1px;"><div style="font-size:6px;color:rgba(255,255,255,.7);">AI trading tools…</div></div>
+            <div style="background:rgba(52,152,219,.3);border-radius:100px;padding:6px;text-align:center;font-size:7px;font-weight:700;color:white;margin-top:4px;">Discover tools</div>
+            <div style="height:9px;display:flex;align-items:center;justify-content:center;"><div style="width:28px;height:2px;background:rgba(255,255,255,.25);border-radius:100px;"></div></div>
           </div>
         </div>
       </div>
-      <div class="lbl">Half-Sheet + Video</div>
+      <div class="v5-leg">
+        <div style="font-size:9px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Maps to</div>
+        <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#e74c3c;"></div><div><div style="font-size:9px;font-weight:700;">video_url</div><div style="font-size:8px;color:var(--soft);">Full-screen player</div></div></div>
+        <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#e67e22;"></div><div><div style="font-size:9px;font-weight:700;">poster_url</div><div style="font-size:8px;color:var(--soft);">First-paint (no black flash)</div></div></div>
+        <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#f1c40f;"></div><div><div style="font-size:9px;font-weight:700;">headline</div><div style="font-size:8px;color:var(--soft);">Bold text, bottom overlay</div></div></div>
+        <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#2ecc71;"></div><div><div style="font-size:9px;font-weight:700;">body</div><div style="font-size:8px;color:var(--soft);">Subtitle below headline</div></div></div>
+        <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#3498db;"></div><div><div style="font-size:9px;font-weight:700;">cta_text</div><div style="font-size:8px;color:var(--soft);">DSButton pill label</div></div></div>
+        <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#9b59b6;"></div><div><div style="font-size:9px;font-weight:700;">cta_url</div><div style="font-size:8px;color:var(--soft);">Button destination</div></div></div>
+        <div class="v5-leg-item"><div class="v5-leg-dot" style="background:#95a5a6;"></div><div><div style="font-size:9px;font-weight:700;">id</div><div style="font-size:8px;color:var(--soft);">Fires CTA_<em>id</em> alias</div></div></div>
+      </div>
+    </div>
+    <div class="tip">The IAM automatically generates <code style="font-size:10px;background:white;padding:1px 3px;border-radius:3px;">data-button-id="CTA_${item.id}"</code> from the <code style="font-size:10px;background:white;padding:1px 3px;border-radius:3px;">id</code> field. Use descriptive IDs like <code style="font-size:10px;background:white;padding:1px 3px;border-radius:3px;">video_options</code> not <code style="font-size:10px;background:white;padding:1px 3px;border-radius:3px;">video_1</code> — they appear verbatim in Braze analytics.</div>
+  </div>
+</section>
+
+<!-- ── 4. HALF-SHEET ── -->
+<section class="section" id="s4">
+  <div class="sec-hd"><h2>▶ Half-Sheet Video Modal</h2><p>Single video embedded inside a standard half-sheet IAM. Copy, title, and CTA live in the modal layout — not overlaid on the video. Copy and screen zone guidelines from the Reels tab do not apply here.</p></div>
+
+  <div class="format-note">📌 Because copy and CTA live outside the video frame in the modal's own layout, there are no character limits driven by video real estate. Write copy to fit the modal — not the video overlay constraints.</div>
+
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:14px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:140px;height:280px;background:#fcfcfc;border-radius:26px;border:4px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 16px 40px rgba(0,0,0,.18);flex-shrink:0;">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#ecddc5,#e8d5e4,#ecd9c6);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;background:white;border-radius:18px 18px 0 0;padding:0 0 10px;box-shadow:0 -4px 20px rgba(0,0,0,.1);">
+          <div style="display:flex;justify-content:flex-end;padding:8px 10px 3px;"><div style="width:16px;height:16px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--soft);">✕</div></div>
+          <div style="height:52px;margin:0 10px;border-radius:9px;background:#111;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:7px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:11px;color:white;">▶</div>
+          </div>
+          <div style="padding:0 10px;">
+            <div style="font-size:10px;font-weight:800;color:var(--brown);margin-bottom:4px;line-height:1.3;">Business chequing is here — this one's for you.</div>
+            <div style="font-size:7px;color:var(--soft);line-height:1.5;margin-bottom:7px;">Thanks for being part of the beta. Here's a short note from Christine, Head of Business Products.</div>
+            <div style="background:var(--brown);color:white;font-size:8px;font-weight:700;text-align:center;padding:9px;border-radius:100px;">Share your thoughts</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Half-Sheet + Video</div>
     </div>
 
-    <!-- SPEC STACK -->
-    <div style="display:flex;flex-direction:column;gap:12px;max-width:340px;">
-
-      <div style="background:white;border-radius:12px;padding:14px 16px;box-shadow:var(--card-shadow);">
-        <div style="font-size:11px;font-weight:700;margin-bottom:8px;">📐 Video specs</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
-          <div class="specitem"><div class="k">Format</div><div class="v">MP4 (H.264)</div></div>
+    <div style="flex:1;min-width:220px;display:flex;flex-direction:column;gap:12px;">
+      <div class="card">
+        <h3>Video specs</h3>
+        <div class="specgrid">
+          <div class="specitem"><div class="k">Format</div><div class="v">MP4 H.264</div></div>
           <div class="specitem"><div class="k">Ratio</div><div class="v">16:9 or 1:1</div></div>
           <div class="specitem"><div class="k">Duration</div><div class="v">30–90s</div></div>
           <div class="specitem"><div class="k">Controls</div><div class="v">Native (visible)</div></div>
           <div class="specitem"><div class="k">Autoplay</div><div class="v">No</div></div>
-          <div class="specitem"><div class="k">Muted default</div><div class="v">No</div></div>
+          <div class="specitem"><div class="k">Audio</div><div class="v">Yes</div></div>
         </div>
       </div>
-
-      <div style="background:white;border-radius:12px;padding:14px 16px;box-shadow:var(--card-shadow);">
-        <div style="font-size:11px;font-weight:700;margin-bottom:8px;">✏️ Content fields</div>
-        <div style="font-size:10px;color:var(--soft);line-height:1.9;">
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--bg);padding-bottom:3px;margin-bottom:3px;"><span><strong style="color:var(--brown);">Title</strong></span><span>1–2 lines, bold headline</span></div>
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--bg);padding-bottom:3px;margin-bottom:3px;"><span><strong style="color:var(--brown);">Body 1</strong></span><span>1–2 sentences of context</span></div>
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--bg);padding-bottom:3px;margin-bottom:3px;"><span><strong style="color:var(--brown);">Body 2</strong></span><span>Optional — attribution or detail</span></div>
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--bg);padding-bottom:3px;margin-bottom:3px;"><span><strong style="color:var(--brown);">Video URL</strong></span><span>GitHub Pages hosted MP4</span></div>
-          <div style="display:flex;justify-content:space-between;"><span><strong style="color:var(--brown);">CTA</strong></span><span>Single button, verb-first</span></div>
+      <div class="card">
+        <h3>Content fields</h3>
+        <table class="spec-table">
+          <tr><td>Title</td><td>1–2 lines, bold headline</td></tr>
+          <tr><td>Body 1</td><td>1–2 sentences of context</td></tr>
+          <tr><td>Body 2</td><td>Optional — attribution or detail</td></tr>
+          <tr><td>Video URL</td><td>GitHub Pages hosted MP4</td></tr>
+          <tr><td>CTA</td><td>Single button, verb-first</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Video tag</h3>
+        <div class="code-block">
+          <div style="color:#888;">&lt;!-- modal__body-group --&gt;</div>
+          <div><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">video</span> <span style="color:#f97583;">controls</span> <span style="color:#f97583;">playsinline</span><span style="color:#888;">&gt;</span></div>
+          <div style="padding-left:14px;"><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">source</span> <span style="color:#ffab70;">src</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"<span style="color:#c9a96e;">{{VideoURL}}</span>"</span><span style="color:#888;">&gt;</span></div>
+          <div><span style="color:#888;">&lt;/</span><span style="color:#79b8ff;">video</span><span style="color:#888;">&gt;</span></div>
         </div>
       </div>
-
-      <div style="background:white;border-radius:12px;padding:14px 16px;box-shadow:var(--card-shadow);">
-        <div style="font-size:11px;font-weight:700;margin-bottom:8px;">⚙️ How it's built</div>
-        <div style="font-size:10px;color:var(--soft);line-height:1.8;">
-          Uses the standard <code style="font-size:9px;background:var(--bg);padding:1px 4px;border-radius:3px;">Production-IAM_Half_Sheet_Styles</code> content block — the video is embedded as a native HTML <code style="font-size:9px;background:var(--bg);padding:1px 4px;border-radius:3px;">&lt;video&gt;</code> element inside the modal body, not as a Reels IAM. Liquid variables handle all copy and the video source URL.
-        </div>
-        <div style="background:#1e1e1e;border-radius:8px;padding:12px 14px;font-family:monospace;font-size:10px;line-height:1.8;margin-top:10px;overflow-x:auto;">
-          <div style="color:#888;">&lt;!-- Inside modal__body-group --&gt;</div>
-          <div><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">div</span> <span style="color:#ffab70;">class</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"modal__video-embed"</span><span style="color:#888;">&gt;</span></div>
-          <div style="padding-left:14px;"><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">video</span> <span style="color:#ffab70;">controls</span> <span style="color:#ffab70;">playsinline</span><span style="color:#888;">&gt;</span></div>
-          <div style="padding-left:28px;"><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">source</span> <span style="color:#ffab70;">src</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"<span style="color:#c9a96e;">{{VideoURL}}</span>"</span> <span style="color:#ffab70;">type</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"video/mp4"</span><span style="color:#888;">&gt;</span></div>
-          <div style="padding-left:14px;"><span style="color:#888;">&lt;/</span><span style="color:#79b8ff;">video</span><span style="color:#888;">&gt;</span></div>
-          <div><span style="color:#888;">&lt;/</span><span style="color:#79b8ff;">div</span><span style="color:#888;">&gt;</span></div>
-        </div>
-      </div>
-
     </div>
   </div>
 
-  <!-- FORMAT COMPARISON TABLE -->
-  <div style="background:white;border-radius:14px;padding:18px 20px;box-shadow:var(--card-shadow);">
-    <div style="font-size:13px;font-weight:700;margin-bottom:14px;">Reels vs. Half-Sheet — format comparison</div>
-    <div style="overflow-x:auto;">
-      <table style="width:100%;border-collapse:collapse;font-size:11px;">
-        <thead>
-          <tr style="border-bottom:2px solid var(--bg);">
-            <th style="text-align:left;padding:7px 10px;color:var(--soft);font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-size:9px;"></th>
-            <th style="text-align:left;padding:7px 10px;color:var(--soft);font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-size:9px;">Reels</th>
-            <th style="text-align:left;padding:7px 10px;color:var(--soft);font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-size:9px;">Half-Sheet Video</th>
-          </tr>
-        </thead>
+  <div class="card">
+    <h3>When to use half-sheet vs Reels</h3>
+    <table class="spec-table">
+      <thead><tr><th></th><th style="color:var(--gold);">Reels</th><th style="color:var(--purple);">Half-Sheet</th></tr></thead>
+      <tbody>
+        <tr><td>Video ratio</td><td>9:16 vertical</td><td>16:9 or 1:1</td></tr>
+        <tr><td>Duration</td><td>3–30s</td><td>30–90s+</td></tr>
+        <tr><td>Autoplay</td><td>Yes (muted)</td><td>No — user-initiated</td></tr>
+        <tr><td>Video count</td><td>Multiple cards</td><td>One</td></tr>
+        <tr><td>Copy placement</td><td>Overlaid on video</td><td>Modal layout, outside video</td></tr>
+        <tr><td>Best for</td><td>Product education, GTM</td><td>CEO/leadership, beta thanks</td></tr>
+        <tr><td>Template</td><td style="font-family:monospace;font-size:10px;">reels_feed_v1</td><td style="font-family:monospace;font-size:10px;">Production-IAM_Half_Sheet</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── 5. SILENT LOOP ── -->
+<section class="section" id="s5">
+  <div class="sec-hd"><h2>▶ Silent Loop / UI Demo</h2><p>Autoplaying, looping animation embedded in a modal. No controls, no audio, no copy overlay. Best for feature education showing product flows — e.g. 4 digital banking animations in a Reels carousel.</p></div>
+
+  <div class="format-note">📌 Copy and CTA guidelines from the Reels tab do not apply. Copy and CTA live in the modal's own layout — there's dedicated real estate outside the video, so overlay constraints don't apply.</div>
+
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:14px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:140px;height:280px;background:#fcfcfc;border-radius:26px;border:4px solid #1c1c1c;overflow:hidden;position:relative;box-shadow:0 16px 40px rgba(0,0,0,.18);flex-shrink:0;">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#ecddc5,#e8d5e4,#ecd9c6);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;background:white;border-radius:18px 18px 0 0;padding:0 0 10px;box-shadow:0 -4px 20px rgba(0,0,0,.1);">
+          <div style="display:flex;justify-content:flex-end;padding:8px 10px 3px;"><div style="width:16px;height:16px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--soft);">✕</div></div>
+          <div style="height:64px;margin:0 10px;border-radius:9px;background:linear-gradient(135deg,#1a1a2e,#0f1520);overflow:hidden;position:relative;padding:8px;display:flex;align-items:center;justify-content:center;margin-bottom:7px;">
+            <div style="width:34px;height:52px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.15);border-radius:5px;display:flex;flex-direction:column;padding:3px;gap:2px;">
+              <div style="height:14px;background:linear-gradient(135deg,#1a3520,#2a5030);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;">📋</div>
+              <div style="height:4px;background:rgba(255,255,255,.07);border-radius:1px;"></div>
+              <div style="height:4px;background:rgba(255,255,255,.04);border-radius:1px;width:70%;"></div>
+              <div style="height:7px;background:rgba(201,169,110,.3);border-radius:2px;border:1px solid rgba(201,169,110,.4);display:flex;align-items:center;padding:0 2px;"><div style="font-size:4px;color:rgba(255,255,255,.7);font-weight:700;">Order →</div></div>
+            </div>
+            <div style="position:absolute;bottom:4px;left:0;right:0;display:flex;justify-content:center;gap:2px;">
+              <div style="width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.5);"></div>
+              <div style="width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.2);"></div>
+              <div style="width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.2);"></div>
+            </div>
+          </div>
+          <div style="padding:0 10px;">
+            <div style="font-size:10px;font-weight:800;color:var(--brown);margin-bottom:4px;">Order a cheque</div>
+            <div style="font-size:7px;color:var(--soft);line-height:1.5;margin-bottom:7px;">See how easy it is to order a cheque for delivery to your door.</div>
+            <div style="background:var(--brown);color:white;font-size:8px;font-weight:700;text-align:center;padding:9px;border-radius:100px;">Order now</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Silent Loop Modal</div>
+    </div>
+
+    <div style="flex:1;min-width:220px;display:flex;flex-direction:column;gap:12px;">
+      <div class="card">
+        <h3>Animation specs</h3>
+        <div class="specgrid">
+          <div class="specitem"><div class="k">Format</div><div class="v">MP4 H.264</div></div>
+          <div class="specitem"><div class="k">Ratio</div><div class="v">9:16 or 1:1</div></div>
+          <div class="specitem"><div class="k">Resolution</div><div class="v">750×1334 or 1080×1080</div></div>
+          <div class="specitem"><div class="k">Duration</div><div class="v">3–8s, seamless loop</div></div>
+          <div class="specitem"><div class="k">File size</div><div class="v">Under 2 MB</div></div>
+          <div class="specitem"><div class="k">Audio</div><div class="v">None</div></div>
+          <div class="specitem"><div class="k">Autoplay</div><div class="v">Yes — loop</div></div>
+          <div class="specitem"><div class="k">Controls</div><div class="v">None</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Video tag</h3>
+        <div class="code-block">
+          <div><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">video</span></div>
+          <div style="padding-left:14px;"><span style="color:#f97583;">autoplay</span> <span style="color:#f97583;">muted</span> <span style="color:#f97583;">loop</span> <span style="color:#f97583;">playsinline</span></div>
+          <div style="padding-left:14px;"><span style="color:#ffab70;">style</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"width:100%;border-radius:12px;"</span><span style="color:#888;">&gt;</span></div>
+          <div style="padding-left:14px;"><span style="color:#888;">&lt;</span><span style="color:#79b8ff;">source</span> <span style="color:#ffab70;">src</span><span style="color:#888;">=</span><span style="color:#9ecbff;">"<span style="color:#c9a96e;">{{VideoURL}}</span>"</span><span style="color:#888;">&gt;</span></div>
+          <div><span style="color:#888;">&lt;/</span><span style="color:#79b8ff;">video</span><span style="color:#888;">&gt;</span></div>
+        </div>
+        <div class="tip" style="margin-top:8px;">No <code style="font-size:10px;background:white;padding:1px 3px;border-radius:3px;">controls</code> attribute — the animation plays and loops silently with no player chrome.</div>
+      </div>
+      <div class="card">
+        <h3>Designer brief</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;font-size:11px;color:var(--soft);line-height:1.7;">
+          <div style="display:flex;gap:7px;"><span style="color:var(--green);font-weight:700;">✓</span><span>Export MP4 (H.264), <strong style="color:var(--brown);">no audio track</strong></span></div>
+          <div style="display:flex;gap:7px;"><span style="color:var(--green);font-weight:700;">✓</span><span>Loop point seamless — last frame cuts cleanly to frame 0</span></div>
+          <div style="display:flex;gap:7px;"><span style="color:var(--green);font-weight:700;">✓</span><span>Under 2 MB — animations compress well</span></div>
+          <div style="display:flex;gap:7px;"><span style="color:var(--green);font-weight:700;">✓</span><span>30fps, 3–8s duration</span></div>
+          <div style="display:flex;gap:7px;"><span style="color:var(--green);font-weight:700;">✓</span><span>Phone mockup centred on neutral dark background</span></div>
+          <div style="display:flex;gap:7px;"><span style="color:var(--green);font-weight:700;">✓</span><span>Deliver all animations together with copy per card</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Delivery as a Reels carousel — 4 banking flows</h3>
+    <div style="font-size:11px;color:var(--soft);line-height:1.6;margin-bottom:12px;">Silent loop animations are delivered using the Reels feed infrastructure (scroll-snap, one content block per card). The video itself is a silent looping animation rather than live-action footage.</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;">
+      <div style="background:var(--bg);border-radius:9px;padding:11px;"><div style="font-size:10px;font-weight:700;margin-bottom:3px;">📋 Order a cheque</div><div style="font-size:9px;color:var(--soft);">End-to-end cheque order flow</div></div>
+      <div style="background:var(--bg);border-radius:9px;padding:11px;"><div style="font-size:10px;font-weight:700;margin-bottom:3px;">🏦 Bank draft</div><div style="font-size:9px;color:var(--soft);">How to request a bank draft</div></div>
+      <div style="background:var(--bg);border-radius:9px;padding:11px;"><div style="font-size:10px;font-weight:700;margin-bottom:3px;">🌐 Wire transfer</div><div style="font-size:9px;color:var(--soft);">Domestic wire transfer flow</div></div>
+      <div style="background:var(--bg);border-radius:9px;padding:11px;"><div style="font-size:10px;font-weight:700;margin-bottom:3px;">✈️ International send</div><div style="font-size:9px;color:var(--soft);">International money send flow</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. CONTENT HANDOFF ── -->
+<section class="section" id="s6">
+  <div class="sec-hd"><h2>Content Handoff</h2><p>For stakeholders, PMs, and creative teams submitting video content for any in-app format — Reels, half-sheet, or silent loop.</p></div>
+
+  <div style="background:linear-gradient(135deg,#1a3520,#2a5030);border-radius:14px;padding:18px 20px;margin-bottom:24px;display:flex;align-items:flex-start;gap:14px;">
+    <div style="font-size:22px;flex-shrink:0;margin-top:2px;">📌</div>
+    <div><div style="font-size:14px;font-weight:700;color:white;margin-bottom:4px;">Before you record</div><div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.7;">Check Content Timing first to match your video length to the content type. Check Screen Zones if shooting for Reels — top and bottom 25% of frame are reserved for UI. Videos that don't meet spec need re-recording.</div></div>
+  </div>
+
+  <!-- RATIOS -->
+  <div class="card" style="margin-bottom:14px;">
+    <h3>Supported aspect ratios</h3>
+    <div style="font-size:11px;color:var(--soft);margin-bottom:12px;">Choose the ratio that matches your format and content. All ratios require MP4 H.264 export.</div>
+    <div class="ratio-cards">
+      <div class="ratio-card">
+        <div class="ratio-viz" style="width:36px;height:64px;opacity:.2;"></div>
+        <div class="ratio-label">9:16</div>
+        <div style="font-size:9px;font-weight:700;color:var(--brown);margin-bottom:2px;">1080 × 1920px</div>
+        <div class="ratio-sub">Reels feed · Silent loop UI demo</div>
+      </div>
+      <div class="ratio-card">
+        <div class="ratio-viz" style="width:56px;height:56px;opacity:.2;"></div>
+        <div class="ratio-label">1:1</div>
+        <div style="font-size:9px;font-weight:700;color:var(--brown);margin-bottom:2px;">1080 × 1080px</div>
+        <div class="ratio-sub">Silent loop UI demo · Half-sheet option</div>
+      </div>
+      <div class="ratio-card">
+        <div class="ratio-viz" style="width:64px;height:36px;opacity:.2;"></div>
+        <div class="ratio-label">16:9</div>
+        <div style="font-size:9px;font-weight:700;color:var(--brown);margin-bottom:2px;">1920 × 1080px</div>
+        <div class="ratio-sub">Half-sheet modal · CEO / leadership video</div>
+      </div>
+    </div>
+    <table class="spec-table" style="margin-top:14px;">
+      <thead><tr><th>Spec</th><th>9:16 Reels</th><th>1:1 Square</th><th>16:9 Half-Sheet</th></tr></thead>
+      <tbody>
+        <tr><td>Resolution</td><td>1080×1920</td><td>1080×1080</td><td>1920×1080</td></tr>
+        <tr><td>File size</td><td>3–5 MB</td><td>Under 2 MB</td><td>3–10 MB</td></tr>
+        <tr><td>Duration</td><td>3–30s</td><td>3–8s loop</td><td>30–90s</td></tr>
+        <tr><td>Audio</td><td>Optional</td><td>None</td><td>Yes</td></tr>
+        <tr><td>Frame rate</td><td>≤ 30fps</td><td>30fps</td><td>≤ 30fps</td></tr>
+        <tr><td>Loop point</td><td>Not required</td><td>Seamless</td><td>Not required</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- STEPS -->
+  <div class="handoff-step">
+    <div class="handoff-num">1</div>
+    <div class="handoff-body">
+      <h4>Export your video as MP4</h4>
+      <p>All formats require MP4 (H.264). No MOV, no Loom links, no Google Drive previews — the raw file only. Match your export settings to the ratio table above.</p>
+    </div>
+  </div>
+  <div class="handoff-step">
+    <div class="handoff-num">2</div>
+    <div class="handoff-body">
+      <h4>Include a poster image (Reels only)</h4>
+      <p>A static first-frame thumbnail is required for Reels so the card doesn't flash black on load. Not required for half-sheet or silent loop.</p>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:6px;">
+        <span class="badge" style="background:rgba(201,169,110,.12);color:#9a7030;">Format: PNG or JPG</span>
+        <span class="badge" style="background:rgba(201,169,110,.12);color:#9a7030;">1080 × 1920px</span>
+        <span class="badge" style="background:rgba(201,169,110,.12);color:#9a7030;">Frame 0–1s of the video</span>
+      </div>
+    </div>
+  </div>
+  <div class="handoff-step">
+    <div class="handoff-num">3</div>
+    <div class="handoff-body">
+      <h4>Write your copy</h4>
+      <p>Provide per-card copy. For Reels, follow the character limits (copy overlays the video). For half-sheet and silent loop, write to fit the modal layout — no strict limits.</p>
+      <table class="spec-table" style="margin-top:8px;">
+        <thead><tr><th>Field</th><th>Reels (overlay)</th><th>Half-Sheet / Silent Loop</th></tr></thead>
         <tbody>
-          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Video ratio</td><td style="padding:7px 10px;color:var(--soft);">9:16 vertical</td><td style="padding:7px 10px;color:var(--soft);">16:9 or 1:1</td></tr>
-          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Duration</td><td style="padding:7px 10px;color:var(--soft);">3–30s</td><td style="padding:7px 10px;color:var(--soft);">30s–90s+</td></tr>
-          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Autoplay</td><td style="padding:7px 10px;color:var(--soft);">Yes (muted)</td><td style="padding:7px 10px;color:var(--soft);">No — user-initiated</td></tr>
-          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Video count</td><td style="padding:7px 10px;color:var(--soft);">Multiple (feed)</td><td style="padding:7px 10px;color:var(--soft);">One</td></tr>
-          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Surrounding copy</td><td style="padding:7px 10px;color:var(--soft);">Overlay only (headline + body)</td><td style="padding:7px 10px;color:var(--soft);">Full title + body blocks</td></tr>
-          <tr style="border-bottom:1px solid var(--bg);"><td style="padding:7px 10px;font-weight:600;color:var(--brown);">Best for</td><td style="padding:7px 10px;color:var(--soft);">Product education, GTM, awareness</td><td style="padding:7px 10px;color:var(--soft);">CEO/leadership, beta thanks, milestones</td></tr>
-          <tr><td style="padding:7px 10px;font-weight:600;color:var(--brown);">IAM template</td><td style="padding:7px 10px;color:var(--soft);font-family:monospace;font-size:9px;">reels_feed_v1</td><td style="padding:7px 10px;color:var(--soft);font-family:monospace;font-size:9px;">Production-IAM_Half_Sheet_Styles</td></tr>
+          <tr><td>Headline</td><td>3–6 words, benefit-led</td><td>1–2 lines, no strict limit</td></tr>
+          <tr><td>Body</td><td>1 sentence, 5–10 words</td><td>1–3 sentences</td></tr>
+          <tr><td>CTA label</td><td>2–3 words, verb-first</td><td>2–4 words, verb-first</td></tr>
+          <tr><td>CTA destination</td><td colspan="2">Deep link or URL — test in-app before handoff</td></tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="handoff-step">
+    <div class="handoff-num">4</div>
+    <div class="handoff-body">
+      <h4>Host on GitHub Pages and get your source URLs</h4>
+      <p>GitHub Pages does not show file URLs anywhere — there is no link to copy. Build the URL manually using this formula:</p>
+      <div class="naming-block" style="color:#9ecbff;">https://<span style="color:#c9a96e;">[username]</span>.github.io/<span style="color:#c9a96e;">[repo-name]</span>/<span style="color:#c9a96e;">[filename]</span></div>
+      <p>Enable Pages: Repository → Settings → Pages → Deploy from branch → main → Save. Takes ~1–2 min. Verify each URL in a browser before sending — URLs are case-sensitive.</p>
+      <div class="warn">Make sure the repository is set to <strong>Public</strong>. Private repos won't serve files via GitHub Pages and Braze won't be able to load them.</div>
+    </div>
+  </div>
+  <div class="handoff-step">
+    <div class="handoff-num">5</div>
+    <div class="handoff-body">
+      <h4>Name your files correctly</h4>
+      <div class="naming-block">
+        <div style="color:#9ecbff;">reels_<span style="color:#c9a96e;">[campaign-slug]</span>_v<span style="color:#c9a96e;">[n]</span>_card<span style="color:#c9a96e;">[nn]</span>.mp4</div>
+        <div style="color:#9ecbff;">reels_<span style="color:#c9a96e;">[campaign-slug]</span>_v<span style="color:#c9a96e;">[n]</span>_card<span style="color:#c9a96e;">[nn]</span>_poster.png</div>
+      </div>
+      <div class="naming-parts">
+        <div class="naming-part"><div class="np-key">campaign-slug</div><div class="np-val">Lowercase, hyphens only — e.g. rrsp-launch</div></div>
+        <div class="naming-part"><div class="np-key">v1</div><div class="np-val">Increment if you re-record</div></div>
+        <div class="naming-part"><div class="np-key">card01</div><div class="np-val">Position in the feed</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRE-SUBMISSION CHECKLIST -->
+  <div class="card">
+    <h3>Pre-submission checklist</h3>
+    <div class="checklist">
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">MP4 exported at correct ratio and resolution</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">File size within limit for the format</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Poster image included (Reels only)</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Duration matches content type</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Silent loop: seamless loop point, no audio track</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Reels: subject within middle 50% of frame</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Copy written for the right format (overlay vs modal)</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">CTA destination tested in-app</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">GitHub repo set to Public</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Each URL verified in browser before sending</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Files named using convention above</div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-text">All cards delivered together, not staggered</div></div>
     </div>
   </div>
 </section>
 
 <script>
-  function show(i){
-    document.querySelectorAll('.section').forEach((s,j)=>s.classList.toggle('active',i===j));
-    document.querySelectorAll('.nav-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
-    window.scrollTo(0,0);
-  }
+function show(i){
+  document.querySelectorAll('.section').forEach((s,j)=>s.classList.toggle('active',i===j));
+  document.querySelectorAll('.nav-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  window.scrollTo(0,0);
+}
 </script>
 </body>
 </html>
